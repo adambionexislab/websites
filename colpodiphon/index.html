@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Colpo di Phon — Parrucchiera</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['"Playfair Display"', 'serif'],
+            body: ['Inter', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+    .font-display { font-family: 'Playfair Display', serif; }
+    html { scroll-behavior: smooth; }
+    .hero-gradient {
+      background: linear-gradient(135deg, #FAF5EE 0%, #F4EBD9 50%, #EDD5BA 100%);
+    }
+    .nav-blur {
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body class="bg-[#FDFAF6] text-[#1C1917] antialiased">
+
+  <!-- ─── NAVIGATION ─────────────────────────────────────────────────── -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-[#FDFAF6]/90 nav-blur border-b border-[#F0E6D6]">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+
+      <a href="#" class="font-display text-xl font-semibold text-[#1C1917] tracking-wide">
+        Colpo di Phon
+      </a>
+
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-[#44403C]" aria-label="Navigazione principale">
+        <a href="#servizi"    class="hover:text-[#C9956A] transition-colors duration-200">Servizi</a>
+        <a href="#orari"      class="hover:text-[#C9956A] transition-colors duration-200">Orari</a>
+        <a href="#recensioni" class="hover:text-[#C9956A] transition-colors duration-200">Recensioni</a>
+        <a href="#contatti"   class="hover:text-[#C9956A] transition-colors duration-200">Contatti</a>
+      </nav>
+
+      <a href="tel:0298966369"
+         class="cursor-pointer inline-flex items-center gap-2 bg-[#C9956A] text-white text-sm font-medium px-5 py-2.5 rounded-full hover:bg-[#A8754A] transition-colors duration-200">
+        <!-- phone icon -->
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none"
+             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13
+                   a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.18h3a2 2 0 0 1 2 1.72
+                   c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91
+                   a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45
+                   c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+        </svg>
+        Chiama ora
+      </a>
+    </div>
+  </header>
+
+
+  <!-- ─── HERO ───────────────────────────────────────────────────────── -->
+  <section class="hero-gradient min-h-screen flex items-center pt-16">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-28 lg:py-36 w-full">
+
+      <div class="max-w-2xl">
+        <p class="text-[#C9956A] text-xs font-semibold tracking-[0.25em] uppercase mb-6">
+          Parrucchiera &mdash; Cassino d'Alberi (LO)
+        </p>
+
+        <h1 class="font-display text-5xl sm:text-6xl lg:text-7xl font-semibold text-[#1C1917] leading-[1.12] mb-6">
+          L'arte di<br />
+          <span class="text-[#C9956A] italic">prendersi cura</span>
+        </h1>
+
+        <p class="text-xl text-[#5C5248] leading-relaxed mb-10 max-w-md">
+          Ogni capello racconta una storia.<br />Noi la scriviamo con te.
+        </p>
+
+        <div class="flex flex-col sm:flex-row gap-4">
+          <a href="tel:0298966369"
+             class="cursor-pointer inline-flex items-center justify-center gap-2 bg-[#C9956A] text-white font-medium px-8 py-3.5 rounded-full hover:bg-[#A8754A] transition-colors duration-200 shadow-lg shadow-[#C9956A]/25">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13
+                       a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.18h3a2 2 0 0 1 2 1.72
+                       c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91
+                       a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45
+                       c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
+            02 989 6369
+          </a>
+          <a href="#servizi"
+             class="cursor-pointer inline-flex items-center justify-center gap-2 border border-[#DEC9A8] text-[#A8754A] font-medium px-8 py-3.5 rounded-full hover:bg-[#F4EBD9] transition-colors duration-200">
+            Scopri i servizi
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 shrink-0" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 5v14M5 12l7 7 7-7"/>
+            </svg>
+          </a>
+        </div>
+
+        <p class="mt-10 flex items-center gap-2 text-sm text-[#78716C]">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 text-[#C9956A] shrink-0" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z"/>
+            <circle cx="12" cy="10" r="3"/>
+          </svg>
+          Corso Europa, 1 &mdash; Cassino d'Alberi (LO)
+        </p>
+      </div>
+
+      <!-- Decorative serif tagline -->
+      <div class="mt-24 pt-8 border-t border-[#DEC9A8]/70">
+        <p class="font-display text-xl text-[#A8754A] italic">Bellezza artigianale dal cuore</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ─── SERVICES ──────────────────────────────────────────────────── -->
+  <section id="servizi" class="py-24 bg-white">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <div class="text-center mb-16">
+        <p class="text-[#C9956A] text-xs font-semibold tracking-[0.25em] uppercase mb-3">Cosa facciamo</p>
+        <h2 class="font-display text-4xl sm:text-5xl font-semibold text-[#1C1917]">I nostri servizi</h2>
+        <p class="mt-3 text-lg text-[#78716C]">Tutto ciò che il tuo capello merita</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+
+        <!-- 01 Taglio -->
+        <article class="group cursor-default bg-[#FDFAF6] rounded-2xl p-8 border border-[#F0E6D6]
+                        hover:border-[#DEC9A8] hover:shadow-xl hover:shadow-[#C9956A]/10 transition-all duration-300">
+          <div class="w-12 h-12 bg-[#F4EBD9] rounded-xl flex items-center justify-center mb-6">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-[#C9956A]" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/>
+              <path d="M20 4 8.12 15.88M14.47 14.48 20 20M8.12 8.12 12 12"/>
+            </svg>
+          </div>
+          <span class="text-[#C9956A] text-xs font-bold tracking-[0.2em] uppercase">01</span>
+          <h3 class="font-display text-2xl font-semibold text-[#1C1917] mt-2 mb-4">Taglio &amp; Piega</h3>
+          <p class="text-[#78716C] leading-relaxed">
+            Un taglio personalizzato che valorizza i tuoi lineamenti e il tuo stile unico.
+            Ogni cliente è un progetto su misura.
+          </p>
+        </article>
+
+        <!-- 02 Colorazione -->
+        <article class="group cursor-default bg-[#FDFAF6] rounded-2xl p-8 border border-[#F0E6D6]
+                        hover:border-[#DEC9A8] hover:shadow-xl hover:shadow-[#C9956A]/10 transition-all duration-300">
+          <div class="w-12 h-12 bg-[#F4EBD9] rounded-xl flex items-center justify-center mb-6">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-[#C9956A]" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M12 22C6.5 22 2 17.5 2 12S6.5 2 12 2s10 4.5 10 10-4.5 10-10 10z"/>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10A15.3 15.3 0 0 1 8 12 15.3 15.3 0 0 1 12 2z"/>
+              <path d="M2 12h20"/>
+            </svg>
+          </div>
+          <span class="text-[#C9956A] text-xs font-bold tracking-[0.2em] uppercase">02</span>
+          <h3 class="font-display text-2xl font-semibold text-[#1C1917] mt-2 mb-4">Colorazione</h3>
+          <p class="text-[#78716C] leading-relaxed">
+            Tinte, meches, balayage e shatush realizzati con prodotti selezionati per esaltare
+            la tua naturale luminosità.
+          </p>
+        </article>
+
+        <!-- 03 Trattamenti -->
+        <article class="group cursor-default bg-[#FDFAF6] rounded-2xl p-8 border border-[#F0E6D6]
+                        hover:border-[#DEC9A8] hover:shadow-xl hover:shadow-[#C9956A]/10 transition-all duration-300">
+          <div class="w-12 h-12 bg-[#F4EBD9] rounded-xl flex items-center justify-center mb-6">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 text-[#C9956A]" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+            </svg>
+          </div>
+          <span class="text-[#C9956A] text-xs font-bold tracking-[0.2em] uppercase">03</span>
+          <h3 class="font-display text-2xl font-semibold text-[#1C1917] mt-2 mb-4">Trattamenti</h3>
+          <p class="text-[#78716C] leading-relaxed">
+            Cure rigeneranti e ristrutturanti per capelli sani, forti e brillanti.
+            Perché la bellezza inizia dalla salute.
+          </p>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ─── HOURS ──────────────────────────────────────────────────────── -->
+  <section id="orari" class="py-24 bg-[#FDFAF6]">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+
+        <!-- Left copy -->
+        <div>
+          <p class="text-[#C9956A] text-xs font-semibold tracking-[0.25em] uppercase mb-3">Quando trovarci</p>
+          <h2 class="font-display text-4xl sm:text-5xl font-semibold text-[#1C1917] mb-6">Siamo aperti</h2>
+          <p class="text-[#5C5248] text-lg leading-relaxed mb-10">
+            Prenota il tuo appuntamento telefonicamente. Siamo qui per accoglierti con cura e
+            professionalità, dal martedì al sabato.
+          </p>
+          <a href="tel:0298966369"
+             class="cursor-pointer inline-flex items-center gap-2 bg-[#C9956A] text-white font-medium px-7 py-3.5 rounded-full
+                    hover:bg-[#A8754A] transition-colors duration-200 shadow-lg shadow-[#C9956A]/25">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13
+                       a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.18h3a2 2 0 0 1 2 1.72
+                       c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91
+                       a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45
+                       c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
+            Vieni a trovarci
+          </a>
+        </div>
+
+        <!-- Right: hours card -->
+        <div class="bg-white rounded-2xl border border-[#F0E6D6] overflow-hidden shadow-sm">
+          <div class="divide-y divide-[#F0E6D6]">
+
+            <div class="flex items-center justify-between px-6 py-4">
+              <span class="font-medium text-[#1C1917]">Lunedì</span>
+              <span class="text-sm text-[#A8A29E] bg-[#FDFAF6] px-3 py-1 rounded-full font-medium">Chiuso</span>
+            </div>
+
+            <div class="flex items-center justify-between px-6 py-4">
+              <span class="font-medium text-[#1C1917]">Martedì</span>
+              <span class="text-sm text-[#44403C]">8:30&ndash;12:00 <span class="text-[#C9956A] mx-1">/</span> 14:30&ndash;19:00</span>
+            </div>
+
+            <div class="flex items-center justify-between px-6 py-4">
+              <span class="font-medium text-[#1C1917]">Mercoledì</span>
+              <span class="text-sm text-[#44403C]">8:30&ndash;12:00 <span class="text-[#C9956A] mx-1">/</span> 14:30&ndash;19:00</span>
+            </div>
+
+            <div class="flex items-center justify-between px-6 py-4">
+              <span class="font-medium text-[#1C1917]">Giovedì</span>
+              <span class="text-sm text-[#44403C]">8:30&ndash;12:00 <span class="text-[#C9956A] mx-1">/</span> 14:30&ndash;19:00</span>
+            </div>
+
+            <div class="flex items-center justify-between px-6 py-4 bg-[#FDF8F2]">
+              <span class="font-medium text-[#1C1917]">Venerdì</span>
+              <span class="text-sm text-[#44403C]">8:30&ndash;19:00</span>
+            </div>
+
+            <div class="flex items-center justify-between px-6 py-4 bg-[#FDF8F2]">
+              <span class="font-medium text-[#1C1917]">Sabato</span>
+              <span class="text-sm text-[#44403C]">8:30&ndash;19:00</span>
+            </div>
+
+            <div class="flex items-center justify-between px-6 py-4">
+              <span class="font-medium text-[#1C1917]">Domenica</span>
+              <span class="text-sm text-[#A8A29E] bg-[#FDFAF6] px-3 py-1 rounded-full font-medium">Chiuso</span>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ─── REVIEWS ───────────────────────────────────────────────────── -->
+  <section id="recensioni" class="py-24 bg-white">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <div class="text-center mb-16">
+        <p class="text-[#C9956A] text-xs font-semibold tracking-[0.25em] uppercase mb-3">Cosa dicono di noi</p>
+        <h2 class="font-display text-4xl sm:text-5xl font-semibold text-[#1C1917]">Recensioni</h2>
+        <div class="flex items-center justify-center gap-1 mt-4" aria-label="Valutazione: 5 stelle su 5">
+          <!-- 5 stars -->
+          <svg class="w-5 h-5 text-[#C9956A]" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+          </svg>
+          <svg class="w-5 h-5 text-[#C9956A]" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+          </svg>
+          <svg class="w-5 h-5 text-[#C9956A]" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+          </svg>
+          <svg class="w-5 h-5 text-[#C9956A]" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+          </svg>
+          <svg class="w-5 h-5 text-[#C9956A]" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+            <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/>
+          </svg>
+          <span class="ml-2 text-sm text-[#78716C]">5.0 su Google</span>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+
+        <!-- Review helper macro — repeated 3 times with different content -->
+        <figure class="bg-[#FDFAF6] rounded-2xl p-8 border border-[#F0E6D6]">
+          <div class="flex gap-1 mb-5" aria-label="5 stelle">
+            <svg class="w-4 h-4 text-[#C9956A]" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 text-[#C9956A]" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 text-[#C9956A]" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 text-[#C9956A]" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 text-[#C9956A]" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          </div>
+          <blockquote class="text-[#5C5248] leading-relaxed italic mb-6">
+            &ldquo;Bellissimo salone, accogliente grande e luminoso! Titolare e personale molto professionale e disponibile.&rdquo;
+          </blockquote>
+          <figcaption class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full bg-[#E8C4A0] flex items-center justify-center text-[#A8754A] font-semibold text-xs" aria-hidden="true">SR</div>
+            <span class="font-medium text-[#1C1917] text-sm">Simone Ricotta</span>
+          </figcaption>
+        </figure>
+
+        <figure class="bg-[#FDFAF6] rounded-2xl p-8 border border-[#F0E6D6]">
+          <div class="flex gap-1 mb-5" aria-label="5 stelle">
+            <svg class="w-4 h-4 text-[#C9956A]" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 text-[#C9956A]" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 text-[#C9956A]" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 text-[#C9956A]" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 text-[#C9956A]" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          </div>
+          <blockquote class="text-[#5C5248] leading-relaxed italic mb-6">
+            &ldquo;In 28 anni della mia vita non ho mai trovato parrucchiere così brave, competenti, veloci e sempre disponibili.&rdquo;
+          </blockquote>
+          <figcaption class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full bg-[#E8C4A0] flex items-center justify-center text-[#A8754A] font-semibold text-xs" aria-hidden="true">ET</div>
+            <span class="font-medium text-[#1C1917] text-sm">Elena Tushaj</span>
+          </figcaption>
+        </figure>
+
+        <figure class="bg-[#FDFAF6] rounded-2xl p-8 border border-[#F0E6D6]">
+          <div class="flex gap-1 mb-5" aria-label="5 stelle">
+            <svg class="w-4 h-4 text-[#C9956A]" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 text-[#C9956A]" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 text-[#C9956A]" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 text-[#C9956A]" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            <svg class="w-4 h-4 text-[#C9956A]" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          </div>
+          <blockquote class="text-[#5C5248] leading-relaxed italic mb-6">
+            &ldquo;Fantastiche!! Competenti, brave, veloci: sono stata oggi e mi hanno fatto un colore strepitoso.&rdquo;
+          </blockquote>
+          <figcaption class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-full bg-[#E8C4A0] flex items-center justify-center text-[#A8754A] font-semibold text-xs" aria-hidden="true">GG</div>
+            <span class="font-medium text-[#1C1917] text-sm">Gloria Guasco</span>
+          </figcaption>
+        </figure>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ─── CONTACT / FOOTER ───────────────────────────────────────────── -->
+  <footer id="contatti" class="bg-[#1C1917] pt-24 pb-12">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+
+      <div class="grid lg:grid-cols-2 gap-16 items-start pb-20 border-b border-[#2C2926]">
+
+        <!-- CTA column -->
+        <div>
+          <p class="text-[#E8C4A0] text-xs font-semibold tracking-[0.25em] uppercase mb-3">Vieni a trovarci</p>
+          <h2 class="font-display text-4xl sm:text-5xl font-semibold text-white mb-6">
+            Prenota il tuo<br />appuntamento
+          </h2>
+          <p class="text-[#78716C] text-lg leading-relaxed mb-10">
+            Chiamaci per fissare il tuo appuntamento.<br />Siamo qui per prenderci cura di te.
+          </p>
+          <a href="tel:0298966369"
+             class="cursor-pointer inline-flex items-center gap-3 bg-[#C9956A] text-white font-medium
+                    px-8 py-4 rounded-full hover:bg-[#A8754A] transition-colors duration-200
+                    text-lg shadow-lg shadow-[#C9956A]/20">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 shrink-0" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13
+                       a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.18h3a2 2 0 0 1 2 1.72
+                       c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91
+                       a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45
+                       c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
+            02 989 6369
+          </a>
+        </div>
+
+        <!-- Info column -->
+        <div class="space-y-10">
+          <div>
+            <p class="text-[#4A4540] text-xs font-semibold tracking-[0.2em] uppercase mb-2">Indirizzo</p>
+            <p class="text-white text-lg leading-snug">Corso Europa, 1</p>
+            <p class="text-[#78716C]">Cassino d'Alberi (LO)</p>
+          </div>
+          <div>
+            <p class="text-[#4A4540] text-xs font-semibold tracking-[0.2em] uppercase mb-2">Telefono</p>
+            <a href="tel:0298966369"
+               class="cursor-pointer text-white text-lg hover:text-[#C9956A] transition-colors duration-200">
+              02 989 6369
+            </a>
+          </div>
+          <div>
+            <p class="text-[#4A4540] text-xs font-semibold tracking-[0.2em] uppercase mb-2">Orari</p>
+            <p class="text-[#78716C] text-sm leading-loose">
+              Mar &ndash; Gio: 8:30&ndash;12:00 / 14:30&ndash;19:00<br />
+              Ven &ndash; Sab: 8:30&ndash;19:00<br />
+              <span class="text-[#3C3835]">Lun &amp; Dom: Chiuso</span>
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Footer bottom bar -->
+      <div class="mt-10 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <p class="font-display text-[#3C3835] italic text-lg">Colpo di Phon</p>
+        <p class="text-[#3C3835] text-sm">&copy; 2026 Parrucchiera Colpo di Phon</p>
+      </div>
+
+    </div>
+  </footer>
+
+</body>
+</html>
