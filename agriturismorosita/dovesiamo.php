@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Agriturismo Rosita - Dove Siamo | Come raggiungerci da Lodi e Milano</title>
+  <meta name="description" content="Come raggiungere l'Agriturismo Rosita a Tavazzano con Villavesco. Uscita A1 Lodi, da Malpensa e Linate. Via XX Settembre 11, 26838 Tavazzano con Villavesco (LO).">
+  <meta name="keywords" content="agriturismo, agriturismo lodi, agriturismo milano">
+  <meta name="google-site-verification" content="Pg1afVYlq60f7SCpNFz2mNjE3Dw_Rw6Lb8GsWZCXUeM">
+  <meta property="og:title" content="Dove Siamo - Agriturismo Rosita">
+  <meta property="og:description" content="Come raggiungerci in auto, da Lodi e Milano. Uscita A1 Lodi. Via XX Settembre 11, 26838 Tavazzano con Villavesco.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="index.php?lang=ita" class="nav-brand">
+        <img src="images/pages/logo.jpg" alt="Agriturismo Rosita logo">
+        Agriturismo Rosita
+      </a>
+      <button class="nav-hamburger" aria-label="Apri menu" aria-expanded="false">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <ul class="nav-links" role="list">
+        <li><a href="index.php?lang=ita">Home Page</a></li>
+        <li><a href="dovesiamo.php?lang=ita" class="active">Dove Siamo</a></li>
+        <li><a href="lestanze.php?lang=ita">Le Stanze</a></li>
+        <li><a href="confort.php?lang=ita">I Servizi</a></li>
+        <li><a href="territorio.php?lang=ita">Il Territorio</a></li>
+        <li><a href="prezzi.php?lang=ita">I Prezzi</a></li>
+        <li><a href="news.php?lang=ita">News &amp; Offerte</a></li>
+        <li><a href="https://www.tripadvisor.it/Hotel_Review-g2081923-d4235807-Reviews-Agriturismo_Rosita-Tavazzano_con_Villavesco_Province_of_Lodi_Lombardy.html#REVIEWS" target="_blank" rel="noopener">Recensioni dei clienti</a></li>
+        <li class="nav-cta"><a href="contatti.php?lang=ita">Contatti</a></li>
+      </ul>
+      <div class="nav-right">
+        <select id="lang-select" class="nav-lang" aria-label="Seleziona lingua">
+          <option value="ita" selected>ITA</option>
+          <option value="eng">ENG</option>
+          <option value="fra">FRA</option>
+          <option value="ger">GER</option>
+          <option value="spa">SPA</option>
+          <option value="swe">SVE</option>
+          <option value="fin">FIN</option>
+          <option value="rus">RUS</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="page-header">
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="index.php?lang=ita">Home Page</a><span aria-hidden="true"> / </span><span>Dove Siamo</span>
+    </nav>
+    <h1>Dove Siamo</h1>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+
+    <!-- Tabs -->
+    <div class="dir-tabs" role="tablist" data-reveal>
+      <button class="dir-tab active" data-tab="autostrade" role="tab" aria-selected="true" aria-controls="tab-autostrade">Autostrade</button>
+      <button class="dir-tab" data-tab="aeroporti" role="tab" aria-selected="false" aria-controls="tab-aeroporti">Aeroporti</button>
+      <button class="dir-tab" data-tab="indirizzo" role="tab" aria-selected="false" aria-controls="tab-indirizzo">Indirizzo</button>
+    </div>
+
+    <!-- Tab: Autostrade -->
+    <div id="tab-autostrade" class="dir-panel active" role="tabpanel">
+      <div class="dir-layout">
+        <div>
+          <img src="images/pages/cartina.jpg" alt="Mappa per raggiungere l'Agriturismo Rosita da Lodi e Milano" loading="lazy">
+        </div>
+        <div>
+          <h2 style="font-size:1.125rem;font-weight:600;margin-bottom:1.25rem">Da Milano / Bologna (A1)</h2>
+          <ol class="dir-steps">
+            <li class="dir-step"><span class="dir-num">1</span><span>Uscita Autostrada A1 Lodi</span></li>
+            <li class="dir-step"><span class="dir-num">2</span><span>Prendere direzione Lodi</span></li>
+            <li class="dir-step"><span class="dir-num">3</span><span>Svoltare per Tavazzano</span></li>
+            <li class="dir-step"><span class="dir-num">4</span><span>Svoltare a destra per "Modignano"</span></li>
+            <li class="dir-step"><span class="dir-num">5</span><span>Proseguire per "Modignano"</span></li>
+            <li class="dir-step"><span class="dir-num">6</span><span>Arrivo - Via XX Settembre 11</span></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab: Aeroporti -->
+    <div id="tab-aeroporti" class="dir-panel" role="tabpanel">
+      <div class="dir-layout">
+        <div>
+          <h2 style="font-size:1.125rem;font-weight:600;margin-bottom:1.25rem">Da Milano Linate (LIN) - circa 20 km</h2>
+          <ol class="dir-steps">
+            <li class="dir-step"><span class="dir-num">1</span><span>Uscire dall'aeroporto e imboccare la Tangenziale Est direzione Sud</span></li>
+            <li class="dir-step"><span class="dir-num">2</span><span>Raccordo A1 Milano-Bologna, uscita Lodi</span></li>
+            <li class="dir-step"><span class="dir-num">3</span><span>Seguire le indicazioni per Tavazzano e poi Modignano</span></li>
+            <li class="dir-step"><span class="dir-num">4</span><span>Arrivo - Via XX Settembre 11</span></li>
+          </ol>
+          <h2 style="font-size:1.125rem;font-weight:600;margin:2rem 0 1.25rem">Da Milano Malpensa (MXP) - circa 65 km</h2>
+          <ol class="dir-steps">
+            <li class="dir-step"><span class="dir-num">1</span><span>Autostrada A8 direzione Milano, poi raccordo A1 Sud</span></li>
+            <li class="dir-step"><span class="dir-num">2</span><span>Uscita Lodi</span></li>
+            <li class="dir-step"><span class="dir-num">3</span><span>Seguire le indicazioni per Tavazzano e Modignano</span></li>
+            <li class="dir-step"><span class="dir-num">4</span><span>Arrivo - Via XX Settembre 11</span></li>
+          </ol>
+        </div>
+        <div>
+          <img src="images/pages/cartina.jpg" alt="Mappa aeroporti" loading="lazy">
+        </div>
+      </div>
+    </div>
+
+    <!-- Tab: Indirizzo -->
+    <div id="tab-indirizzo" class="dir-panel" role="tabpanel">
+      <div class="address-card" data-reveal>
+        <strong>Agriturismo Rosita</strong><br>
+        Via XX Settembre 11<br>
+        26838 Tavazzano con Villavesco (LO)<br>
+        Italia<br><br>
+        <a href="tel:+390371761964">+39 0371 761964</a><br>
+        <a href="tel:+393397263651">+39 339 7263651</a> (English)<br>
+        Fax: +39 0371 956830<br>
+        <a href="mailto:info@agriturismorosita.it">info@agriturismorosita.it</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <p class="footer-brand">Agriturismo Rosita</p>
+        <p class="footer-tagline">Un'antica casa colonica del 1600 tra i campi di Modignano, a Tavazzano con Villavesco. Ospitalita autentica a pochi chilometri da Milano.</p>
+      </div>
+      <div>
+        <p class="footer-col-title">Pagine</p>
+        <ul class="footer-nav">
+          <li><a href="index.php?lang=ita">Home Page</a></li>
+          <li><a href="dovesiamo.php?lang=ita">Dove Siamo</a></li>
+          <li><a href="lestanze.php?lang=ita">Le Stanze</a></li>
+          <li><a href="confort.php?lang=ita">I Servizi</a></li>
+          <li><a href="territorio.php?lang=ita">Il Territorio</a></li>
+          <li><a href="prezzi.php?lang=ita">I Prezzi</a></li>
+          <li><a href="news.php?lang=ita">News &amp; Offerte</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Contatti</p>
+        <div class="footer-contact">
+          <p>Via XX Settembre 11<br>26838 Tavazzano con Villavesco (LO)</p>
+          <p><a href="tel:+390371761964">+39 0371 761964</a></p>
+          <p><a href="tel:+393397263651">+39 339 7263651</a></p>
+          <p><a href="mailto:info@agriturismorosita.it">info@agriturismorosita.it</a></p>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>Agriturismo Rosita - Via XX Settembre 11, 26838 Tavazzano con Villavesco (LO)</span>
+      <span><a href="mailto:info@agriturismorosita.it" style="color:inherit">info@agriturismorosita.it</a></span>
+    </div>
+  </div>
+</footer>
+
+<div id="cookie-banner" class="cookie-banner hidden" role="alert">
+  <span>Utilizziamo i cookie per migliorare la navigazione. Continuando accetti il loro utilizzo.</span>
+  <button id="cookie-accept" class="cookie-accept">Accetto</button>
+</div>
+
+<script src="js/main.js"></script>
+</body>
+</html>

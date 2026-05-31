@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Agriturismo Rosita - Tra Lodi e Milano | Tavazzano con Villavesco</title>
+  <meta name="description" content="Agriturismo Rosita: 4 appartamenti in un'antica casa colonica del 1600 tra Lodi e Milano. Colazione inclusa, Wi-Fi, parcheggio privato. Tavazzano con Villavesco (LO).">
+  <meta name="keywords" content="agriturismo, agriturismo lodi, agriturismo milano">
+  <meta name="google-site-verification" content="Pg1afVYlq60f7SCpNFz2mNjE3Dw_Rw6Lb8GsWZCXUeM">
+  <meta property="og:title" content="Agriturismo Rosita - Tra Lodi e Milano">
+  <meta property="og:description" content="4 appartamenti in un'antica casa colonica del 1600 tra i campi lodigiani. Colazione inclusa, tranquillita autentica a 20 minuti da Milano.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="http://www.agriturismorosita.it/">
+  <meta property="og:image" content="http://www.agriturismorosita.it/images/pages/home.jpg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BedAndBreakfast",
+    "name": "Agriturismo Rosita",
+    "description": "Antico agriturismo del 1600 tra Lodi e Milano. 4 appartamenti, colazione inclusa.",
+    "url": "http://www.agriturismorosita.it/",
+    "telephone": ["+390371761964", "+393397263651"],
+    "email": "info@agriturismorosita.it",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Via XX Settembre 11",
+      "addressLocality": "Tavazzano con Villavesco",
+      "postalCode": "26838",
+      "addressRegion": "LO",
+      "addressCountry": "IT"
+    },
+    "priceRange": "30-80",
+    "numberOfRooms": 4,
+    "amenityFeature": [
+      {"@type": "LocationFeatureSpecification", "name": "Aria Condizionata", "value": true},
+      {"@type": "LocationFeatureSpecification", "name": "Wi-Fi", "value": true},
+      {"@type": "LocationFeatureSpecification", "name": "Parcheggio Privato", "value": true},
+      {"@type": "LocationFeatureSpecification", "name": "Colazione Inclusa", "value": true},
+      {"@type": "LocationFeatureSpecification", "name": "Accessibile ai disabili", "value": true}
+    ],
+    "sameAs": [
+      "https://www.tripadvisor.it/Hotel_Review-g2081923-d4235807-Reviews-Agriturismo_Rosita-Tavazzano_con_Villavesco_Province_of_Lodi_Lombardy.html",
+      "https://www.facebook.com/pages/Agriturismo-Rosita/139477934886"
+    ]
+  }
+  </script>
+  <!-- GA4: sostituire con il proprio Measurement ID -->
+  <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script> -->
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="index.php?lang=ita" class="nav-brand">
+        <img src="images/pages/logo.jpg" alt="Agriturismo Rosita logo">
+        Agriturismo Rosita
+      </a>
+      <button class="nav-hamburger" aria-label="Apri menu" aria-expanded="false">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <ul class="nav-links" role="list">
+        <li><a href="index.php?lang=ita" class="active">Home Page</a></li>
+        <li><a href="dovesiamo.php?lang=ita">Dove Siamo</a></li>
+        <li><a href="lestanze.php?lang=ita">Le Stanze</a></li>
+        <li><a href="confort.php?lang=ita">I Servizi</a></li>
+        <li><a href="territorio.php?lang=ita">Il Territorio</a></li>
+        <li><a href="prezzi.php?lang=ita">I Prezzi</a></li>
+        <li><a href="news.php?lang=ita">News &amp; Offerte</a></li>
+        <li><a href="https://www.tripadvisor.it/Hotel_Review-g2081923-d4235807-Reviews-Agriturismo_Rosita-Tavazzano_con_Villavesco_Province_of_Lodi_Lombardy.html#REVIEWS" target="_blank" rel="noopener">Recensioni dei clienti</a></li>
+        <li class="nav-cta"><a href="contatti.php?lang=ita">Contatti</a></li>
+      </ul>
+      <div class="nav-right">
+        <select id="lang-select" class="nav-lang" aria-label="Seleziona lingua">
+          <option value="ita" selected>ITA</option>
+          <option value="eng">ENG</option>
+          <option value="fra">FRA</option>
+          <option value="ger">GER</option>
+          <option value="spa">SPA</option>
+          <option value="swe">SVE</option>
+          <option value="fin">FIN</option>
+          <option value="rus">RUS</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-img-wrap">
+    <img src="images/pages/home.jpg" alt="Agriturismo Rosita - la casa colonica tra i campi lodigiani" loading="eager">
+  </div>
+  <div class="hero-content">
+    <span class="hero-eyebrow">Tavazzano con Villavesco (LO)</span>
+    <h1>Agriturismo<br>Rosita</h1>
+    <p class="hero-sub">Tra Lodi e Milano</p>
+    <p class="hero-body">Un'antica casa colonica del 1600 completamente ristrutturata, 4 appartamenti immersi nella quiete della campagna lodigiana. Colazione inclusa, a 20 minuti da Milano.</p>
+    <div class="hero-actions">
+      <a href="contatti.php?lang=ita" class="btn btn-primary">Richiedi disponibilita</a>
+      <a href="lestanze.php?lang=ita" class="btn btn-outline">Le Stanze</a>
+    </div>
+  </div>
+</section>
+
+<!-- Article excerpt -->
+<section class="section section-alt">
+  <div class="container">
+    <div class="article-block">
+      <div class="article-meta" data-reveal>
+        <p class="article-source">Il Cittadino</p>
+        <h2 class="article-headline">Tra i campi di Modignano, la quiete ritrovata</h2>
+        <p class="article-byline">Silvia Canevara, 20 aprile 2007</p>
+      </div>
+      <div class="article-text" data-reveal>
+        <p>Dalla finestra a piano terra di uno dei quattro appartamenti in cui l'agriturismo Rosita si divide si vede solo un bel prato di campagna: la centrale Endesa e lontana e il traffico della via Emilia, che lambisce i campi coltivati attorno a Modignano, non riesce a far raggiungere sin qui il suo fragore.</p>
+        <p>La cura con cui la famiglia Robbiati ha restaurato quelle che un tempo erano case coloniche e davvero degna degli architetti piu in voga: le vecchie volte a mattoni, che risalgono al 1600, sono state recuperate, i locali resi piu accoglienti con mobili in arte povera, completi di arredi e suppellettili, strutture sanitarie appositamente concepite per utenti disabili, le tende ricamate a mano appese alle finestre e in salotto un camino nuovo di zecca da accendere nelle sere d'inverno.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Three features -->
+<section class="section">
+  <div class="container">
+    <div class="mb-lg" data-reveal>
+      <h2 class="section-title">Perche scegliere Rosita</h2>
+      <p class="section-body">Autenticita, comfort moderni e la bellezza della campagna lodigiana, tutto in un'unica destinazione a pochi chilometri dal capoluogo lombardo.</p>
+    </div>
+    <div class="features">
+      <div class="feature-card" data-reveal>
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/>
+        </svg>
+        <h3 class="feature-title">Casa colonica del 1600</h3>
+        <p class="feature-body">Volte a mattoni originali, letti in ferro battuto fatti a mano, mobili in arte povera e tende ricamate. Un'ospitalita che racconta quattro secoli di storia rurale lombarda.</p>
+      </div>
+      <div class="feature-card" data-reveal>
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+        </svg>
+        <h3 class="feature-title">Ogni comfort incluso</h3>
+        <p class="feature-body">Aria condizionata, Wi-Fi, TV satellitare, lavatrice e colazione ogni mattina. Reception aperta 24 ore. Un appartamento e attrezzato per ospiti diversamente abili.</p>
+      </div>
+      <div class="feature-card" data-reveal>
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M12 22s-8-4.5-8-11.8A8 8 0 0 1 12 2a8 8 0 0 1 8 8.2c0 7.3-8 11.8-8 11.8z"/><circle cx="12" cy="10" r="3"/>
+        </svg>
+        <h3 class="feature-title">Campagna lodigiana</h3>
+        <p class="feature-body">A 20 minuti da Milano, immersi nell'aria pulita dei campi di Modignano. Sentieri per passeggiate, percorsi di cicloturismo, silenzio vero. Uscita A1 di Lodi.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TripAdvisor strip -->
+<section class="section-sm section-alt">
+  <div class="container" data-reveal>
+    <div class="ta-strip">
+      <div class="ta-logo" aria-hidden="true">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="#fff"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
+      </div>
+      <p class="ta-text">Leggi le recensioni dei nostri ospiti su <a href="https://www.tripadvisor.it/Hotel_Review-g2081923-d4235807-Reviews-Agriturismo_Rosita-Tavazzano_con_Villavesco_Province_of_Lodi_Lombardy.html#REVIEWS" target="_blank" rel="noopener">TripAdvisor</a>. La vostra esperienza e la nostra migliore presentazione.</p>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <p class="footer-brand">Agriturismo Rosita</p>
+        <p class="footer-tagline">Un'antica casa colonica del 1600 tra i campi di Modignano, a Tavazzano con Villavesco. Ospitalita autentica a pochi chilometri da Milano.</p>
+      </div>
+      <div>
+        <p class="footer-col-title">Pagine</p>
+        <ul class="footer-nav">
+          <li><a href="index.php?lang=ita">Home Page</a></li>
+          <li><a href="dovesiamo.php?lang=ita">Dove Siamo</a></li>
+          <li><a href="lestanze.php?lang=ita">Le Stanze</a></li>
+          <li><a href="confort.php?lang=ita">I Servizi</a></li>
+          <li><a href="territorio.php?lang=ita">Il Territorio</a></li>
+          <li><a href="prezzi.php?lang=ita">I Prezzi</a></li>
+          <li><a href="news.php?lang=ita">News &amp; Offerte</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Contatti</p>
+        <div class="footer-contact">
+          <p>Via XX Settembre 11<br>26838 Tavazzano con Villavesco (LO)</p>
+          <p><a href="tel:+390371761964">+39 0371 761964</a></p>
+          <p><a href="tel:+393397263651">+39 339 7263651</a> <span style="font-size:0.8em;opacity:.7">(English)</span></p>
+          <p><a href="mailto:info@agriturismorosita.it">info@agriturismorosita.it</a></p>
+          <p style="margin-top:0.875rem"><a href="https://www.tripadvisor.it/Hotel_Review-g2081923-d4235807-Reviews-Agriturismo_Rosita-Tavazzano_con_Villavesco_Province_of_Lodi_Lombardy.html#REVIEWS" target="_blank" rel="noopener">Recensioni su TripAdvisor</a></p>
+          <p><a href="https://www.facebook.com/pages/Agriturismo-Rosita/139477934886" target="_blank" rel="noopener">Pagina Facebook</a></p>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>Agriturismo Rosita - Via XX Settembre 11, 26838 Tavazzano con Villavesco (LO)</span>
+      <span><a href="mailto:info@agriturismorosita.it" style="color:inherit">info@agriturismorosita.it</a></span>
+    </div>
+  </div>
+</footer>
+
+<div id="cookie-banner" class="cookie-banner hidden" role="alert">
+  <span>Utilizziamo i cookie per migliorare la navigazione. Continuando accetti il loro utilizzo.</span>
+  <button id="cookie-accept" class="cookie-accept">Accetto</button>
+</div>
+
+<script src="js/main.js"></script>
+</body>
+</html>

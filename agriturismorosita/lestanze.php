@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Agriturismo Rosita - Le Stanze | Appartamenti rurali tra Lodi e Milano</title>
+  <meta name="description" content="Scopri i 4 appartamenti dell'Agriturismo Rosita: soffitti a volta in mattoni del 1600, letti in ferro battuto fatti a mano, giardino privato e balcone con vista campagna.">
+  <meta name="keywords" content="agriturismo, agriturismo lodi, agriturismo milano">
+  <meta name="google-site-verification" content="Pg1afVYlq60f7SCpNFz2mNjE3Dw_Rw6Lb8GsWZCXUeM">
+  <meta property="og:title" content="Le Stanze - Agriturismo Rosita">
+  <meta property="og:description" content="4 appartamenti in un'antica casa colonica del 1600. Volte a mattoni, ferro battuto, arredamento in arte povera.">
+  <meta property="og:type" content="website">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&display=swap">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="index.php?lang=ita" class="nav-brand">
+        <img src="images/pages/logo.jpg" alt="Agriturismo Rosita logo">
+        Agriturismo Rosita
+      </a>
+      <button class="nav-hamburger" aria-label="Apri menu" aria-expanded="false">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+      <ul class="nav-links" role="list">
+        <li><a href="index.php?lang=ita">Home Page</a></li>
+        <li><a href="dovesiamo.php?lang=ita">Dove Siamo</a></li>
+        <li><a href="lestanze.php?lang=ita" class="active">Le Stanze</a></li>
+        <li><a href="confort.php?lang=ita">I Servizi</a></li>
+        <li><a href="territorio.php?lang=ita">Il Territorio</a></li>
+        <li><a href="prezzi.php?lang=ita">I Prezzi</a></li>
+        <li><a href="news.php?lang=ita">News &amp; Offerte</a></li>
+        <li><a href="https://www.tripadvisor.it/Hotel_Review-g2081923-d4235807-Reviews-Agriturismo_Rosita-Tavazzano_con_Villavesco_Province_of_Lodi_Lombardy.html#REVIEWS" target="_blank" rel="noopener">Recensioni dei clienti</a></li>
+        <li class="nav-cta"><a href="contatti.php?lang=ita">Contatti</a></li>
+      </ul>
+      <div class="nav-right">
+        <select id="lang-select" class="nav-lang" aria-label="Seleziona lingua">
+          <option value="ita" selected>ITA</option>
+          <option value="eng">ENG</option>
+          <option value="fra">FRA</option>
+          <option value="ger">GER</option>
+          <option value="spa">SPA</option>
+          <option value="swe">SVE</option>
+          <option value="fin">FIN</option>
+          <option value="rus">RUS</option>
+        </select>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="page-header">
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="index.php?lang=ita">Home Page</a><span aria-hidden="true"> / </span><span>Le Stanze</span>
+    </nav>
+    <h1>Le Stanze</h1>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <div class="gallery-grid mb-lg" data-reveal>
+      <a class="gallery-item" href="#" data-lightbox="images/fotonuove-int/1.jpg" aria-label="Foto appartamento 1">
+        <img src="images/fotonuove-int/thumb1.jpg" alt="Soggiorno con caminetto" loading="lazy">
+      </a>
+      <a class="gallery-item" href="#" data-lightbox="images/fotonuove-int/2.jpg" aria-label="Foto appartamento 2">
+        <img src="images/fotonuove-int/thumb2.jpg" alt="Camera da letto con letto in ferro battuto" loading="lazy">
+      </a>
+      <a class="gallery-item" href="#" data-lightbox="images/fotonuove-int/3.jpg" aria-label="Foto appartamento 3">
+        <img src="images/fotonuove-int/thumb3.jpg" alt="Cucina attrezzata" loading="lazy">
+      </a>
+      <a class="gallery-item" href="#" data-lightbox="images/fotonuove-int/4.jpg" aria-label="Foto appartamento 4">
+        <img src="images/fotonuove-int/thumb4.jpg" alt="Soffitto a volta in mattoni" loading="lazy">
+      </a>
+      <a class="gallery-item" href="#" data-lightbox="images/fotonuove-int/5.jpg" aria-label="Foto appartamento 5">
+        <img src="images/fotonuove-int/thumb5.jpg" alt="Bagno privato" loading="lazy">
+      </a>
+      <a class="gallery-item" href="#" data-lightbox="images/fotonuove-int/6.jpg" aria-label="Foto appartamento 6">
+        <img src="images/fotonuove-int/thumb6.jpg" alt="Arredi in arte povera" loading="lazy">
+      </a>
+      <a class="gallery-item" href="#" data-lightbox="images/fotonuove-int/7.jpg" aria-label="Foto appartamento 7">
+        <img src="images/fotonuove-int/thumb7.jpg" alt="Salotto rustico" loading="lazy">
+      </a>
+      <a class="gallery-item" href="#" data-lightbox="images/fotonuove-int/8.jpg" aria-label="Foto appartamento 8">
+        <img src="images/fotonuove-int/thumb8.jpg" alt="Vista sul giardino privato" loading="lazy">
+      </a>
+      <a class="gallery-item" href="#" data-lightbox="images/fotonuove-int/9.jpg" aria-label="Foto appartamento 9">
+        <img src="images/fotonuove-int/thumb9.jpg" alt="Dettaglio arredo" loading="lazy">
+      </a>
+      <a class="gallery-item" href="#" data-lightbox="images/fotonuove-int/10.jpg" aria-label="Foto appartamento 10">
+        <img src="images/fotonuove-int/thumb10.jpg" alt="Terrazza con vista campagna" loading="lazy">
+      </a>
+      <a class="gallery-item" href="#" data-lightbox="images/fotonuove-int/11.jpg" aria-label="Foto appartamento 11">
+        <img src="images/fotonuove-int/thumb11.jpg" alt="Ingresso appartamento" loading="lazy">
+      </a>
+      <a class="gallery-item" href="#" data-lightbox="images/fotonuove-int/12.jpg" aria-label="Foto appartamento 12">
+        <img src="images/fotonuove-int/thumb12.jpg" alt="Zona notte" loading="lazy">
+      </a>
+      <a class="gallery-item" href="#" data-lightbox="images/fotonuove-int/13.jpg" aria-label="Foto appartamento 13">
+        <img src="images/fotonuove-int/thumb13.jpg" alt="Zona giorno" loading="lazy">
+      </a>
+      <a class="gallery-item" href="#" data-lightbox="images/fotonuove-int/14.jpg" aria-label="Foto appartamento 14">
+        <img src="images/fotonuove-int/thumb14.jpg" alt="Esterno della struttura" loading="lazy">
+      </a>
+    </div>
+
+    <div class="article-block">
+      <div class="article-meta" data-reveal>
+        <span class="article-source">La struttura</span>
+        <h2 class="article-headline">4 appartamenti in una dimora del 1600</h2>
+        <p class="article-byline" style="margin-top:1.25rem"><a href="contatti.php?lang=ita" class="btn btn-primary" style="font-size:0.875rem;padding:0.625rem 1.25rem">Prenota ora</a></p>
+      </div>
+      <div class="article-text" data-reveal>
+        <p>L'agriturismo Rosita si colloca in un'antica casa contadina del 1600 completamente ristrutturata. Sono stati ricavati 4 appartamenti di due locali ciascuno con bagno privato, di cui uno attrezzato per ospitare persone diversamente abili.</p>
+        <p>Tutti gli appartamenti hanno l'arredamento in legno massello di stile arte povera e sono completi di elettrodomestici. La cucina e il soggiorno sono in stile rustico con un caratteristico caminetto, mentre le camere sono contraddistinte da letti realizzati a mano in ferro battuto.</p>
+        <p>Gli appartamenti al piano terra sono caratterizzati da un rarissimo soffitto in mattoni a volta completamente restaurato e godono di vista sul giardino privato. Quelli al primo piano presentano invece un caratteristico soffitto in legno e un balcone privato con vista sulla campagna.</p>
+        <p>L'agriturismo Rosita puo ospitare un massimo di 13 persone, alloggiate in 3 appartamenti da 3 posti ognuno e un quarto appartamento da quattro posti.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Lightbox -->
+<div id="lightbox" class="lightbox" role="dialog" aria-label="Visualizzazione immagine" aria-modal="true">
+  <button id="lightbox-close" class="lightbox-close" aria-label="Chiudi">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+  </button>
+  <button id="lightbox-prev" class="lightbox-prev" aria-label="Precedente">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+  </button>
+  <img id="lightbox-img" src="" alt="">
+  <button id="lightbox-next" class="lightbox-next" aria-label="Successiva">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
+</div>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <p class="footer-brand">Agriturismo Rosita</p>
+        <p class="footer-tagline">Un'antica casa colonica del 1600 tra i campi di Modignano, a Tavazzano con Villavesco. Ospitalita autentica a pochi chilometri da Milano.</p>
+      </div>
+      <div>
+        <p class="footer-col-title">Pagine</p>
+        <ul class="footer-nav">
+          <li><a href="index.php?lang=ita">Home Page</a></li>
+          <li><a href="dovesiamo.php?lang=ita">Dove Siamo</a></li>
+          <li><a href="lestanze.php?lang=ita">Le Stanze</a></li>
+          <li><a href="confort.php?lang=ita">I Servizi</a></li>
+          <li><a href="territorio.php?lang=ita">Il Territorio</a></li>
+          <li><a href="prezzi.php?lang=ita">I Prezzi</a></li>
+          <li><a href="news.php?lang=ita">News &amp; Offerte</a></li>
+        </ul>
+      </div>
+      <div>
+        <p class="footer-col-title">Contatti</p>
+        <div class="footer-contact">
+          <p>Via XX Settembre 11<br>26838 Tavazzano con Villavesco (LO)</p>
+          <p><a href="tel:+390371761964">+39 0371 761964</a></p>
+          <p><a href="tel:+393397263651">+39 339 7263651</a></p>
+          <p><a href="mailto:info@agriturismorosita.it">info@agriturismorosita.it</a></p>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>Agriturismo Rosita - Via XX Settembre 11, 26838 Tavazzano con Villavesco (LO)</span>
+      <span><a href="mailto:info@agriturismorosita.it" style="color:inherit">info@agriturismorosita.it</a></span>
+    </div>
+  </div>
+</footer>
+
+<div id="cookie-banner" class="cookie-banner hidden" role="alert">
+  <span>Utilizziamo i cookie per migliorare la navigazione. Continuando accetti il loro utilizzo.</span>
+  <button id="cookie-accept" class="cookie-accept">Accetto</button>
+</div>
+
+<script src="js/main.js"></script>
+</body>
+</html>
