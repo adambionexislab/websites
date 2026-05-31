@@ -3,15 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Tricologia a Paullo Milano | ES Protocollo Trico 360°</title>
+  <title>Tricologia a Paullo Milano | ES Hair Wellness</title>
   <meta name="description" content="Soffri di caduta capelli o cuoio capelluto danneggiato? ES Protocollo Trico 360° a Paullo (MI) offre analisi tricologica avanzata e trattamenti personalizzati. Prenota una consulenza gratuita." />
 
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-
-  <!-- LocalBusiness Schema Markup -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -20,6 +14,7 @@
     "description": "Salone tricologico a Paullo (MI) specializzato in analisi tricologica avanzata e trattamenti personalizzati per la caduta capelli e l'alopecia.",
     "address": {
       "@type": "PostalAddress",
+      "streetAddress": "Via S.Maria in Pratello, 2/D",
       "addressLocality": "Paullo",
       "addressRegion": "MI",
       "addressCountry": "IT"
@@ -29,33 +24,31 @@
   }
   </script>
 
-  <!-- Tailwind Play CDN -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       theme: {
         extend: {
           colors: {
-            cream:        '#FAF6F2',
-            'cream-dark': '#F0E6DA',
-            gold:         '#C4965A',
-            'gold-light': '#DDB97A',
-            'gold-dark':  '#A8793F',
-            rose:         '#7D3B55',
-            'rose-dark':  '#632E44',
-            'rose-light': '#B87A8E',
-            'rose-pale':  '#F7EEF1',
-            charcoal:     '#2A1A16',
-            'warm-muted': '#6B5048',
-            'warm-border':'#E5D8CF',
+            cream:       '#FDFBF7',
+            'cream-mid': '#F3EDE3',
+            ink:         '#0D0D0B',
+            'ink-muted': '#595954',
+            'ink-faint': '#9A9A96',
+            gold:        '#C4965A',
+            'gold-light':'#DDB97A',
+            'gold-dark': '#A8793F',
+            lime:        '#84CC16',
+            'lime-dark': '#65A30D',
+            'lime-pale': '#F7FEE7',
           },
           fontFamily: {
             serif: ['Cormorant', 'Georgia', 'serif'],
             sans:  ['Montserrat', 'sans-serif'],
-          },
-          boxShadow: {
-            warm:       '0 4px 24px rgba(42,26,22,0.08)',
-            'warm-lg':  '0 8px 40px rgba(42,26,22,0.14)',
           },
         }
       }
@@ -65,336 +58,396 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
-    body { font-family: 'Montserrat', sans-serif; -webkit-font-smoothing: antialiased; }
+    body {
+      font-family: 'Montserrat', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      background-color: #FDFBF7;
+      color: #0D0D0B;
+    }
     h1, h2, h3, h4 { font-family: 'Cormorant', Georgia, serif; }
 
-    .gold-line {
-      display: block;
-      width: 56px;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, #C4965A 30%, #C4965A 70%, transparent);
-      margin: 0 auto;
+    /* Grain overlay — fixed, pointer-events-none, never on scrolling content */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      pointer-events: none;
+      opacity: 0.038;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-repeat: repeat;
     }
 
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(22px); }
-      to   { opacity: 1; transform: translateY(0); }
+    /* Custom easing */
+    :root {
+      --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+      --ease-spring: cubic-bezier(0.32, 0.72, 0, 1);
     }
-    .fade-up            { animation: fadeUp 0.65s ease both; }
-    .fade-up-d1         { animation-delay: 0.1s; }
-    .fade-up-d2         { animation-delay: 0.2s; }
-    .fade-up-d3         { animation-delay: 0.35s; }
+
+    /* Scroll reveal system — IntersectionObserver driven */
+    .reveal {
+      opacity: 0;
+      transform: translateY(26px);
+      filter: blur(3px);
+      transition:
+        opacity   0.75s var(--ease-expo),
+        transform 0.75s var(--ease-expo),
+        filter    0.55s var(--ease-expo);
+    }
+    .reveal.in { opacity: 1; transform: translateY(0); filter: blur(0); }
+    .reveal-d1 { transition-delay: 0.08s; }
+    .reveal-d2 { transition-delay: 0.17s; }
+    .reveal-d3 { transition-delay: 0.26s; }
+    .reveal-d4 { transition-delay: 0.35s; }
+
+    /* Button press */
+    .btn {
+      transition:
+        background-color 180ms var(--ease-expo),
+        border-color     180ms var(--ease-expo),
+        box-shadow       180ms var(--ease-expo),
+        transform        130ms var(--ease-expo);
+    }
+    .btn:active { transform: scale(0.97); }
+
+    /* Floating nav glass */
+    .nav-glass {
+      background: rgba(253,251,247,0.82);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(13,13,11,0.07);
+      box-shadow: 0 1px 20px rgba(13,13,11,0.06), inset 0 1px 0 rgba(255,255,255,0.6);
+    }
+
+    /* Double-bezel card architecture */
+    .bezel {
+      background: rgba(13,13,11,0.028);
+      border: 1px solid rgba(13,13,11,0.07);
+      padding: 6px;
+      border-radius: 2rem;
+    }
+    .bezel-inner {
+      background: #fff;
+      border-radius: calc(2rem - 6px);
+      box-shadow: inset 0 1px 1px rgba(255,255,255,0.9);
+    }
+    /* Dark variant */
+    .bezel-dark {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.10);
+      padding: 6px;
+      border-radius: 2rem;
+    }
+    .bezel-dark .bezel-inner {
+      background: rgba(255,255,255,0.04);
+      box-shadow: inset 0 1px 1px rgba(255,255,255,0.08);
+    }
+    /* Lime variant */
+    .bezel-lime {
+      background: rgba(255,255,255,0.15);
+      border: 1px solid rgba(255,255,255,0.22);
+      padding: 6px;
+      border-radius: 2rem;
+    }
+    .bezel-lime .bezel-inner {
+      background: rgba(255,255,255,0.9);
+      border-radius: calc(2rem - 6px);
+      box-shadow: inset 0 1px 1px rgba(255,255,255,1);
+    }
+
+    /* Icon ring */
+    .icon-ring {
+      width: 2.5rem;
+      height: 2.5rem;
+      border-radius: 0.75rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    /* Trailing icon in button-in-button */
+    .btn-icon {
+      width: 2rem;
+      height: 2rem;
+      border-radius: 9999px;
+      background: rgba(255,255,255,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      transition: transform 280ms var(--ease-spring);
+    }
+    .btn:hover .btn-icon { transform: translate(2px, -1px); }
+
+    .btn-icon-dark {
+      background: rgba(13,13,11,0.08);
+    }
+    .btn:hover .btn-icon-dark { transform: translate(2px, -1px); }
+
+    /* Gold line */
+    .gold-line {
+      display: inline-block;
+      width: 36px;
+      height: 1.5px;
+      background: linear-gradient(90deg, #C4965A, #DDB97A);
+      vertical-align: middle;
+    }
 
     @media (prefers-reduced-motion: reduce) {
-      .fade-up { animation: none; }
+      .reveal { opacity: 1; transform: none; filter: none; transition: none; }
     }
 
-    /* Focus styles */
     a:focus-visible {
-      outline: 2px solid #C4965A;
+      outline: 2px solid #84CC16;
       outline-offset: 3px;
       border-radius: 4px;
     }
   </style>
 </head>
 
-<body class="bg-cream text-charcoal font-sans">
+<body>
 
-  <!-- ════════════════ NAVBAR ════════════════ -->
-  <nav
-    class="fixed top-0 inset-x-0 z-50 bg-cream/92 backdrop-blur-md border-b border-warm-border"
-    role="navigation"
-    aria-label="Navigazione principale"
-  >
-    <div class="max-w-6xl mx-auto px-5 sm:px-6 h-16 flex items-center justify-between">
+  <!-- ═══════════════════ NAVBAR — Floating Glass Pill ═══════════════════ -->
+  <div class="fixed top-0 left-0 right-0 z-40 flex justify-center pt-4 px-4" role="navigation" aria-label="Navigazione principale">
+    <nav class="nav-glass rounded-full px-4 py-2.5 flex items-center gap-6 w-full max-w-xl">
 
-      <!-- Brand mark -->
-      <a href="#" class="flex items-center gap-2.5 cursor-pointer" aria-label="ES Protocollo Trico 360° — torna all'inizio">
-        <svg width="34" height="34" viewBox="0 0 34 34" fill="none" aria-hidden="true">
+      <a href="#" class="flex items-center gap-2.5 flex-shrink-0" aria-label="ES Green Hair Wellness — torna all'inizio">
+        <svg width="28" height="28" viewBox="0 0 34 34" fill="none" aria-hidden="true">
           <circle cx="17" cy="17" r="16" stroke="#C4965A" stroke-width="1.5"/>
-          <path d="M11 23 C11 14 17 9 17 9 C17 9 23 14 23 23" stroke="#7D3B55" stroke-width="1.5" stroke-linecap="round" fill="none"/>
+          <path d="M11 23 C11 14 17 9 17 9 C17 9 23 14 23 23" stroke="#84CC16" stroke-width="1.5" stroke-linecap="round" fill="none"/>
           <ellipse cx="17" cy="25" rx="2.5" ry="1.5" fill="#C4965A"/>
         </svg>
-        <span class="font-serif text-lg text-rose font-semibold leading-none tracking-wide">ES Trico 360°</span>
+        <span class="font-serif text-[15px] font-semibold text-ink leading-none">ES Green Hair Wellness</span>
       </a>
 
-      <!-- Desktop CTA -->
-      <a
-        href="https://forms.gle/nvqDiRowFNGc1gNu7"
-        target="_blank" rel="noopener noreferrer"
-        class="hidden sm:inline-flex items-center gap-2 bg-gold text-white font-sans font-semibold text-xs tracking-widest uppercase px-5 py-2.5 rounded-full hover:bg-gold-dark transition-colors duration-200 cursor-pointer"
-      >
+      <div class="flex-1"></div>
+
+      <a href="https://forms.gle/nvqDiRowFNGc1gNu7" target="_blank" rel="noopener noreferrer"
+         class="hidden sm:inline-flex items-center gap-2 bg-lime text-white font-sans font-semibold text-[11px] tracking-widest uppercase px-4 py-2.5 rounded-full btn group">
         Consulenza Gratuita
+        <span class="btn-icon w-5 h-5" aria-hidden="true">
+          <svg width="9" height="9" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 10L10 2M10 2H4M10 2v6"/></svg>
+        </span>
       </a>
+      <a href="https://forms.gle/nvqDiRowFNGc1gNu7" target="_blank" rel="noopener noreferrer"
+         class="sm:hidden bg-lime text-white font-sans font-semibold text-[11px] px-4 py-2 rounded-full btn">Prenota</a>
 
-      <!-- Mobile CTA -->
-      <a
-        href="https://forms.gle/nvqDiRowFNGc1gNu7"
-        target="_blank" rel="noopener noreferrer"
-        class="sm:hidden bg-gold text-white font-sans font-semibold text-xs px-4 py-2 rounded-full cursor-pointer"
-      >
-        Prenota
-      </a>
-
-    </div>
-  </nav>
+    </nav>
+  </div>
 
   <main>
 
-  <!-- ════════════════ HERO ════════════════ -->
-  <section
-    id="hero"
-    class="min-h-screen flex items-center justify-center relative overflow-hidden pt-16"
-    style="background: linear-gradient(150deg, #FAF6F2 0%, #F5EDE3 55%, #EFE0CF 100%);"
-    aria-labelledby="hero-heading"
-  >
+  <!-- ═══════════════════ HERO ═══════════════════ -->
+  <section id="hero" class="min-h-[100dvh] flex flex-col justify-center relative overflow-hidden pt-28 pb-20 px-5" aria-labelledby="hero-heading">
 
-    <!-- Decorative ambient blobs -->
-    <div class="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
-      <div class="absolute top-20 -right-16 w-96 h-96 rounded-full"
-           style="background: radial-gradient(circle, rgba(196,150,90,0.18) 0%, transparent 65%);"></div>
-      <div class="absolute -bottom-10 -left-16 w-[32rem] h-[32rem] rounded-full"
-           style="background: radial-gradient(circle, rgba(125,59,85,0.10) 0%, transparent 65%);"></div>
-      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[40rem] h-[40rem] rounded-full"
-           style="background: radial-gradient(circle, rgba(240,230,218,0.5) 0%, transparent 60%);"></div>
+    <!-- Ambient orbs — decorative only -->
+    <div class="absolute top-1/4 right-0 w-[700px] h-[700px] rounded-full pointer-events-none" aria-hidden="true"
+         style="background: radial-gradient(circle, rgba(132,204,22,0.07) 0%, transparent 62%); transform: translateX(28%);"></div>
+    <div class="absolute -bottom-20 -left-20 w-[600px] h-[600px] rounded-full pointer-events-none" aria-hidden="true"
+         style="background: radial-gradient(circle, rgba(196,150,90,0.09) 0%, transparent 62%);"></div>
+
+    <div class="max-w-6xl mx-auto w-full">
+      <div class="max-w-4xl">
+
+        <!-- Location tag — no all-caps eyebrow pattern, just a clean inline element -->
+        <div class="flex items-center gap-3 mb-10 reveal">
+          <span class="gold-line"></span>
+          <span class="font-sans text-[11px] font-medium tracking-[0.22em] uppercase text-gold">Salone Tricologico · Paullo, Milano</span>
+        </div>
+
+        <!-- Massive editorial heading -->
+        <h1 id="hero-heading" class="font-serif font-medium text-ink leading-[1.0] mb-9 reveal reveal-d1"
+            style="font-size: clamp(3.6rem, 9.5vw, 7.5rem); letter-spacing: -0.025em; text-wrap: balance;">
+          Caduta Capelli?<br />
+          <em class="italic font-light" style="color: #84CC16;">Ritrova una<br class="sm:hidden" /> Chioma Sana.</em>
+        </h1>
+
+        <p class="font-sans text-base sm:text-[17px] text-ink-muted leading-[1.9] max-w-lg mb-11 font-light reveal reveal-d2"
+           style="max-width: 65ch;">
+          Il <strong class="font-semibold text-ink">Metodo Trico 360°</strong> — analisi tricologica avanzata
+          e trattamenti personalizzati per donne a Paullo e provincia di Milano.
+        </p>
+
+        <!-- CTAs — button-in-button pattern -->
+        <div class="flex flex-wrap gap-4 mb-16 reveal reveal-d3">
+          <a href="https://forms.gle/nvqDiRowFNGc1gNu7" target="_blank" rel="noopener noreferrer"
+             class="inline-flex items-center gap-3 bg-ink text-white font-sans font-semibold text-sm px-6 py-4 rounded-full btn group">
+            Prenota una consulenza gratuita
+            <span class="btn-icon" aria-hidden="true">
+              <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 10L10 2M10 2H4M10 2v6"/></svg>
+            </span>
+          </a>
+          <a href="#metodo"
+             class="inline-flex items-center gap-2 border border-ink/14 text-ink font-sans font-medium text-sm px-6 py-4 rounded-full btn hover:bg-ink/[0.04]">
+            Scopri il metodo
+          </a>
+        </div>
+
+        <!-- Scroll cue -->
+        <div class="flex items-center gap-3 reveal reveal-d4">
+          <div class="w-px h-9 bg-gradient-to-b from-transparent via-gold/50 to-transparent"></div>
+          <span class="font-sans text-[10px] tracking-[0.22em] uppercase text-ink-faint">Scorri per scoprire</span>
+        </div>
+
+      </div>
     </div>
+  </section>
 
-    <div class="relative max-w-4xl mx-auto px-5 py-20 sm:py-28 text-center">
 
-      <!-- Eyebrow -->
-      <p class="font-sans text-xs font-medium tracking-[0.3em] uppercase text-gold mb-5 fade-up">
-        Salone Tricologico · Paullo, Provincia di Milano
+  <!-- ═══════════════════ SOCIAL PROOF ═══════════════════ -->
+  <section class="bg-ink py-5 px-5" aria-label="Clienti soddisfatte">
+    <div class="max-w-6xl mx-auto flex flex-wrap items-center justify-between gap-4">
+      <div class="flex items-center gap-3">
+        <div class="flex gap-0.5" role="img" aria-label="5 stelle su 5">
+          <svg class="w-3 h-3 text-gold fill-current" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg class="w-3 h-3 text-gold fill-current" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg class="w-3 h-3 text-gold fill-current" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg class="w-3 h-3 text-gold fill-current" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+          <svg class="w-3 h-3 text-gold fill-current" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+        </div>
+        <span class="font-sans text-white/50 text-xs">5.0 · Google</span>
+      </div>
+      <p class="font-sans text-white/70 text-sm font-light">
+        Oltre <strong class="text-gold font-semibold">580 donne</strong> tra Paullo, Milano e provincia si sono già affidate al Metodo Trico 360°
       </p>
+    </div>
+  </section>
 
-      <!-- Top gold line -->
-      <span class="gold-line mb-7 fade-up fade-up-d1" role="presentation" aria-hidden="true"></span>
 
-      <!-- H1 -->
-      <h1
-        id="hero-heading"
-        class="font-serif text-[2.7rem] sm:text-5xl md:text-[3.75rem] lg:text-7xl font-semibold leading-[1.1] text-charcoal mb-6 fade-up fade-up-d1"
-      >
-        Caduta Capelli a Paullo?<br />
-        <em class="italic font-normal text-rose">Ritrova una Chioma</em><br />
-        Sana e Folta
-      </h1>
+  <!-- ═══════════════════ PROBLEMA ═══════════════════ -->
+  <section id="problema" class="py-32 px-5" aria-labelledby="problem-heading">
+    <div class="max-w-6xl mx-auto">
 
-      <!-- Bottom gold line -->
-      <span class="gold-line mb-7 fade-up fade-up-d2" role="presentation" aria-hidden="true"></span>
-
-      <!-- Subheadline -->
-      <p class="font-sans text-base sm:text-lg text-warm-muted leading-[1.8] max-w-2xl mx-auto mb-10 font-light fade-up fade-up-d2">
-        Il <strong class="font-semibold text-charcoal">Metodo Trico 360°</strong> — analisi tricologica avanzata
-        e trattamenti personalizzati per donne a Paullo e provincia di Milano
-      </p>
-
-      <!-- CTA block -->
-      <div class="fade-up fade-up-d3">
-        <a
-          href="https://forms.gle/nvqDiRowFNGc1gNu7"
-          target="_blank" rel="noopener noreferrer"
-          class="inline-flex items-center gap-3 bg-rose text-white font-sans font-semibold text-sm tracking-wide px-8 py-4 rounded-full shadow-warm hover:bg-rose-dark hover:shadow-warm-lg transition-all duration-300 cursor-pointer"
-        >
-          <!-- Calendar icon -->
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-            <line x1="16" y1="2" x2="16" y2="6"/>
-            <line x1="8" y1="2" x2="8" y2="6"/>
-            <line x1="3" y1="10" x2="21" y2="10"/>
-          </svg>
-          Prenota una consulenza gratuita
-        </a>
-        <p class="mt-3.5 font-sans text-xs text-warm-muted">
-          <svg class="inline w-3.5 h-3.5 mr-1 text-gold" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
-          </svg>
-          Completamente gratuita · Nessun impegno
+      <div class="mb-16 reveal">
+        <h2 id="problem-heading" class="font-serif font-medium text-ink leading-tight"
+            style="font-size: clamp(2.6rem, 5.5vw, 4.2rem); letter-spacing: -0.025em; text-wrap: balance;">
+          Perché i prodotti da scaffale<br />
+          <em class="italic font-light text-lime-dark">non funzionano?</em>
+        </h2>
+        <p class="font-sans text-ink-muted text-sm mt-5 leading-relaxed" style="max-width: 46ch;">
+          Il tuo cuoio capelluto è unico. I prodotti generici non lo sanno.
         </p>
       </div>
 
-    </div>
-  </section>
+      <!-- Asymmetric bento — 1 wide + 2 stacked -->
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
 
+        <!-- Card 1 wide -->
+        <article class="md:col-span-7 bezel reveal reveal-d1">
+          <div class="bezel-inner p-8 md:p-10">
+            <div class="icon-ring bg-lime-pale mb-7" aria-hidden="true">
+              <svg class="w-5 h-5 text-lime-dark" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 10V11"/>
+              </svg>
+            </div>
+            <h3 class="font-serif text-2xl md:text-3xl font-medium text-ink leading-snug mb-5">
+              Prodotti generici che non trattano il tuo cuoio capelluto specifico
+            </h3>
+            <div class="w-8 h-[1.5px]" style="background: linear-gradient(90deg,#C4965A,#DDB97A);"></div>
+          </div>
+        </article>
 
-  <!-- ════════════════ SOCIAL PROOF BAR ════════════════ -->
-  <section class="bg-rose py-6 px-5" aria-label="Numero di clienti soddisfatte">
-    <div class="max-w-3xl mx-auto text-center">
+        <!-- Cards 2 + 3 stacked -->
+        <div class="md:col-span-5 flex flex-col gap-4">
+          <article class="bezel reveal reveal-d2 flex-1">
+            <div class="bezel-inner p-7 h-full">
+              <div class="icon-ring bg-lime-pale mb-5" aria-hidden="true">
+                <svg class="w-5 h-5 text-lime-dark" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </svg>
+              </div>
+              <h3 class="font-serif text-xl font-medium text-ink leading-snug">
+                Soldi spesi su soluzioni che non risolvono la caduta alla radice
+              </h3>
+            </div>
+          </article>
+          <article class="bezel reveal reveal-d3 flex-1">
+            <div class="bezel-inner p-7 h-full">
+              <div class="icon-ring bg-lime-pale mb-5" aria-hidden="true">
+                <svg class="w-5 h-5 text-lime-dark" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"/>
+                </svg>
+              </div>
+              <h3 class="font-serif text-xl font-medium text-ink leading-snug">
+                La frustrazione quotidiana di nascondere le zone diradate
+              </h3>
+            </div>
+          </article>
+        </div>
 
-      <!-- Stars -->
-      <div class="flex justify-center gap-1 mb-3" role="img" aria-label="Valutazione 5 stelle su 5">
-        <svg class="w-4 h-4 text-gold-light fill-current" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-        <svg class="w-4 h-4 text-gold-light fill-current" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-        <svg class="w-4 h-4 text-gold-light fill-current" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-        <svg class="w-4 h-4 text-gold-light fill-current" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-        <svg class="w-4 h-4 text-gold-light fill-current" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
       </div>
-
-      <p class="font-sans text-white text-sm sm:text-base font-medium leading-relaxed">
-        Oltre <strong class="text-gold-light font-bold text-lg sm:text-xl">580 donne</strong> tra Paullo, Milano e provincia
-        si sono già affidate al Metodo Trico 360°
-      </p>
     </div>
   </section>
 
 
-  <!-- ════════════════ PROBLEMA ════════════════ -->
-  <section
-    id="problema"
-    class="py-20 px-5"
-    style="background-color: #F0E6DA;"
-    aria-labelledby="problem-heading"
-  >
+  <!-- ═══════════════════ METODO ═══════════════════ -->
+  <section id="metodo" class="py-32 px-5 bg-ink" aria-labelledby="method-heading">
     <div class="max-w-6xl mx-auto">
 
-      <!-- Header -->
-      <div class="text-center mb-14">
-        <p class="font-sans text-xs font-medium tracking-[0.3em] uppercase text-gold mb-4">Il Problema</p>
-        <h2 id="problem-heading" class="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold text-charcoal leading-tight max-w-xl mx-auto">
-          Perché i prodotti da scaffale<br />
-          <em class="italic font-normal text-rose">non funzionano?</em>
+      <div class="mb-20 reveal">
+        <h2 id="method-heading" class="font-serif font-medium text-white leading-tight"
+            style="font-size: clamp(2.6rem, 5.5vw, 4.2rem); letter-spacing: -0.025em;">
+          Il Metodo Trico 360°<br />
+          <em class="italic font-light text-lime">di ES</em>
         </h2>
-        <span class="gold-line mt-6 block" role="presentation" aria-hidden="true"></span>
       </div>
 
-      <!-- 3 Cards -->
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+      <!-- Steps as a ruled grid — large background numbers for depth -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-px" style="background: rgba(255,255,255,0.06);">
 
-        <!-- Card 1 -->
-        <article class="bg-white rounded-2xl p-8 shadow-warm hover:shadow-warm-lg transition-shadow duration-300 border border-warm-border cursor-default">
-          <div class="w-12 h-12 rounded-full bg-rose-pale flex items-center justify-center mb-5" aria-hidden="true">
-            <svg class="w-6 h-6 text-rose" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 10V11"/>
-            </svg>
-          </div>
-          <h3 class="font-serif text-xl sm:text-2xl font-semibold text-charcoal mb-3 leading-snug">
-            Prodotti generici che non trattano il tuo cuoio capelluto specifico
-          </h3>
-          <div class="w-8 h-0.5 bg-gold mt-4" role="presentation" aria-hidden="true"></div>
-        </article>
-
-        <!-- Card 2 -->
-        <article class="bg-white rounded-2xl p-8 shadow-warm hover:shadow-warm-lg transition-shadow duration-300 border border-warm-border cursor-default">
-          <div class="w-12 h-12 rounded-full bg-rose-pale flex items-center justify-center mb-5" aria-hidden="true">
-            <svg class="w-6 h-6 text-rose" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-            </svg>
-          </div>
-          <h3 class="font-serif text-xl sm:text-2xl font-semibold text-charcoal mb-3 leading-snug">
-            Soldi spesi su soluzioni che non risolvono la caduta capelli alla radice
-          </h3>
-          <div class="w-8 h-0.5 bg-gold mt-4" role="presentation" aria-hidden="true"></div>
-        </article>
-
-        <!-- Card 3 -->
-        <article class="bg-white rounded-2xl p-8 shadow-warm hover:shadow-warm-lg transition-shadow duration-300 border border-warm-border cursor-default">
-          <div class="w-12 h-12 rounded-full bg-rose-pale flex items-center justify-center mb-5" aria-hidden="true">
-            <svg class="w-6 h-6 text-rose" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.88 9.88l-3.29-3.29m7.532 7.532l3.29 3.29M3 3l3.59 3.59m0 0A9.953 9.953 0 0112 5c4.478 0 8.268 2.943 9.543 7a10.025 10.025 0 01-4.132 5.411m0 0L21 21"/>
-            </svg>
-          </div>
-          <h3 class="font-serif text-xl sm:text-2xl font-semibold text-charcoal mb-3 leading-snug">
-            La frustrazione quotidiana di nascondere le zone diradate
-          </h3>
-          <div class="w-8 h-0.5 bg-gold mt-4" role="presentation" aria-hidden="true"></div>
-        </article>
-
-      </div>
-    </div>
-  </section>
-
-
-  <!-- ════════════════ METODO ════════════════ -->
-  <section
-    id="metodo"
-    class="py-20 px-5 bg-white"
-    aria-labelledby="method-heading"
-  >
-    <div class="max-w-6xl mx-auto">
-
-      <!-- Header -->
-      <div class="text-center mb-16">
-        <p class="font-sans text-xs font-medium tracking-[0.3em] uppercase text-gold mb-4">Come Funziona</p>
-        <h2 id="method-heading" class="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold text-charcoal leading-tight">
-          Il Metodo Trico 360° di ES
-        </h2>
-        <span class="gold-line mt-6 block" role="presentation" aria-hidden="true"></span>
-      </div>
-
-      <!-- Steps -->
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-10 sm:gap-6 relative">
-
-        <!-- Horizontal connector line (desktop only) -->
-        <div
-          class="hidden sm:block absolute top-10 left-[calc(16.67%+2.5rem)] right-[calc(16.67%+2.5rem)] h-px bg-warm-border"
-          aria-hidden="true"
-        ></div>
-
-        <!-- Step 1 -->
-        <article class="flex flex-col items-center text-center px-4">
-          <div
-            class="relative flex w-20 h-20 rounded-full items-center justify-center mb-6 flex-shrink-0 bg-cream-dark"
-            style="border: 1.5px solid #C4965A;"
-          >
-            <span class="absolute -top-2 -right-1 w-6 h-6 rounded-full bg-rose text-white font-sans font-bold text-xs flex items-center justify-center" aria-label="Passo 1">1</span>
-            <svg class="w-8 h-8 text-gold" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true">
+        <article class="bg-ink p-10 reveal reveal-d1 transition-colors duration-500" style="transition: background 400ms var(--ease-expo);"
+                 onmouseenter="this.style.background='rgba(255,255,255,0.025)'" onmouseleave="this.style.background='#0D0D0B'">
+          <span class="font-serif font-light text-white/[0.04] leading-none select-none block mb-3" style="font-size: 7rem;" aria-hidden="true">01</span>
+          <div class="icon-ring border mb-6" style="border-color: rgba(132,204,22,0.3);" aria-hidden="true">
+            <svg class="w-5 h-5 text-lime" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
             </svg>
           </div>
-          <h3 class="font-serif text-2xl font-semibold text-charcoal mb-3">Analisi Tricologica Avanzata</h3>
-          <p class="font-sans text-sm text-warm-muted leading-[1.8]">
-            Analisi tricologica approfondita con tecnologie avanzate — studiamo il tuo cuoio capelluto nel dettaglio
+          <h3 class="font-serif text-2xl font-medium text-white mb-3">Analisi Tricologica Avanzata</h3>
+          <p class="font-sans text-white/45 text-sm leading-[1.85]">
+            Analisi approfondita con tecnologie avanzate. Studiamo il tuo cuoio capelluto nel dettaglio.
           </p>
         </article>
 
-        <!-- Step 2 -->
-        <article class="flex flex-col items-center text-center px-4">
-          <div
-            class="relative flex w-20 h-20 rounded-full items-center justify-center mb-6 flex-shrink-0 bg-cream-dark"
-            style="border: 1.5px solid #C4965A;"
-          >
-            <span class="absolute -top-2 -right-1 w-6 h-6 rounded-full bg-rose text-white font-sans font-bold text-xs flex items-center justify-center" aria-label="Passo 2">2</span>
-            <svg class="w-8 h-8 text-gold" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true">
+        <article class="bg-ink p-10 reveal reveal-d2 transition-colors duration-500"
+                 onmouseenter="this.style.background='rgba(255,255,255,0.025)'" onmouseleave="this.style.background='#0D0D0B'">
+          <span class="font-serif font-light text-white/[0.04] leading-none select-none block mb-3" style="font-size: 7rem;" aria-hidden="true">02</span>
+          <div class="icon-ring border mb-6" style="border-color: rgba(132,204,22,0.3);" aria-hidden="true">
+            <svg class="w-5 h-5 text-lime" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
             </svg>
           </div>
-          <h3 class="font-serif text-2xl font-semibold text-charcoal mb-3">Trattamento Personalizzato</h3>
-          <p class="font-sans text-sm text-warm-muted leading-[1.8]">
-            Trattamento personalizzato per la caduta capelli o alopecia, studiato sulla tua situazione specifica
+          <h3 class="font-serif text-2xl font-medium text-white mb-3">Trattamento Personalizzato</h3>
+          <p class="font-sans text-white/45 text-sm leading-[1.85]">
+            Percorso su misura per la caduta capelli o alopecia, studiato sulla tua situazione specifica.
           </p>
         </article>
 
-        <!-- Step 3 -->
-        <article class="flex flex-col items-center text-center px-4">
-          <div
-            class="relative flex w-20 h-20 rounded-full items-center justify-center mb-6 flex-shrink-0 bg-cream-dark"
-            style="border: 1.5px solid #C4965A;"
-          >
-            <span class="absolute -top-2 -right-1 w-6 h-6 rounded-full bg-rose text-white font-sans font-bold text-xs flex items-center justify-center" aria-label="Passo 3">3</span>
-            <svg class="w-8 h-8 text-gold" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24" aria-hidden="true">
+        <article class="bg-ink p-10 reveal reveal-d3 transition-colors duration-500"
+                 onmouseenter="this.style.background='rgba(255,255,255,0.025)'" onmouseleave="this.style.background='#0D0D0B'">
+          <span class="font-serif font-light text-white/[0.04] leading-none select-none block mb-3" style="font-size: 7rem;" aria-hidden="true">03</span>
+          <div class="icon-ring border mb-6" style="border-color: rgba(132,204,22,0.3);" aria-hidden="true">
+            <svg class="w-5 h-5 text-lime" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
               <path stroke-linecap="round" stroke-linejoin="round" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/>
             </svg>
           </div>
-          <h3 class="font-serif text-2xl font-semibold text-charcoal mb-3">Risultati Visibili</h3>
-          <p class="font-sans text-sm text-warm-muted leading-[1.8]">
-            Risultati visibili — torna a sentirti libera, anche al mare, in palestra, con il vento
+          <h3 class="font-serif text-2xl font-medium text-white mb-3">Risultati Visibili</h3>
+          <p class="font-sans text-white/45 text-sm leading-[1.85]">
+            Risultati concreti. Torna a sentirti libera, anche al mare, in palestra, con il vento.
           </p>
         </article>
 
       </div>
 
-      <!-- Method CTA -->
-      <div class="text-center mt-14">
-        <a
-          href="https://forms.gle/nvqDiRowFNGc1gNu7"
-          target="_blank" rel="noopener noreferrer"
-          class="inline-flex items-center gap-2 border-2 border-gold text-gold font-sans font-semibold text-sm tracking-wide px-7 py-3.5 rounded-full hover:bg-gold hover:text-white transition-all duration-300 cursor-pointer"
-        >
+      <div class="mt-12 reveal">
+        <a href="https://forms.gle/nvqDiRowFNGc1gNu7" target="_blank" rel="noopener noreferrer"
+           class="inline-flex items-center gap-3 border text-white font-sans font-medium text-sm px-6 py-3.5 rounded-full btn group hover:bg-white/[0.05]"
+           style="border-color: rgba(255,255,255,0.14);">
           Inizia il tuo percorso
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <path d="M5 12h14M12 5l7 7-7 7"/>
-          </svg>
+          <span class="btn-icon" aria-hidden="true">
+            <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 10L10 2M10 2H4M10 2v6"/></svg>
+          </span>
         </a>
       </div>
 
@@ -402,214 +455,206 @@
   </section>
 
 
-  <!-- ════════════════ RISULTATI ════════════════ -->
-  <section
-    id="risultati"
-    class="py-20 px-5"
-    style="background: linear-gradient(180deg, #F5EDE3 0%, #FAF6F2 100%);"
-    aria-labelledby="results-heading"
-  >
+  <!-- ═══════════════════ RISULTATI ═══════════════════ -->
+  <section id="risultati" class="py-32 px-5" aria-labelledby="results-heading">
     <div class="max-w-6xl mx-auto">
 
-      <!-- Header -->
-      <div class="text-center mb-12">
-        <p class="font-sans text-xs font-medium tracking-[0.3em] uppercase text-gold mb-4">Trasformazioni Reali</p>
-        <h2 id="results-heading" class="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold text-charcoal leading-tight">
-          Le Trasformazioni delle<br class="hidden sm:block" />
-          <em class="italic font-normal text-rose">Nostre Clienti</em>
+      <div class="mb-16 reveal">
+        <h2 id="results-heading" class="font-serif font-medium text-ink leading-tight"
+            style="font-size: clamp(2.6rem, 5.5vw, 4.2rem); letter-spacing: -0.025em;">
+          Le Trasformazioni<br />
+          <em class="italic font-light text-lime">delle Nostre Clienti</em>
         </h2>
-        <span class="gold-line mt-6 block" role="presentation" aria-hidden="true"></span>
-        <p class="font-sans text-sm text-warm-muted mt-4 max-w-lg mx-auto leading-relaxed">
-          Risultati reali di donne che hanno scelto il Metodo Trico 360° a Paullo e provincia di Milano
+        <p class="font-sans text-ink-muted text-sm mt-5 leading-relaxed" style="max-width: 50ch;">
+          Risultati reali di donne che hanno scelto il Metodo Trico 360° a Paullo e provincia di Milano.
         </p>
       </div>
 
-      <!-- Before/After Grid -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Before/after grid — double-bezel frames -->
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-5">
 
-        <!-- Placeholder 1 -->
-        <figure class="rounded-2xl overflow-hidden shadow-warm border border-warm-border">
-          <div
-            class="w-full bg-gray-100 flex flex-col items-center justify-center gap-3 p-8"
-            style="aspect-ratio: 3/4;"
-            role="img"
-            aria-label="Prima e dopo trattamento tricologico Paullo Milano — Risultato cliente 1, caduta capelli"
-          >
-            <svg class="w-10 h-10 text-gray-300" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/>
-            </svg>
-            <p class="font-sans text-xs text-gray-400 text-center leading-relaxed">
-              Prima e dopo<br />trattamento tricologico<br /><strong class="font-medium">Paullo · Milano</strong>
-            </p>
+        <figure class="bezel reveal reveal-d1">
+          <div class="bezel-inner overflow-hidden" style="border-radius: calc(2rem - 6px);">
+            <div class="w-full flex flex-col items-center justify-center gap-3 p-8" style="aspect-ratio:3/4; background:#F3EDE3;"
+                 role="img" aria-label="Prima e dopo trattamento tricologico — cliente 1">
+              <svg class="w-8 h-8 text-ink-faint" fill="none" stroke="currentColor" stroke-width="1.2" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/>
+              </svg>
+              <p class="font-sans text-xs text-ink-faint text-center leading-relaxed">Prima e dopo<br />trattamento tricologico</p>
+            </div>
+            <div class="bg-white px-5 py-3.5" style="border-top: 1px solid rgba(13,13,11,0.06);">
+              <p class="font-serif text-base font-medium text-ink">Trattamento Caduta Capelli</p>
+              <p class="font-sans text-xs text-ink-muted mt-0.5">Paullo, Milano</p>
+            </div>
           </div>
-          <figcaption class="bg-white px-5 py-3.5 border-t border-warm-border">
-            <p class="font-serif text-base font-semibold text-charcoal">Trattamento Caduta Capelli</p>
-            <p class="font-sans text-xs text-warm-muted mt-0.5">Paullo, Milano</p>
-          </figcaption>
         </figure>
 
-        <!-- Placeholder 2 -->
-        <figure class="rounded-2xl overflow-hidden shadow-warm border border-warm-border">
-          <div
-            class="w-full bg-gray-100 flex flex-col items-center justify-center gap-3 p-8"
-            style="aspect-ratio: 3/4;"
-            role="img"
-            aria-label="Prima e dopo trattamento tricologico Paullo Milano — Risultato cliente 2, alopecia"
-          >
-            <svg class="w-10 h-10 text-gray-300" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/>
-            </svg>
-            <p class="font-sans text-xs text-gray-400 text-center leading-relaxed">
-              Prima e dopo<br />trattamento alopecia<br /><strong class="font-medium">Paullo · Milano</strong>
-            </p>
+        <figure class="bezel reveal reveal-d2">
+          <div class="bezel-inner overflow-hidden" style="border-radius: calc(2rem - 6px);">
+            <div class="w-full flex flex-col items-center justify-center gap-3 p-8" style="aspect-ratio:3/4; background:#F3EDE3;"
+                 role="img" aria-label="Prima e dopo trattamento alopecia — cliente 2">
+              <svg class="w-8 h-8 text-ink-faint" fill="none" stroke="currentColor" stroke-width="1.2" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/>
+              </svg>
+              <p class="font-sans text-xs text-ink-faint text-center leading-relaxed">Prima e dopo<br />trattamento alopecia</p>
+            </div>
+            <div class="bg-white px-5 py-3.5" style="border-top: 1px solid rgba(13,13,11,0.06);">
+              <p class="font-serif text-base font-medium text-ink">Trattamento Alopecia</p>
+              <p class="font-sans text-xs text-ink-muted mt-0.5">Provincia di Milano</p>
+            </div>
           </div>
-          <figcaption class="bg-white px-5 py-3.5 border-t border-warm-border">
-            <p class="font-serif text-base font-semibold text-charcoal">Trattamento Alopecia</p>
-            <p class="font-sans text-xs text-warm-muted mt-0.5">Provincia di Milano</p>
-          </figcaption>
         </figure>
 
-        <!-- Placeholder 3 -->
-        <figure class="rounded-2xl overflow-hidden shadow-warm border border-warm-border sm:col-span-2 lg:col-span-1">
-          <div
-            class="w-full bg-gray-100 flex flex-col items-center justify-center gap-3 p-8"
-            style="aspect-ratio: 3/4;"
-            role="img"
-            aria-label="Prima e dopo trattamento tricologico Paullo Milano — Risultato cliente 3, cuoio capelluto"
-          >
-            <svg class="w-10 h-10 text-gray-300" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/>
-            </svg>
-            <p class="font-sans text-xs text-gray-400 text-center leading-relaxed">
-              Prima e dopo<br />ricostruzione cuoio capelluto<br /><strong class="font-medium">Paullo · Milano</strong>
-            </p>
+        <figure class="bezel reveal reveal-d3">
+          <div class="bezel-inner overflow-hidden" style="border-radius: calc(2rem - 6px);">
+            <div class="w-full flex flex-col items-center justify-center gap-3 p-8" style="aspect-ratio:3/4; background:#F3EDE3;"
+                 role="img" aria-label="Prima e dopo ricostruzione cuoio capelluto — cliente 3">
+              <svg class="w-8 h-8 text-ink-faint" fill="none" stroke="currentColor" stroke-width="1.2" viewBox="0 0 24 24" aria-hidden="true">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909m-18 3.75h16.5a1.5 1.5 0 001.5-1.5V6a1.5 1.5 0 00-1.5-1.5H3.75A1.5 1.5 0 002.25 6v12a1.5 1.5 0 001.5 1.5zm10.5-11.25h.008v.008h-.008V8.25zm.375 0a.375.375 0 11-.75 0 .375.375 0 01.75 0z"/>
+              </svg>
+              <p class="font-sans text-xs text-ink-faint text-center leading-relaxed">Prima e dopo<br />ricostruzione cuoio capelluto</p>
+            </div>
+            <div class="bg-white px-5 py-3.5" style="border-top: 1px solid rgba(13,13,11,0.06);">
+              <p class="font-serif text-base font-medium text-ink">Ricostruzione Cuoio Capelluto</p>
+              <p class="font-sans text-xs text-ink-muted mt-0.5">Paullo, Milano</p>
+            </div>
           </div>
-          <figcaption class="bg-white px-5 py-3.5 border-t border-warm-border">
-            <p class="font-serif text-base font-semibold text-charcoal">Ricostruzione Cuoio Capelluto</p>
-            <p class="font-sans text-xs text-warm-muted mt-0.5">Paullo, Milano</p>
-          </figcaption>
         </figure>
 
       </div>
+
+      <!-- Video — double-bezel -->
+      <div class="bezel reveal">
+        <div class="bezel-inner overflow-hidden" style="border-radius: calc(2rem - 6px);">
+          <div style="position:relative; padding-bottom:56.25%; height:0;">
+            <iframe src="https://www.youtube.com/embed/haSIXynn0iA"
+                    title="ES Protocollo Trico 360° — Video"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen loading="lazy"
+                    style="position:absolute; top:0; left:0; width:100%; height:100%; border:0; display:block;"></iframe>
+          </div>
+        </div>
+      </div>
+
     </div>
   </section>
 
 
-  <!-- ════════════════ TESTIMONIANZE ════════════════ -->
-  <section
-    id="testimonianze"
-    class="py-20 px-5 bg-white"
-    aria-labelledby="testimonials-heading"
-  >
+  <!-- ═══════════════════ TESTIMONIANZE ═══════════════════ -->
+  <section id="testimonianze" class="py-32 px-5" style="background:#F3EDE3;" aria-labelledby="testimonials-heading">
     <div class="max-w-6xl mx-auto">
 
-      <!-- Header -->
-      <div class="text-center mb-12">
-        <p class="font-sans text-xs font-medium tracking-[0.3em] uppercase text-gold mb-4">Recensioni</p>
-        <h2 id="testimonials-heading" class="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold text-charcoal leading-tight">
-          Cosa Dicono le Nostre Clienti<br class="hidden sm:block" />
-          <em class="italic font-normal text-rose">a Paullo e Milano</em>
+      <div class="mb-16 reveal">
+        <h2 id="testimonials-heading" class="font-serif font-medium text-ink leading-tight"
+            style="font-size: clamp(2.6rem, 5.5vw, 4.2rem); letter-spacing: -0.025em;">
+          Cosa Dicono le<br />
+          <em class="italic font-light text-lime-dark">Nostre Clienti</em>
         </h2>
-        <span class="gold-line mt-6 block" role="presentation" aria-hidden="true"></span>
       </div>
 
-      <!-- Grid -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+      <!-- Star SVG helper — reused inline -->
 
-        <!-- Naomi -->
-        <blockquote class="bg-cream rounded-2xl p-7 border border-warm-border relative overflow-hidden">
-          <span class="absolute top-2 left-5 font-serif text-8xl text-gold leading-none select-none opacity-15" aria-hidden="true">"</span>
-          <div class="flex gap-0.5 mb-4" role="img" aria-label="5 stelle su 5">
-            <svg class="w-4 h-4 text-gold fill-current" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-            <svg class="w-4 h-4 text-gold fill-current" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-            <svg class="w-4 h-4 text-gold fill-current" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-            <svg class="w-4 h-4 text-gold fill-current" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-            <svg class="w-4 h-4 text-gold fill-current" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+      <!-- Asymmetric grid: wide + narrow alternating -->
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-4">
+
+        <!-- Naomi — wide -->
+        <blockquote class="md:col-span-7 bezel reveal reveal-d1">
+          <div class="bezel-inner p-8 md:p-9">
+            <div class="flex gap-0.5 mb-5" role="img" aria-label="5 stelle su 5">
+              <svg class="w-3.5 h-3.5 text-gold fill-current" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <svg class="w-3.5 h-3.5 text-gold fill-current" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <svg class="w-3.5 h-3.5 text-gold fill-current" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <svg class="w-3.5 h-3.5 text-gold fill-current" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <svg class="w-3.5 h-3.5 text-gold fill-current" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            </div>
+            <p class="font-serif text-xl md:text-2xl font-light text-ink leading-[1.5] mb-7 italic">
+              "OTTIMO!! Le ragazze sono esperte e professionali, capaci di trovare il giusto trattamento per ogni tipologia di capello e inestetismo. Avevo un capello rovinato dal mare e dalle decolorazioni, grazie ad un percorso personalizzato rigenerante e ricostituente hanno riportato i miei capelli in salute! Oggi sono sani e senza aver rinunciato alle decolorazioni e al mio amato biondo&#x1F609; Super consigliato!"
+            </p>
+            <footer class="flex items-center gap-3">
+              <div class="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0" style="background:#F7FEE7; border: 1px solid rgba(132,204,22,0.2);">
+                <span class="font-serif font-semibold text-lime-dark text-sm leading-none">N</span>
+              </div>
+              <div>
+                <p class="font-sans font-semibold text-ink text-sm">Naomi Lorti</p>
+                <p class="font-sans text-xs text-ink-muted">Cliente · Paullo, Milano</p>
+              </div>
+            </footer>
           </div>
-          <p class="font-sans text-sm text-warm-muted leading-[1.85] mb-5 relative z-10">
-            Le ragazze sono esperte e professionali... oggi i miei capelli sono sani senza aver rinunciato al biondo
-          </p>
-          <footer class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-full bg-rose-pale flex items-center justify-center flex-shrink-0" aria-hidden="true">
-              <span class="font-serif font-semibold text-rose text-base leading-none">N</span>
-            </div>
-            <div>
-              <p class="font-sans font-semibold text-charcoal text-sm">Naomi</p>
-              <p class="font-sans text-xs text-warm-muted">Cliente · Paullo, Milano</p>
-            </div>
-          </footer>
         </blockquote>
 
-        <!-- Eli -->
-        <blockquote class="bg-cream rounded-2xl p-7 border border-warm-border relative overflow-hidden">
-          <span class="absolute top-2 left-5 font-serif text-8xl text-gold leading-none select-none opacity-15" aria-hidden="true">"</span>
-          <div class="flex gap-0.5 mb-4" role="img" aria-label="5 stelle su 5">
-            <svg class="w-4 h-4 text-gold fill-current" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-            <svg class="w-4 h-4 text-gold fill-current" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-            <svg class="w-4 h-4 text-gold fill-current" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-            <svg class="w-4 h-4 text-gold fill-current" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-            <svg class="w-4 h-4 text-gold fill-current" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+        <!-- Eli — narrow -->
+        <blockquote class="md:col-span-5 bezel reveal reveal-d2">
+          <div class="bezel-inner p-7 h-full">
+            <div class="flex gap-0.5 mb-4" role="img" aria-label="5 stelle su 5">
+              <svg class="w-3.5 h-3.5 text-gold fill-current" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <svg class="w-3.5 h-3.5 text-gold fill-current" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <svg class="w-3.5 h-3.5 text-gold fill-current" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <svg class="w-3.5 h-3.5 text-gold fill-current" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <svg class="w-3.5 h-3.5 text-gold fill-current" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            </div>
+            <p class="font-serif text-lg font-light text-ink leading-[1.5] mb-6 italic">
+              "Grazie ragazze per aver fatto rinascere i miei capelli!!! Una mattinata di assoluta serenità e relax in compagnia di un team preparato, professionale e attento alle vere esigenze di ogni cliente. Capelli bellissimi e sani?!? Qui si può! Continuate così!!"
+            </p>
+            <footer class="flex items-center gap-3">
+              <div class="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0" style="background:#F7FEE7; border: 1px solid rgba(132,204,22,0.2);">
+                <span class="font-serif font-semibold text-lime-dark text-sm leading-none">E</span>
+              </div>
+              <div>
+                <p class="font-sans font-semibold text-ink text-sm">Eli Voluaz</p>
+                <p class="font-sans text-xs text-ink-muted">Cliente · Provincia di Milano</p>
+              </div>
+            </footer>
           </div>
-          <p class="font-sans text-sm text-warm-muted leading-[1.85] mb-5 relative z-10">
-            Una mattinata di assoluta serenità... capelli bellissimi e sani
-          </p>
-          <footer class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-full bg-rose-pale flex items-center justify-center flex-shrink-0" aria-hidden="true">
-              <span class="font-serif font-semibold text-rose text-base leading-none">E</span>
-            </div>
-            <div>
-              <p class="font-sans font-semibold text-charcoal text-sm">Eli</p>
-              <p class="font-sans text-xs text-warm-muted">Cliente · Provincia di Milano</p>
-            </div>
-          </footer>
         </blockquote>
 
-        <!-- Gabriella -->
-        <blockquote class="bg-cream rounded-2xl p-7 border border-warm-border relative overflow-hidden">
-          <span class="absolute top-2 left-5 font-serif text-8xl text-gold leading-none select-none opacity-15" aria-hidden="true">"</span>
-          <div class="flex gap-0.5 mb-4" role="img" aria-label="5 stelle su 5">
-            <svg class="w-4 h-4 text-gold fill-current" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-            <svg class="w-4 h-4 text-gold fill-current" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-            <svg class="w-4 h-4 text-gold fill-current" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-            <svg class="w-4 h-4 text-gold fill-current" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-            <svg class="w-4 h-4 text-gold fill-current" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+        <!-- Gabriella — narrow -->
+        <blockquote class="md:col-span-5 bezel reveal reveal-d3">
+          <div class="bezel-inner p-7">
+            <div class="flex gap-0.5 mb-4" role="img" aria-label="5 stelle su 5">
+              <svg class="w-3.5 h-3.5 text-gold fill-current" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <svg class="w-3.5 h-3.5 text-gold fill-current" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <svg class="w-3.5 h-3.5 text-gold fill-current" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <svg class="w-3.5 h-3.5 text-gold fill-current" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <svg class="w-3.5 h-3.5 text-gold fill-current" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            </div>
+            <p class="font-serif text-lg font-light text-ink leading-[1.5] mb-6 italic">
+              "Una vera e propria spa per i capelli dove puoi rilassarti e goderti tutti i loro trattamenti! Mi sono trovata davvero bene e soddisfatta del colore che mi hanno fatto; inoltre eseguono percorsi mirati per la cura della cute e capelli."
+            </p>
+            <footer class="flex items-center gap-3">
+              <div class="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0" style="background:#F7FEE7; border: 1px solid rgba(132,204,22,0.2);">
+                <span class="font-serif font-semibold text-lime-dark text-sm leading-none">G</span>
+              </div>
+              <div>
+                <p class="font-sans font-semibold text-ink text-sm">Gabriella Maglione</p>
+                <p class="font-sans text-xs text-ink-muted">Cliente · Milano</p>
+              </div>
+            </footer>
           </div>
-          <p class="font-sans text-sm text-warm-muted leading-[1.85] mb-5 relative z-10">
-            Una vera e propria spa per i capelli
-          </p>
-          <footer class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-full bg-rose-pale flex items-center justify-center flex-shrink-0" aria-hidden="true">
-              <span class="font-serif font-semibold text-rose text-base leading-none">G</span>
-            </div>
-            <div>
-              <p class="font-sans font-semibold text-charcoal text-sm">Gabriella</p>
-              <p class="font-sans text-xs text-warm-muted">Cliente · Milano</p>
-            </div>
-          </footer>
         </blockquote>
 
-        <!-- Mariana -->
-        <blockquote class="bg-cream rounded-2xl p-7 border border-warm-border relative overflow-hidden">
-          <span class="absolute top-2 left-5 font-serif text-8xl text-gold leading-none select-none opacity-15" aria-hidden="true">"</span>
-          <div class="flex gap-0.5 mb-4" role="img" aria-label="5 stelle su 5">
-            <svg class="w-4 h-4 text-gold fill-current" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-            <svg class="w-4 h-4 text-gold fill-current" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-            <svg class="w-4 h-4 text-gold fill-current" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-            <svg class="w-4 h-4 text-gold fill-current" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
-            <svg class="w-4 h-4 text-gold fill-current" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+        <!-- Mariana — wide -->
+        <blockquote class="md:col-span-7 bezel reveal reveal-d4">
+          <div class="bezel-inner p-8">
+            <div class="flex gap-0.5 mb-5" role="img" aria-label="5 stelle su 5">
+              <svg class="w-3.5 h-3.5 text-gold fill-current" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <svg class="w-3.5 h-3.5 text-gold fill-current" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <svg class="w-3.5 h-3.5 text-gold fill-current" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <svg class="w-3.5 h-3.5 text-gold fill-current" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+              <svg class="w-3.5 h-3.5 text-gold fill-current" viewBox="0 0 20 20" aria-hidden="true"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+            </div>
+            <p class="font-serif text-xl font-light text-ink leading-[1.5] mb-6 italic">
+              "Ho iniziato da poco un percorso e si vedono già i risultati. Ti coccolano dall'inizio alla fine. Bravissime!!."
+            </p>
+            <footer class="flex items-center gap-3">
+              <div class="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0" style="background:#F7FEE7; border: 1px solid rgba(132,204,22,0.2);">
+                <span class="font-serif font-semibold text-lime-dark text-sm leading-none">M</span>
+              </div>
+              <div>
+                <p class="font-sans font-semibold text-ink text-sm">Mariana Morandi</p>
+                <p class="font-sans text-xs text-ink-muted">Cliente · Paullo</p>
+              </div>
+            </footer>
           </div>
-          <p class="font-sans text-sm text-warm-muted leading-[1.85] mb-5 relative z-10">
-            Ti coccolano dall'inizio alla fine. Bravissime!
-          </p>
-          <footer class="flex items-center gap-3">
-            <div class="w-10 h-10 rounded-full bg-rose-pale flex items-center justify-center flex-shrink-0" aria-hidden="true">
-              <span class="font-serif font-semibold text-rose text-base leading-none">M</span>
-            </div>
-            <div>
-              <p class="font-sans font-semibold text-charcoal text-sm">Mariana</p>
-              <p class="font-sans text-xs text-warm-muted">Cliente · Paullo</p>
-            </div>
-          </footer>
         </blockquote>
 
       </div>
@@ -617,133 +662,30 @@
   </section>
 
 
-  <!-- ════════════════ GARANZIA ════════════════ -->
-  <section
-    id="garanzia"
-    class="py-20 px-5"
-    style="background: linear-gradient(135deg, #7D3B55 0%, #9B4F6B 100%);"
-    aria-labelledby="guarantee-heading"
-  >
-    <div class="max-w-2xl mx-auto text-center">
+  <!-- ═══════════════════ GARANZIA ═══════════════════ -->
+  <section id="garanzia" class="py-28 px-5 bg-lime" aria-labelledby="guarantee-heading">
+    <div class="max-w-5xl mx-auto">
+      <div class="flex flex-col md:flex-row items-start gap-10">
 
-      <!-- Shield icon -->
-      <div
-        class="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6"
-        style="background: rgba(255,255,255,0.12);"
-        aria-hidden="true"
-      >
-        <svg class="w-8 h-8 text-gold-light" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/>
-        </svg>
-      </div>
-
-      <p class="font-sans text-xs font-medium tracking-[0.3em] uppercase mb-4" style="color: rgba(221,185,122,0.8);">La Nostra Promessa</p>
-
-      <h2 id="guarantee-heading" class="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold text-white leading-tight mb-3">
-        Garanzia Soddisfatta<br />
-        <em class="italic font-normal text-gold-light">o Ritrattata</em>
-      </h2>
-
-      <div class="w-12 h-px mx-auto my-6" style="background: rgba(221,185,122,0.4);" role="presentation" aria-hidden="true"></div>
-
-      <p class="font-sans text-white/80 text-base sm:text-lg leading-relaxed">
-        Se per qualsiasi motivo non sei soddisfatta del trattamento tricologico,
-        <strong class="text-white font-semibold">lo rifacciamo senza costi aggiuntivi</strong>
-      </p>
-
-    </div>
-  </section>
-
-
-  <!-- ════════════════ LOCAL SEO ════════════════ -->
-  <section
-    id="dove-siamo"
-    class="py-20 px-5 bg-white"
-    aria-labelledby="location-heading"
-  >
-    <div class="max-w-6xl mx-auto">
-
-      <!-- Header -->
-      <div class="text-center mb-12">
-        <p class="font-sans text-xs font-medium tracking-[0.3em] uppercase text-gold mb-4">Dove Siamo</p>
-        <h2 id="location-heading" class="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold text-charcoal leading-tight">
-          Salone Tricologico a<br class="hidden sm:block" />
-          <em class="italic font-normal text-rose">Paullo (MI)</em>
-        </h2>
-        <span class="gold-line mt-6 block" role="presentation" aria-hidden="true"></span>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
-
-        <!-- Info -->
-        <div class="space-y-5">
-
-          <div class="bg-cream rounded-2xl p-6 border border-warm-border">
-            <div class="flex items-start gap-4">
-              <div class="flex-shrink-0 w-10 h-10 rounded-full bg-rose-pale flex items-center justify-center" aria-hidden="true">
-                <svg class="w-5 h-5 text-rose" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/>
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/>
-                </svg>
-              </div>
-              <div>
-                <p class="font-sans font-semibold text-charcoal text-sm mb-1.5">Indirizzo</p>
-                <address class="font-sans text-sm text-warm-muted not-italic leading-[1.8]">
-                  <strong class="text-charcoal font-semibold">ES Protocollo Trico 360°</strong><br />
-                  Paullo, Milano (MI)<br />
-                  Italia
-                </address>
-              </div>
-            </div>
-          </div>
-
-          <div class="bg-cream rounded-2xl p-6 border border-warm-border">
-            <div class="flex items-start gap-4">
-              <div class="flex-shrink-0 w-10 h-10 rounded-full bg-rose-pale flex items-center justify-center" aria-hidden="true">
-                <svg class="w-5 h-5 text-rose" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z"/>
-                </svg>
-              </div>
-              <div>
-                <p class="font-sans font-semibold text-charcoal text-sm mb-1.5">Area Servita</p>
-                <p class="font-sans text-sm text-warm-muted leading-[1.8]">
-                  Serviamo clienti da <strong class="text-charcoal">Paullo</strong>,
-                  <strong class="text-charcoal">Lodi</strong>,
-                  <strong class="text-charcoal">Melegnano</strong>,
-                  <strong class="text-charcoal">San Donato Milanese</strong>
-                  e tutta la <strong class="text-charcoal">provincia di Milano</strong>
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <a
-            href="https://forms.gle/nvqDiRowFNGc1gNu7"
-            target="_blank" rel="noopener noreferrer"
-            class="flex items-center justify-center gap-2 bg-gold text-white font-sans font-semibold text-sm tracking-wide px-6 py-4 rounded-full hover:bg-gold-dark transition-colors duration-200 cursor-pointer w-full"
-          >
-            Prenota la tua consulenza gratuita
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
-                 stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-              <path d="M5 12h14M12 5l7 7-7 7"/>
+        <!-- Icon — double-bezel lime variant -->
+        <div class="bezel-lime flex-shrink-0">
+          <div class="bezel-inner w-16 h-16 flex items-center justify-center" style="border-radius: calc(2rem - 6px);">
+            <svg class="w-8 h-8 text-lime-dark" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24" aria-hidden="true">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75m-3-7.036A11.959 11.959 0 013.598 6 11.99 11.99 0 003 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285z"/>
             </svg>
-          </a>
-
+          </div>
         </div>
 
-        <!-- Map -->
-        <div class="rounded-2xl overflow-hidden shadow-warm border border-warm-border">
-          <iframe
-            src="https://maps.google.com/maps?q=Paullo,+MI,+Italia&t=m&z=14&ie=UTF8&iwloc=&output=embed"
-            width="100%"
-            height="400"
-            style="border:0; display:block;"
-            allowfullscreen=""
-            loading="lazy"
-            referrerpolicy="no-referrer-when-downgrade"
-            title="Mappa ES Protocollo Trico 360° — Paullo, Milano"
-            aria-label="Mappa di Paullo (MI) — salone tricologico ES Protocollo Trico 360°"
-          ></iframe>
+        <div class="reveal">
+          <h2 id="guarantee-heading" class="font-serif font-medium text-white leading-tight mb-5"
+              style="font-size: clamp(2.4rem, 5vw, 4rem); letter-spacing: -0.025em;">
+            Garanzia Soddisfatta<br />
+            <em class="italic font-light">o Ritrattata</em>
+          </h2>
+          <p class="font-sans text-white/75 text-base sm:text-lg leading-[1.8]" style="max-width: 52ch;">
+            Se per qualsiasi motivo non sei soddisfatta del trattamento tricologico,
+            <strong class="text-white font-semibold">lo rifacciamo senza costi aggiuntivi.</strong>
+          </p>
         </div>
 
       </div>
@@ -751,62 +693,124 @@
   </section>
 
 
-  <!-- ════════════════ FINAL CTA ════════════════ -->
-  <section
-    id="prenota"
-    class="py-24 px-5"
-    style="background: linear-gradient(150deg, #FAF6F2 0%, #F5EDE3 60%, #EFE0CF 100%);"
-    aria-labelledby="cta-heading"
-  >
-    <div class="max-w-2xl mx-auto text-center">
+  <!-- ═══════════════════ DOVE SIAMO ═══════════════════ -->
+  <section id="dove-siamo" class="py-32 px-5" aria-labelledby="location-heading">
+    <div class="max-w-6xl mx-auto">
 
-      <!-- Decorative icon -->
-      <div
-        class="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6"
-        style="background: linear-gradient(135deg, #F5EDE3, #EFD9C8); border: 1.5px solid #C4965A;"
-        aria-hidden="true"
-      >
-        <svg class="w-7 h-7 text-gold" fill="none" stroke="currentColor" stroke-width="1.8" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
-        </svg>
+      <div class="mb-16 reveal">
+        <h2 id="location-heading" class="font-serif font-medium text-ink leading-tight"
+            style="font-size: clamp(2.6rem, 5.5vw, 4.2rem); letter-spacing: -0.025em;">
+          Salone Tricologico<br />
+          <em class="italic font-light text-lime-dark">a Paullo (MI)</em>
+        </h2>
       </div>
 
-      <p class="font-sans text-xs font-medium tracking-[0.3em] uppercase text-gold mb-4">Inizia Oggi</p>
-      <span class="gold-line mb-7 block" role="presentation" aria-hidden="true"></span>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
 
-      <h2 id="cta-heading" class="font-serif text-3xl sm:text-4xl md:text-5xl font-semibold text-charcoal leading-tight mb-6">
-        Fai il Primo Passo verso<br />
-        una <em class="italic font-normal text-rose">Chioma in Salute</em><br />
-        a Paullo
-      </h2>
+        <div class="flex flex-col gap-4">
 
-      <span class="gold-line mb-8 block" role="presentation" aria-hidden="true"></span>
+          <div class="bezel reveal reveal-d1">
+            <div class="bezel-inner p-6">
+              <div class="flex items-start gap-4">
+                <div class="icon-ring bg-lime-pale flex-shrink-0" aria-hidden="true">
+                  <svg class="w-5 h-5 text-lime-dark" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"/>
+                  </svg>
+                </div>
+                <div>
+                  <p class="font-sans font-semibold text-ink text-sm mb-2">Indirizzo</p>
+                  <address class="font-sans text-sm text-ink-muted not-italic leading-[1.85]">
+                    <strong class="text-ink font-semibold">ES Protocollo Trico 360°</strong><br />
+                    Via S.Maria in Pratello, 2/D<br />
+                    Paullo (MI) · Italia
+                  </address>
+                </div>
+              </div>
+            </div>
+          </div>
 
-      <p class="font-sans text-base text-warm-muted leading-[1.8] max-w-lg mx-auto mb-10">
+          <div class="bezel reveal reveal-d2">
+            <div class="bezel-inner p-6">
+              <div class="flex items-start gap-4">
+                <div class="icon-ring bg-lime-pale flex-shrink-0" aria-hidden="true">
+                  <svg class="w-5 h-5 text-lime-dark" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 6.75V15m6-6v8.25m.503 3.498l4.875-2.437c.381-.19.622-.58.622-1.006V4.82c0-.836-.88-1.38-1.628-1.006l-3.869 1.934c-.317.159-.69.159-1.006 0L9.503 3.252a1.125 1.125 0 00-1.006 0L3.622 5.689C3.24 5.88 3 6.27 3 6.695V19.18c0 .836.88 1.38 1.628 1.006l3.869-1.934c.317-.159.69-.159 1.006 0l4.994 2.497c.317.158.69.158 1.006 0z"/>
+                  </svg>
+                </div>
+                <div>
+                  <p class="font-sans font-semibold text-ink text-sm mb-2">Area Servita</p>
+                  <p class="font-sans text-sm text-ink-muted leading-[1.85]">
+                    Serviamo clienti da <strong class="text-ink">Paullo</strong>,
+                    <strong class="text-ink">Lodi</strong>,
+                    <strong class="text-ink">Melegnano</strong>,
+                    <strong class="text-ink">San Donato Milanese</strong>
+                    e tutta la <strong class="text-ink">provincia di Milano</strong>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="reveal reveal-d3">
+            <a href="https://forms.gle/nvqDiRowFNGc1gNu7" target="_blank" rel="noopener noreferrer"
+               class="flex items-center justify-center gap-3 bg-ink text-white font-sans font-semibold text-sm px-6 py-4 rounded-full btn group w-full">
+              Prenota la tua consulenza gratuita
+              <span class="btn-icon" aria-hidden="true">
+                <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 10L10 2M10 2H4M10 2v6"/></svg>
+              </span>
+            </a>
+          </div>
+
+        </div>
+
+        <!-- Map — double-bezel -->
+        <div class="bezel reveal reveal-d2">
+          <div class="bezel-inner overflow-hidden" style="border-radius: calc(2rem - 6px);">
+            <iframe
+              src="https://maps.google.com/maps?q=Via+S.Maria+in+Pratello,+2%2FD,+Paullo,+MI,+Italia&t=m&z=16&ie=UTF8&iwloc=&output=embed"
+              width="100%" height="420"
+              style="border:0; display:block;"
+              allowfullscreen loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              title="Mappa ES Protocollo Trico 360° — Via S.Maria in Pratello 2/D, Paullo"
+              aria-label="Mappa di Via S.Maria in Pratello 2/D, Paullo (MI)"
+            ></iframe>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════ FINAL CTA ═══════════════════ -->
+  <section id="prenota" class="py-40 px-5" style="background:#F3EDE3;" aria-labelledby="cta-heading">
+    <div class="max-w-4xl mx-auto text-center">
+
+      <div class="reveal">
+        <h2 id="cta-heading" class="font-serif font-medium text-ink leading-[1.0] mb-8"
+            style="font-size: clamp(3rem, 9vw, 6.5rem); letter-spacing: -0.03em; text-wrap: balance;">
+          Fai il Primo Passo<br />
+          <em class="italic font-light text-lime">verso una Chioma</em><br />
+          in Salute
+        </h2>
+      </div>
+
+      <p class="font-sans text-ink-muted text-base leading-[1.9] mx-auto mb-10 reveal reveal-d1" style="max-width: 52ch;">
         Migliaia di donne in provincia di Milano hanno già scelto il Metodo Trico 360°. È il tuo momento.
       </p>
 
-      <a
-        href="https://forms.gle/nvqDiRowFNGc1gNu7"
-        target="_blank" rel="noopener noreferrer"
-        class="inline-flex items-center gap-3 bg-rose text-white font-sans font-semibold text-sm tracking-wide px-10 py-4 rounded-full shadow-warm hover:bg-rose-dark hover:shadow-warm-lg transition-all duration-300 cursor-pointer"
-      >
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
-          <line x1="16" y1="2" x2="16" y2="6"/>
-          <line x1="8" y1="2" x2="8" y2="6"/>
-          <line x1="3" y1="10" x2="21" y2="10"/>
-        </svg>
-        Voglio Prenotare una Consulenza Gratuita
-      </a>
-
-      <p class="mt-4 font-sans text-xs text-warm-muted">
-        <svg class="inline w-3.5 h-3.5 mr-1 text-gold" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
-          <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/>
-        </svg>
-        Nessun pagamento richiesto — solo la tua prima consulenza gratuita
-      </p>
+      <div class="reveal reveal-d2">
+        <a href="https://forms.gle/nvqDiRowFNGc1gNu7" target="_blank" rel="noopener noreferrer"
+           class="inline-flex items-center gap-3 bg-ink text-white font-sans font-semibold text-sm px-8 py-4 rounded-full btn group">
+          Voglio Prenotare una Consulenza Gratuita
+          <span class="btn-icon" aria-hidden="true">
+            <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 10L10 2M10 2H4M10 2v6"/></svg>
+          </span>
+        </a>
+        <p class="mt-4 font-sans text-xs text-ink-faint">Completamente gratuita · Nessun impegno</p>
+      </div>
 
     </div>
   </section>
@@ -814,40 +818,54 @@
   </main>
 
 
-  <!-- ════════════════ FOOTER ════════════════ -->
-  <footer class="bg-charcoal py-12 px-5" role="contentinfo">
+  <!-- ═══════════════════ FOOTER ═══════════════════ -->
+  <footer class="bg-ink py-12 px-5" role="contentinfo">
     <div class="max-w-6xl mx-auto">
-
-      <!-- Brand + nav -->
-      <div class="flex flex-col sm:flex-row items-center sm:items-start justify-between gap-8 mb-8">
-        <div class="text-center sm:text-left">
-          <p class="font-serif text-white text-xl font-semibold mb-1 tracking-wide">ES Protocollo Trico 360°</p>
-          <p class="font-sans text-white/50 text-xs">Salone Tricologico · Paullo (MI) · Provincia di Milano</p>
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 mb-8">
+        <div>
+          <p class="font-serif text-white text-xl font-medium mb-1 tracking-wide">ES Protocollo Trico 360°</p>
+          <p class="font-sans text-white/35 text-xs">Salone Tricologico · Paullo (MI) · Provincia di Milano</p>
         </div>
-        <div class="text-center sm:text-right">
-          <p class="font-sans text-white/60 text-xs leading-[2]">
+        <div class="text-left sm:text-right">
+          <p class="font-sans text-white/35 text-xs leading-[2.2]">
             Tricologia · Trattamento Caduta Capelli · Analisi Tricologica<br />
             Paullo · Lodi · Melegnano · San Donato Milanese · Milano
           </p>
         </div>
       </div>
-
-      <!-- Divider -->
-      <div class="h-px bg-white/10 mb-6" role="presentation" aria-hidden="true"></div>
-
-      <div class="flex flex-col sm:flex-row items-center justify-between gap-3">
-        <p class="font-sans text-white/35 text-xs">© 2025 ES Protocollo Trico 360° · Tutti i diritti riservati · Paullo, MI</p>
-        <a
-          href="https://forms.gle/nvqDiRowFNGc1gNu7"
-          target="_blank" rel="noopener noreferrer"
-          class="font-sans text-gold/70 hover:text-gold text-xs transition-colors duration-200 cursor-pointer"
-        >
+      <div class="mb-6" style="height:1px; background: rgba(255,255,255,0.06);"></div>
+      <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+        <p class="font-sans text-white/22 text-xs">© 2025 ES Protocollo Trico 360° · Tutti i diritti riservati · Paullo, MI</p>
+        <a href="https://forms.gle/nvqDiRowFNGc1gNu7" target="_blank" rel="noopener noreferrer"
+           class="font-sans text-xs transition-colors duration-200"
+           style="color: rgba(196,150,90,0.6);"
+           onmouseenter="this.style.color='#C4965A'" onmouseleave="this.style.color='rgba(196,150,90,0.6)'">
           Prenota consulenza gratuita →
         </a>
       </div>
-
     </div>
   </footer>
+
+
+  <!-- IntersectionObserver scroll reveals — GPU-safe, no window scroll listener -->
+  <script>
+    (function () {
+      const observer = new IntersectionObserver(
+        function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('in');
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1, rootMargin: '-30px 0px' }
+      );
+      document.querySelectorAll('.reveal').forEach(function (el) {
+        observer.observe(el);
+      });
+    })();
+  </script>
 
 </body>
 </html>
