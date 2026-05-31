@@ -205,8 +205,11 @@
 
     /* Portfolio grid */
     .portfolio-item {
-      overflow: hidden; position: relative; background: #111;
-      background-size: cover; background-position: center;
+      overflow: hidden; position: relative;
+      background-color: #111;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
       transition: filter 0.4s ease;
     }
     .portfolio-item:hover { filter: brightness(0.75); }
@@ -871,6 +874,14 @@
       const open = menu.classList.toggle('open');
       btn.classList.toggle('open', open);
       btn.setAttribute('aria-expanded', open);
+    });
+
+    // Force background-image on all portfolio items via JS to bypass any CSS cascade issue
+    document.querySelectorAll('.portfolio-item[style*="background-image"]').forEach(function(el) {
+      var match = el.getAttribute('style').match(/background-image\s*:\s*url\(['"]?([^'")\s]+)['"]?\)/);
+      if (match) {
+        el.style.setProperty('background-image', 'url("' + match[1] + '?' + Date.now() + '")', 'important');
+      }
     });
 
     // Scroll reveal via IntersectionObserver
