@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>New Neon Splendor - Insegne Luminose e Car Wrapping a Milano</title>
+  <meta name="description" content="New Neon Splendor: insegne luminose, car wrapping e segnaletica aziendale a Milano e provincia da oltre 30 anni. Progettazione, produzione e installazione chiavi in mano. Chiama +39 333 6131165." />
+  <meta property="og:title" content="New Neon Splendor - Insegne Luminose Milano" />
+  <meta property="og:description" content="Insegne luminose, car wrapping e segnaletica aziendale a Milano da 30 anni. Chiavi in mano." />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://picsum.photos/seed/neon-sign-night-storefront/1200/630" />
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "name": "New Neon Splendor",
+    "description": "Insegne luminose, car wrapping e segnaletica aziendale a Milano e provincia",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Via Mozart, 19",
+      "addressLocality": "Mulazzano",
+      "postalCode": "20097",
+      "addressRegion": "MI",
+      "addressCountry": "IT"
+    },
+    "telephone": "+393336131165",
+    "email": "info@newneonsplendor.it",
+    "foundingDate": "1994",
+    "founder": { "@type": "Person", "name": "Dacco Zeffirino" },
+    "areaServed": "Milano e provincia",
+    "url": "https://www.newneonsplendor.it"
+  }
+  </script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,600;0,700;0,800;1,700&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Barlow Condensed', 'sans-serif'],
+            body: ['Barlow', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --green: #6ee547;
+      --dark: #111110;
+      --warm-white: #fafaf8;
+      --text: #1c1c1a;
+      --muted: #6b6b68;
+      --border: #e4e4e0;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    body {
+      font-family: 'Barlow', sans-serif;
+      font-weight: 400;
+      background: var(--warm-white);
+      color: var(--text);
+      margin: 0;
+    }
+    html { scroll-behavior: smooth; }
+
+    /* Reveal animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.72s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.72s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .d1 { transition-delay: 0.07s; }
+    .d2 { transition-delay: 0.14s; }
+    .d3 { transition-delay: 0.21s; }
+    .d4 { transition-delay: 0.28s; }
+    .d5 { transition-delay: 0.35s; }
+
+    /* Nav */
+    #site-nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+      background: rgba(250,250,248,0.96);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      transition: box-shadow 0.25s ease;
+    }
+    #site-nav.scrolled { box-shadow: 0 2px 16px rgba(0,0,0,0.07); }
+    .nav-inner {
+      max-width: 1280px; margin: 0 auto; padding: 0 20px;
+      height: 68px; display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo img { height: 42px; width: auto; display: block; }
+    .nav-links { display: flex; align-items: center; gap: 36px; }
+    .nav-links a {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600; font-size: 0.8125rem;
+      letter-spacing: 0.07em; text-transform: uppercase;
+      color: var(--text); text-decoration: none;
+      position: relative; padding-bottom: 3px;
+    }
+    .nav-links a::after {
+      content: ''; position: absolute; left: 0; bottom: 0;
+      width: 0; height: 2px; background: var(--green);
+      transition: width 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .nav-links a:hover::after { width: 100%; }
+    .nav-cta {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--green); color: #111110;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-size: 0.875rem;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 10px 20px; text-decoration: none; border: none;
+      transition: transform 0.18s cubic-bezier(0.16,1,0.3,1), box-shadow 0.18s ease;
+    }
+    .nav-cta:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px 20px rgba(110,229,71,0.32);
+    }
+    .nav-cta:active { transform: scale(0.98); }
+
+    /* Hamburger */
+    .hamburger { display: none; flex-direction: column; gap: 5px; padding: 6px; background: none; border: none; cursor: pointer; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--text); transition: all 0.22s ease; }
+    .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* Mobile menu */
+    #mobile-nav {
+      display: none; flex-direction: column;
+      background: var(--warm-white);
+      border-top: 1px solid var(--border);
+      padding: 12px 20px 20px;
+    }
+    #mobile-nav.open { display: flex; }
+    #mobile-nav a {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 600;
+      font-size: 1rem; letter-spacing: 0.07em; text-transform: uppercase;
+      color: var(--text); text-decoration: none;
+      padding: 12px 0; border-bottom: 1px solid var(--border);
+    }
+    #mobile-nav .nav-cta {
+      margin-top: 14px; justify-content: center; border: none;
+    }
+
+    /* Buttons */
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: var(--green); color: #111110;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-size: 0.9375rem;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 14px 28px; text-decoration: none; border: none; cursor: pointer;
+      transition: transform 0.18s cubic-bezier(0.16,1,0.3,1), box-shadow 0.18s ease;
+    }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(110,229,71,0.35); }
+    .btn-primary:active { transform: scale(0.98); box-shadow: none; }
+
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: transparent; color: #fff;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600; font-size: 0.9375rem;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      padding: 13px 28px; text-decoration: none;
+      border: 1.5px solid rgba(255,255,255,0.3);
+      transition: border-color 0.2s ease, color 0.2s ease;
+    }
+    .btn-outline:hover { border-color: var(--green); color: var(--green); }
+    .btn-outline:active { transform: scale(0.98); }
+
+    /* Service cards */
+    .svc-card {
+      background: #fff; border: 1px solid var(--border); padding: 28px;
+      transition: border-color 0.22s ease, transform 0.22s cubic-bezier(0.16,1,0.3,1), box-shadow 0.22s ease;
+    }
+    .svc-card:hover {
+      border-color: var(--green);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.07);
+    }
+    .svc-icon {
+      width: 40px; height: 40px; display: flex; align-items: center; justify-content: center;
+      background: rgba(110,229,71,0.12); margin-bottom: 16px;
+    }
+    .svc-link {
+      display: inline-flex; align-items: center; gap: 6px; margin-top: 16px;
+      color: var(--green); font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-size: 0.8125rem;
+      letter-spacing: 0.08em; text-transform: uppercase; text-decoration: none;
+      transition: gap 0.2s ease;
+    }
+    .svc-link:hover { gap: 10px; }
+
+    /* Portfolio grid */
+    .portfolio-item {
+      overflow: hidden; position: relative; background: #111;
+    }
+    .portfolio-item img {
+      width: 100%; height: 100%; object-fit: cover; display: block;
+      transition: transform 0.55s cubic-bezier(0.16,1,0.3,1), opacity 0.3s ease;
+    }
+    .portfolio-item:hover img { transform: scale(1.05); opacity: 0.85; }
+    .portfolio-overlay {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 18px 20px;
+      background: linear-gradient(to top, rgba(17,17,16,0.9) 0%, transparent 100%);
+      transform: translateY(6px); opacity: 0;
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    .portfolio-item:hover .portfolio-overlay { opacity: 1; transform: translateY(0); }
+    .portfolio-cat {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 600;
+      font-size: 0.6875rem; letter-spacing: 0.14em; text-transform: uppercase;
+      color: var(--green); margin-bottom: 3px;
+    }
+    .portfolio-name {
+      font-family: 'Barlow Condensed', sans-serif; font-weight: 700;
+      font-size: 1rem; color: #fff;
+    }
+
+    /* Form */
+    .form-label {
+      display: block; font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600; font-size: 0.75rem; letter-spacing: 0.08em;
+      text-transform: uppercase; color: var(--muted); margin-bottom: 6px;
+    }
+    .form-input {
+      width: 100%; padding: 12px 14px;
+      border: 1.5px solid var(--border); background: #fff;
+      font-family: 'Barlow', sans-serif; font-size: 0.9375rem;
+      color: var(--text); outline: none; appearance: none;
+      transition: border-color 0.2s ease;
+    }
+    .form-input:focus { border-color: var(--green); }
+    .form-input::placeholder { color: #aaa; }
+    select.form-input { cursor: pointer; }
+
+    /* WhatsApp FAB */
+    .wa-fab {
+      position: fixed; bottom: 24px; right: 24px; z-index: 60;
+      width: 54px; height: 54px; border-radius: 50%;
+      background: #25d366; display: flex; align-items: center; justify-content: center;
+      text-decoration: none;
+      box-shadow: 0 4px 18px rgba(37,211,102,0.45);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .wa-fab:hover { transform: scale(1.08); box-shadow: 0 8px 28px rgba(37,211,102,0.55); }
+
+    @media (max-width: 767px) {
+      .nav-links, .nav-cta { display: none !important; }
+      .hamburger { display: flex !important; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; transition: none; }
+      .svc-card, .portfolio-item img, .portfolio-overlay,
+      .btn-primary, .btn-outline, .nav-cta, .svc-link { transition: none; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAV -->
+  <header id="site-nav" role="banner">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo" aria-label="New Neon Splendor - Homepage">
+        <img src="https://www.newneonsplendor.it/wp-content/uploads/2016/03/NNS_logo-e1458145901835.png"
+             alt="New Neon Splendor Insegne Luminose" />
+      </a>
+
+      <nav class="nav-links" aria-label="Navigazione principale">
+        <a href="/">Home</a>
+        <a href="/chi-siamo/">Chi siamo</a>
+        <a href="/servizi/">Servizi</a>
+        <a href="/gallery/">Gallery</a>
+      </nav>
+
+      <a href="tel:+393336131165" class="nav-cta" aria-label="Chiama New Neon Splendor">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.12 1.18 2 2 0 012.11 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.09a16 16 0 006 6l.46-.46a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        +39 333 613 1165
+      </a>
+
+      <button class="hamburger" id="hamburger" aria-label="Apri menu" aria-expanded="false" aria-controls="mobile-nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+
+    <nav id="mobile-nav" aria-label="Menu mobile">
+      <a href="/">Home</a>
+      <a href="/chi-siamo/">Chi siamo</a>
+      <a href="/servizi/">Servizi</a>
+      <a href="/gallery/">Gallery</a>
+      <a href="tel:+393336131165" class="nav-cta">Chiama +39 333 613 1165</a>
+    </nav>
+  </header>
+
+
+  <!-- HERO -->
+  <section style="min-height: 100dvh; background: #111110; display: flex; align-items: center; position: relative; overflow: hidden; padding-top: 68px;">
+    <!-- BG image -->
+    <div style="position: absolute; inset: 0;">
+      <img src="https://picsum.photos/seed/neon-sign-night-storefront-milan/1600/900"
+           alt="" aria-hidden="true"
+           style="width:100%; height:100%; object-fit:cover; opacity:0.22;" />
+      <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(17,17,16,0.96) 50%, rgba(17,17,16,0.6) 100%);"></div>
+    </div>
+    <!-- Green line bottom -->
+    <div style="position:absolute;bottom:0;left:0;right:0;height:3px;background:#6ee547;"></div>
+    <!-- Sentinel for nav shadow IntersectionObserver -->
+    <div id="hero-sentinel" style="position:absolute;bottom:0;left:0;width:1px;height:1px;pointer-events:none;" aria-hidden="true"></div>
+
+    <div style="max-width:1280px;margin:0 auto;padding:0 20px;width:100%;position:relative;z-index:1;">
+      <div style="display:grid;grid-template-columns:1fr;gap:48px;align-items:center;padding:72px 0 80px;">
+
+        <div style="max-width:620px;">
+          <h1 class="reveal" style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:clamp(2.75rem,6vw,4.75rem);line-height:1;letter-spacing:-0.01em;color:#fff;margin:0 0 24px;">
+            Insegne su misura.<br>
+            <span style="color:#6ee547;">Milano e provincia.</span>
+          </h1>
+          <p class="reveal d1" style="font-size:1.0625rem;color:rgba(255,255,255,0.65);line-height:1.7;max-width:480px;margin:0 0 36px;">
+            Progettiamo, produciamo e installiamo insegne luminose, car wrapping e segnaletica aziendale da oltre 30 anni. Ogni progetto chiavi in mano.
+          </p>
+          <div class="reveal d2" style="display:flex;flex-wrap:wrap;gap:14px;">
+            <a href="tel:+393336131165" class="btn-primary">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.12 1.18 2 2 0 012.11 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.09a16 16 0 006 6l.46-.46a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+              Chiama per un preventivo
+            </a>
+            <a href="#lavori" class="btn-outline">Guarda i lavori</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- STATS BAR -->
+  <section style="background:#fff;border-bottom:1px solid #e4e4e0;">
+    <div style="max-width:1280px;margin:0 auto;padding:0 20px;">
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);">
+
+        <div class="reveal" style="display:flex;align-items:center;gap:16px;padding:28px 24px 28px 0;border-right:1px solid #e4e4e0;">
+          <span style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:2.75rem;line-height:1;color:#6ee547;">30+</span>
+          <span style="font-size:0.875rem;color:#6b6b68;line-height:1.45;">anni di attivita<br>nel settore</span>
+        </div>
+
+        <div class="reveal d1" style="display:flex;align-items:center;gap:16px;padding:28px 24px;border-right:1px solid #e4e4e0;">
+          <span style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:2.75rem;line-height:1;color:#6ee547;">500+</span>
+          <span style="font-size:0.875rem;color:#6b6b68;line-height:1.45;">progetti realizzati<br>a Milano e provincia</span>
+        </div>
+
+        <div class="reveal d2" style="display:flex;align-items:center;gap:16px;padding:28px 0 28px 24px;">
+          <svg width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="#6ee547" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="flex-shrink:0;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          <span style="font-size:0.875rem;color:#6b6b68;line-height:1.45;">Dalla progettazione<br>all'installazione chiavi in mano</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- SERVIZI -->
+  <section style="background:#fafaf8;padding:88px 0;">
+    <div style="max-width:1280px;margin:0 auto;padding:0 20px;">
+
+      <div class="reveal" style="margin-bottom:52px;">
+        <p style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.6875rem;letter-spacing:0.18em;text-transform:uppercase;color:#6b6b68;margin:0 0 10px;">Servizi</p>
+        <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:clamp(2rem,4vw,3rem);line-height:1.05;color:#1c1c1a;margin:0;">
+          Tutto quello che serve<br>per farsi notare.
+        </h2>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:36px;">
+
+        <div class="svc-card reveal d1" style="grid-column:span 1;">
+          <div class="svc-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6ee547" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          </div>
+          <h3 style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.1875rem;color:#1c1c1a;margin:0 0 8px;">Insegne LED</h3>
+          <p style="font-size:0.9rem;color:#6b6b68;line-height:1.65;margin:0;">Pannelli ultra-sottili, lettere luminose e scritte neon-style per interni ed esterni. Consumi ridotti e massima visibilita.</p>
+          <a href="/servizi/insegne-led/" class="svc-link">Scopri <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+
+        <div class="svc-card reveal d2">
+          <div class="svc-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6ee547" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>
+          </div>
+          <h3 style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.1875rem;color:#1c1c1a;margin:0 0 8px;">Car Wrapping</h3>
+          <p style="font-size:0.9rem;color:#6b6b68;line-height:1.65;margin:0;">Personalizzazione di veicoli con pellicole adesive di qualita professionale. Parziale o totale, per auto, furgoni e flotte.</p>
+          <a href="/servizi/car-wrapping/" class="svc-link">Scopri <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+
+        <div class="svc-card reveal d3">
+          <div class="svc-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6ee547" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 16V8a2 2 0 00-1-1.73l-7-4a2 2 0 00-2 0l-7 4A2 2 0 003 8v8a2 2 0 001 1.73l7 4a2 2 0 002 0l7-4A2 2 0 0021 16z"/></svg>
+          </div>
+          <h3 style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.1875rem;color:#1c1c1a;margin:0 0 8px;">Cassonetti Luminosi</h3>
+          <p style="font-size:0.9rem;color:#6b6b68;line-height:1.65;margin:0;">Monofacciali, bifacciali e a bandiera. Illuminazione LED integrata, adatti a ogni tipo di attivita commerciale.</p>
+          <a href="/servizi/cassonetti-luminosi/" class="svc-link">Scopri <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+
+        <div class="svc-card reveal d1">
+          <div class="svc-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6ee547" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="4 7 4 4 20 4 20 7"/><line x1="9" y1="20" x2="15" y2="20"/><line x1="12" y1="4" x2="12" y2="20"/></svg>
+          </div>
+          <h3 style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.1875rem;color:#1c1c1a;margin:0 0 8px;">Lettere Scatolate</h3>
+          <p style="font-size:0.9rem;color:#6b6b68;line-height:1.65;margin:0;">Lettere singole in alluminio, ottone, rame, ferro o plexiglass. Con o senza illuminazione LED integrata.</p>
+          <a href="/servizi/lettere-scatolate/" class="svc-link">Scopri <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+
+        <div class="svc-card reveal d2">
+          <div class="svc-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6ee547" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+          </div>
+          <h3 style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.1875rem;color:#1c1c1a;margin:0 0 8px;">Targhe</h3>
+          <p style="font-size:0.9rem;color:#6b6b68;line-height:1.65;margin:0;">Classiche in ottone e alluminio inciso, speciali con lettere in rilievo, trasparenti in plexiglass o luminose a LED.</p>
+          <a href="/servizi/targhe/" class="svc-link">Scopri <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+
+        <div class="svc-card reveal d3">
+          <div class="svc-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#6ee547" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M1 4v6h6"/><path d="M3.51 15a9 9 0 102.13-9.36L1 10"/></svg>
+          </div>
+          <h3 style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.1875rem;color:#1c1c1a;margin:0 0 8px;">Manutenzione</h3>
+          <p style="font-size:0.9rem;color:#6b6b68;line-height:1.65;margin:0;">Interventi su insegne esistenti, conversione da neon tradizionale a LED e riparazioni rapide in tutta la provincia.</p>
+          <a href="/servizi/manutenzione/" class="svc-link">Scopri <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+        </div>
+
+      </div>
+
+      <div class="reveal">
+        <a href="/servizi/" style="display:inline-flex;align-items:center;gap:8px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.8125rem;letter-spacing:0.08em;text-transform:uppercase;color:#1c1c1a;text-decoration:none;transition:color 0.2s ease;" onmouseover="this.style.color='#6ee547'" onmouseout="this.style.color='#1c1c1a'">
+          Tutti i servizi
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- PORTFOLIO -->
+  <section id="lavori" style="background:#fff;padding:88px 0;">
+    <div style="max-width:1280px;margin:0 auto;padding:0 20px;">
+
+      <div class="reveal" style="display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:44px;">
+        <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:clamp(2rem,4vw,3rem);line-height:1.05;color:#1c1c1a;margin:0;">
+          Lavori recenti.
+        </h2>
+        <a href="/gallery/" style="display:inline-flex;align-items:center;gap:8px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.8125rem;letter-spacing:0.08em;text-transform:uppercase;color:#6b6b68;text-decoration:none;transition:color 0.2s ease;white-space:nowrap;" onmouseover="this.style.color='#6ee547'" onmouseout="this.style.color='#6b6b68'">
+          Vedi tutta la gallery <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
+
+      <!-- Asymmetric grid: 3 cols, varied heights -->
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:280px 280px;gap:8px;">
+
+        <!-- Tall item: rows 1+2, col 1 -->
+        <div class="portfolio-item reveal d1" style="grid-row:span 2;">
+          <img src="https://picsum.photos/seed/pizzeria-insegna-led-neon/600/620" alt="Insegna LED - Pizzeria San Giorgio, Paderno Dugnano" loading="lazy" />
+          <div class="portfolio-overlay">
+            <p class="portfolio-cat">Insegna LED</p>
+            <p class="portfolio-name">Pizzeria San Giorgio</p>
+          </div>
+        </div>
+
+        <!-- Standard items -->
+        <div class="portfolio-item reveal d2">
+          <img src="https://picsum.photos/seed/car-wrap-van-fioraio/600/300" alt="Car wrapping furgone - La Peonia Piante e Fiori" loading="lazy" />
+          <div class="portfolio-overlay">
+            <p class="portfolio-cat">Car Wrapping</p>
+            <p class="portfolio-name">La Peonia</p>
+          </div>
+        </div>
+
+        <div class="portfolio-item reveal d3">
+          <img src="https://picsum.photos/seed/vetrofania-ufficio-satinato/600/300" alt="Vetrofanie - ATN Cell Repairs" loading="lazy" />
+          <div class="portfolio-overlay">
+            <p class="portfolio-cat">Vetrofanie</p>
+            <p class="portfolio-name">ATN Cell Repairs</p>
+          </div>
+        </div>
+
+        <!-- Wide item: col-span 2 -->
+        <div class="portfolio-item reveal d2" style="grid-column:span 2;">
+          <img src="https://picsum.photos/seed/car-wrap-ristorante-furgone/900/300" alt="Car wrapping - Il Ristorantino" loading="lazy" />
+          <div class="portfolio-overlay">
+            <p class="portfolio-cat">Car Wrapping</p>
+            <p class="portfolio-name">Il Ristorantino</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Second row of 3 -->
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px;">
+        <div class="portfolio-item reveal d1" style="height:220px;">
+          <img src="https://picsum.photos/seed/segnaletica-immobiliare-ottone/600/250" alt="Segnaletica - Trefor Immobiliare" loading="lazy" />
+          <div class="portfolio-overlay">
+            <p class="portfolio-cat">Segnaletica</p>
+            <p class="portfolio-name">Trefor Immobiliare</p>
+          </div>
+        </div>
+        <div class="portfolio-item reveal d2" style="height:220px;">
+          <img src="https://picsum.photos/seed/totem-pubblicitario-laundry/600/250" alt="Totem - Lavanderia Linda" loading="lazy" />
+          <div class="portfolio-overlay">
+            <p class="portfolio-cat">Totem</p>
+            <p class="portfolio-name">Lavanderia Linda</p>
+          </div>
+        </div>
+        <div class="portfolio-item reveal d3" style="height:220px;">
+          <img src="https://picsum.photos/seed/espositori-tabacchi-piccoli/600/250" alt="Espositori - PL Multiservice" loading="lazy" />
+          <div class="portfolio-overlay">
+            <p class="portfolio-cat">Espositori</p>
+            <p class="portfolio-name">PL Multiservice</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- CHI SIAMO -->
+  <section style="background:#fafaf8;padding:88px 0;">
+    <div style="max-width:1280px;margin:0 auto;padding:0 20px;">
+      <!-- 5-col asymmetric: stat+copy (2 cols) + image (3 cols) -->
+      <div style="display:grid;grid-template-columns:2fr 3fr;gap:64px;align-items:center;">
+
+        <!-- Left: big number + copy -->
+        <div>
+          <div class="reveal" style="margin-bottom:32px;">
+            <span style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:clamp(5rem,10vw,8rem);line-height:1;color:#6ee547;display:block;letter-spacing:-0.02em;">30</span>
+            <span style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1.5rem;color:#1c1c1a;text-transform:uppercase;letter-spacing:0.04em;">anni di insegne</span>
+          </div>
+          <p class="reveal d1" style="font-size:0.9375rem;color:#6b6b68;line-height:1.75;max-width:400px;margin:0 0 20px;">
+            New Neon Splendor nasce a Milano come azienda a conduzione familiare specializzata in insegne luminose. Trent'anni dopo, siamo ancora qui: stessa passione, tecnologie aggiornate.
+          </p>
+          <p class="reveal d2" style="font-size:0.9375rem;color:#6b6b68;line-height:1.75;max-width:400px;margin:0 0 32px;">
+            Gestiamo ogni progetto dall'inizio alla fine: sopralluogo, progettazione grafica, pratiche autorizzative, produzione e installazione. Un unico interlocutore, nessuna sorpresa.
+          </p>
+          <div class="reveal d2" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:32px;">
+            <div style="border:1px solid #e4e4e0;padding:16px;">
+              <p style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:#6b6b68;margin:0 0 4px;">Area di intervento</p>
+              <p style="font-size:0.875rem;color:#1c1c1a;margin:0;">Milano e tutta la provincia</p>
+            </div>
+            <div style="border:1px solid #e4e4e0;padding:16px;">
+              <p style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.7rem;letter-spacing:0.1em;text-transform:uppercase;color:#6b6b68;margin:0 0 4px;">Pratiche amministrative</p>
+              <p style="font-size:0.875rem;color:#1c1c1a;margin:0;">Gestiamo noi le autorizzazioni</p>
+            </div>
+          </div>
+          <a href="/chi-siamo/" class="reveal d3" style="display:inline-flex;align-items:center;gap:8px;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.8125rem;letter-spacing:0.08em;text-transform:uppercase;color:#1c1c1a;text-decoration:none;transition:color 0.2s ease;" onmouseover="this.style.color='#6ee547'" onmouseout="this.style.color='#1c1c1a'">
+            Chi siamo <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+
+        <!-- Right: image -->
+        <div class="reveal d1">
+          <img src="https://picsum.photos/seed/sign-workshop-craftsman-laboratorio/800/580"
+               alt="Laboratorio New Neon Splendor - produzione insegne artigianali a Mulazzano"
+               style="width:100%;height:520px;object-fit:cover;display:block;border-left:4px solid #6ee547;" />
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- TESTIMONIANZE -->
+  <section style="background:#fff;padding:88px 0;">
+    <div style="max-width:1280px;margin:0 auto;padding:0 20px;">
+
+      <h2 class="reveal" style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:clamp(2rem,4vw,3rem);line-height:1.05;color:#1c1c1a;margin:0 0 44px;">
+        Dicono di noi.
+      </h2>
+
+      <!-- Featured quote full-width, then 2-col pair below: different layout family from the 3-col card grids above -->
+      <div class="reveal" style="background:#111110;padding:40px 44px;margin-bottom:12px;display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px;">
+        <p style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:clamp(1.25rem,2.5vw,1.625rem);color:#fff;line-height:1.55;max-width:640px;margin:0;">
+          "Lavoriamo con New Neon Splendor da anni per le nostre vetrine. Professionali, puntuali e il risultato e sempre di qualita. Li consiglio senza esitazione."
+        </p>
+        <div style="display:flex;align-items:center;gap:12px;flex-shrink:0;">
+          <div style="width:40px;height:40px;background:#6ee547;display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.125rem;color:#111;">M</div>
+          <div>
+            <p style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.9375rem;color:#fff;margin:0;">Marco Ferretti</p>
+            <p style="font-size:0.8125rem;color:rgba(255,255,255,0.45);margin:0;">Titolare, Glass &amp; Co.</p>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+
+        <div class="reveal d1" style="background:#fafaf8;border:1px solid #e4e4e0;padding:28px;">
+          <p style="font-size:0.9375rem;color:#2c2c2a;line-height:1.72;margin:0 0 24px;">
+            "Avevo bisogno del wrapping per tre furgoni in tempi stretti. Hanno gestito tutto con efficienza e il risultato supera le aspettative."
+          </p>
+          <div style="display:flex;align-items:center;gap:12px;padding-top:20px;border-top:1px solid #e4e4e0;">
+            <div style="width:36px;height:36px;background:#6ee547;display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1rem;color:#111;flex-shrink:0;">S</div>
+            <div>
+              <p style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.9375rem;color:#1c1c1a;margin:0;">Simona Riva</p>
+              <p style="font-size:0.8125rem;color:#9a9a96;margin:0;">Il Ristorantino</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal d2" style="background:#fafaf8;border:1px solid #e4e4e0;padding:28px;">
+          <p style="font-size:0.9375rem;color:#2c2c2a;line-height:1.72;margin:0 0 24px;">
+            "Insegna luminosa per la nostra sede. Hanno curato anche le pratiche comunali senza che dovessimo fare nulla. Servizio completo e affidabile."
+          </p>
+          <div style="display:flex;align-items:center;gap:12px;padding-top:20px;border-top:1px solid #e4e4e0;">
+            <div style="width:36px;height:36px;background:#6ee547;display:flex;align-items:center;justify-content:center;font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1rem;color:#111;flex-shrink:0;">L</div>
+            <div>
+              <p style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.9375rem;color:#1c1c1a;margin:0;">Luca Baronti</p>
+              <p style="font-size:0.8125rem;color:#9a9a96;margin:0;">Trefor Immobiliare</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- CONTATTI -->
+  <section id="contatti" style="background:#fafaf8;padding:88px 0;">
+    <div style="max-width:1280px;margin:0 auto;padding:0 20px;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;">
+
+        <!-- Form -->
+        <div class="reveal">
+          <p style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.6875rem;letter-spacing:0.18em;text-transform:uppercase;color:#6b6b68;margin:0 0 10px;">Contatti</p>
+          <h2 style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:clamp(2rem,3.5vw,2.75rem);line-height:1.05;color:#1c1c1a;margin:0 0 36px;">
+            Richiedi un preventivo.
+          </h2>
+
+          <form action="https://www.newneonsplendor.it/contatti/" method="POST" style="display:flex;flex-direction:column;gap:18px;" novalidate>
+
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+              <div>
+                <label class="form-label" for="nome">Nome e cognome</label>
+                <input class="form-input" type="text" id="nome" name="nome" placeholder="Mario Rossi" required autocomplete="name" />
+              </div>
+              <div>
+                <label class="form-label" for="telefono">Telefono</label>
+                <input class="form-input" type="tel" id="telefono" name="telefono" placeholder="+39 333 0000000" required autocomplete="tel" />
+              </div>
+            </div>
+
+            <div>
+              <label class="form-label" for="email">Email</label>
+              <input class="form-input" type="email" id="email" name="email" placeholder="mario@azienda.it" autocomplete="email" />
+            </div>
+
+            <div>
+              <label class="form-label" for="servizio">Tipo di servizio</label>
+              <select class="form-input" id="servizio" name="servizio" required>
+                <option value="" disabled selected>Seleziona un servizio...</option>
+                <option value="insegne-led">Insegne LED</option>
+                <option value="car-wrapping">Car Wrapping</option>
+                <option value="cassonetti">Cassonetti luminosi</option>
+                <option value="lettere-scatolate">Lettere scatolate</option>
+                <option value="targhe">Targhe</option>
+                <option value="vetrofanie">Vetrofanie</option>
+                <option value="totem">Totem</option>
+                <option value="segnaletica">Segnaletica aziendale</option>
+                <option value="manutenzione">Manutenzione</option>
+                <option value="altro">Altro</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="form-label" for="messaggio">Messaggio</label>
+              <textarea class="form-input" id="messaggio" name="messaggio" rows="4" placeholder="Descrivi brevemente il progetto o la tua esigenza..."></textarea>
+            </div>
+
+            <button type="submit" class="btn-primary" style="justify-content:center;">
+              Invia richiesta
+            </button>
+
+            <p style="font-size:0.8125rem;color:#9a9a96;line-height:1.6;margin:0;">
+              I tuoi dati sono trattati nel rispetto del GDPR. Nessuna comunicazione a terzi.
+            </p>
+
+          </form>
+        </div>
+
+        <!-- Contact info -->
+        <div class="reveal d1" style="padding-top:80px;">
+          <div style="display:flex;flex-direction:column;gap:32px;">
+
+            <div>
+              <p class="form-label">Telefono</p>
+              <a href="tel:+393336131165" style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:1.5rem;color:#1c1c1a;text-decoration:none;display:block;transition:color 0.2s ease;" onmouseover="this.style.color='#6ee547'" onmouseout="this.style.color='#1c1c1a'">
+                +39 333 613 1165
+              </a>
+              <p style="font-size:0.875rem;color:#6b6b68;margin:4px 0 0;">Chiamaci per un sopralluogo gratuito</p>
+            </div>
+
+            <div>
+              <p class="form-label">Email</p>
+              <a href="mailto:info@newneonsplendor.it" style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:1rem;color:#1c1c1a;text-decoration:none;transition:color 0.2s ease;" onmouseover="this.style.color='#6ee547'" onmouseout="this.style.color='#1c1c1a'">
+                info@newneonsplendor.it
+              </a>
+            </div>
+
+            <div>
+              <p class="form-label">Sede</p>
+              <p style="font-size:0.9375rem;color:#1c1c1a;line-height:1.65;margin:0;">
+                Via Mozart, 19<br>20097 Mulazzano (MI)
+              </p>
+            </div>
+
+            <div style="border-top:1px solid #e4e4e0;padding-top:28px;">
+              <p class="form-label" style="margin-bottom:14px;">Scrivici su WhatsApp</p>
+              <a href="https://wa.me/393336131165" target="_blank" rel="noopener noreferrer"
+                 style="display:inline-flex;align-items:center;gap:12px;padding:14px 20px;border:1.5px solid #e4e4e0;font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:0.875rem;letter-spacing:0.06em;text-transform:uppercase;color:#1c1c1a;text-decoration:none;transition:border-color 0.2s ease,color 0.2s ease;"
+                 onmouseover="this.style.borderColor='#25d366';this.style.color='#25d366'" onmouseout="this.style.borderColor='#e4e4e0';this.style.color='#1c1c1a'">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                Scrivi su WhatsApp
+              </a>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- FOOTER -->
+  <footer style="background:#111110;padding:64px 0 32px;">
+    <div style="max-width:1280px;margin:0 auto;padding:0 20px;">
+
+      <div style="display:grid;grid-template-columns:1.5fr 1fr 1.5fr 1fr;gap:48px;padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,0.08);">
+
+        <div>
+          <a href="/" aria-label="New Neon Splendor Homepage">
+            <img src="https://www.newneonsplendor.it/wp-content/uploads/2016/03/NNS_logo-e1458145901835.png"
+                 alt="New Neon Splendor" style="height:38px;width:auto;display:block;margin-bottom:16px;" />
+          </a>
+          <p style="font-size:0.875rem;color:rgba(255,255,255,0.4);line-height:1.7;max-width:240px;margin:0;">
+            Insegne luminose, car wrapping e segnaletica aziendale a Milano e provincia dal 1994.
+          </p>
+        </div>
+
+        <div>
+          <p style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.6875rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin:0 0 16px;">Pagine</p>
+          <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;">
+            <li><a href="/" style="font-size:0.875rem;color:rgba(255,255,255,0.45);text-decoration:none;transition:color 0.2s ease;" onmouseover="this.style.color='#6ee547'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Home</a></li>
+            <li><a href="/chi-siamo/" style="font-size:0.875rem;color:rgba(255,255,255,0.45);text-decoration:none;transition:color 0.2s ease;" onmouseover="this.style.color='#6ee547'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Chi siamo</a></li>
+            <li><a href="/servizi/" style="font-size:0.875rem;color:rgba(255,255,255,0.45);text-decoration:none;transition:color 0.2s ease;" onmouseover="this.style.color='#6ee547'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Servizi</a></li>
+            <li><a href="/gallery/" style="font-size:0.875rem;color:rgba(255,255,255,0.45);text-decoration:none;transition:color 0.2s ease;" onmouseover="this.style.color='#6ee547'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Gallery</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <p style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.6875rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin:0 0 16px;">Servizi</p>
+          <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:10px;">
+            <li><a href="/servizi/insegne-led/" style="font-size:0.875rem;color:rgba(255,255,255,0.45);text-decoration:none;transition:color 0.2s ease;" onmouseover="this.style.color='#6ee547'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Insegne LED</a></li>
+            <li><a href="/servizi/car-wrapping/" style="font-size:0.875rem;color:rgba(255,255,255,0.45);text-decoration:none;transition:color 0.2s ease;" onmouseover="this.style.color='#6ee547'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Car Wrapping</a></li>
+            <li><a href="/servizi/cassonetti-luminosi/" style="font-size:0.875rem;color:rgba(255,255,255,0.45);text-decoration:none;transition:color 0.2s ease;" onmouseover="this.style.color='#6ee547'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Cassonetti luminosi</a></li>
+            <li><a href="/servizi/lettere-scatolate/" style="font-size:0.875rem;color:rgba(255,255,255,0.45);text-decoration:none;transition:color 0.2s ease;" onmouseover="this.style.color='#6ee547'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Lettere scatolate</a></li>
+            <li><a href="/servizi/targhe/" style="font-size:0.875rem;color:rgba(255,255,255,0.45);text-decoration:none;transition:color 0.2s ease;" onmouseover="this.style.color='#6ee547'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Targhe</a></li>
+            <li><a href="/servizi/vetrofanie/" style="font-size:0.875rem;color:rgba(255,255,255,0.45);text-decoration:none;transition:color 0.2s ease;" onmouseover="this.style.color='#6ee547'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">Vetrofanie</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <p style="font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:0.6875rem;letter-spacing:0.15em;text-transform:uppercase;color:rgba(255,255,255,0.5);margin:0 0 16px;">Contatti</p>
+          <ul style="list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px;">
+            <li>
+              <a href="tel:+393336131165" style="font-size:0.875rem;color:rgba(255,255,255,0.45);text-decoration:none;display:flex;align-items:center;gap:8px;transition:color 0.2s ease;" onmouseover="this.style.color='#6ee547'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81 19.79 19.79 0 01.12 1.18 2 2 0 012.11 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 7.09a16 16 0 006 6l.46-.46a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+                +39 333 613 1165
+              </a>
+            </li>
+            <li>
+              <a href="mailto:info@newneonsplendor.it" style="font-size:0.875rem;color:rgba(255,255,255,0.45);text-decoration:none;display:flex;align-items:center;gap:8px;transition:color 0.2s ease;" onmouseover="this.style.color='#6ee547'" onmouseout="this.style.color='rgba(255,255,255,0.45)'">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                info@newneonsplendor.it
+              </a>
+            </li>
+            <li style="font-size:0.875rem;color:rgba(255,255,255,0.35);display:flex;align-items:flex-start;gap:8px;line-height:1.55;">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:2px;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              Via Mozart, 19<br>20097 Mulazzano (MI)
+            </li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px;padding-top:24px;">
+        <p style="font-size:0.8rem;color:rgba(255,255,255,0.25);margin:0;">
+          &copy; 2026 New Neon Splendor - Dacc&ograve; Zeffirino. P.IVA 08539260961
+        </p>
+        <a href="/privacy-e-cookie-policy/" style="font-size:0.8rem;color:rgba(255,255,255,0.25);text-decoration:none;transition:color 0.2s ease;" onmouseover="this.style.color='rgba(255,255,255,0.55)'" onmouseout="this.style.color='rgba(255,255,255,0.25)'">
+          Privacy e Cookie Policy
+        </a>
+      </div>
+
+    </div>
+  </footer>
+
+
+  <!-- WhatsApp floating button -->
+  <a href="https://wa.me/393336131165" target="_blank" rel="noopener noreferrer" class="wa-fab" aria-label="Contattaci su WhatsApp">
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="white" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+
+  <!-- Mobile responsive overrides -->
+  <style>
+    @media (max-width: 767px) {
+      /* Stats: stack vertically */
+      #stats-grid { grid-template-columns: 1fr !important; }
+      #stats-grid > div { border-right: none !important; border-bottom: 1px solid #e4e4e0; padding: 20px 0 !important; }
+      #stats-grid > div:last-child { border-bottom: none; }
+
+      /* Services: 1 col */
+      #services-grid { grid-template-columns: 1fr !important; }
+
+      /* Portfolio: 1 col */
+      #portfolio-grid-main { grid-template-columns: 1fr !important; grid-template-rows: auto !important; }
+      #portfolio-grid-main .portfolio-item { grid-row: auto !important; grid-column: auto !important; height: 220px !important; }
+      #portfolio-grid-bottom { grid-template-columns: 1fr !important; }
+
+      /* Chi siamo: stack */
+      #chisiamo-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
+      #chisiamo-grid .big-num { font-size: 6rem !important; }
+
+      /* Testimonianze: 1 col */
+      #testi-grid { grid-template-columns: 1fr !important; }
+
+      /* Contatti: stack */
+      #contatti-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+      #contatti-info { padding-top: 0 !important; }
+
+      /* Footer: 2 col */
+      #footer-grid { grid-template-columns: 1fr 1fr !important; gap: 32px !important; }
+    }
+
+    @media (max-width: 480px) {
+      #footer-grid { grid-template-columns: 1fr !important; }
+    }
+  </style>
+
+  <!-- Apply IDs for responsive targeting -->
+  <script>
+    // Stats grid ID
+    document.querySelector('[style*="grid-template-columns:repeat(3,1fr)"]') &&
+      document.querySelectorAll('[style*="grid-template-columns:repeat(3,1fr)"]')[0]?.setAttribute('id','stats-grid');
+  </script>
+
+  <script>
+    // Nav shadow: IntersectionObserver watches the hero bottom sentinel
+    const nav = document.getElementById('site-nav');
+    const heroSentinel = document.getElementById('hero-sentinel');
+    if (heroSentinel) {
+      new IntersectionObserver((entries) => {
+        nav.classList.toggle('scrolled', !entries[0].isIntersecting);
+      }, { threshold: 0 }).observe(heroSentinel);
+    }
+
+    // Mobile hamburger
+    const btn = document.getElementById('hamburger');
+    const menu = document.getElementById('mobile-nav');
+    btn.addEventListener('click', () => {
+      const open = menu.classList.toggle('open');
+      btn.classList.toggle('open', open);
+      btn.setAttribute('aria-expanded', open);
+    });
+
+    // Scroll reveal via IntersectionObserver
+    const revealEls = document.querySelectorAll('.reveal');
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.1 });
+    revealEls.forEach(el => io.observe(el));
+  </script>
+
+</body>
+</html>
