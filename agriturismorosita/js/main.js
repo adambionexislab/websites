@@ -73,36 +73,15 @@
   });
 })();
 
-/* Date picker -> hidden split fields (contact form) */
-(function () {
-  function wire(pickerId, d, m, y) {
-    var picker = document.getElementById(pickerId);
-    if (!picker) return;
-    picker.addEventListener('change', function () {
-      var val = picker.value; /* YYYY-MM-DD */
-      if (!val) return;
-      var parts = val.split('-');
-      var fDay  = document.querySelector('[name="' + d + '"]');
-      var fMon  = document.querySelector('[name="' + m + '"]');
-      var fYear = document.querySelector('[name="' + y + '"]');
-      if (fDay)  fDay.value  = parts[2];
-      if (fMon)  fMon.value  = parts[1];
-      if (fYear) fYear.value = parts[0];
-    });
-  }
-  wire('date-arrival',   'doad', 'doam', 'doay');
-  wire('date-departure', 'dodd', 'dodm', 'dody');
-})();
+/* Date inputs submit directly via name="arrival_date" / "departure_date" to Formspree */
 
-/* Language switcher */
+/* Language switcher - static site: only Italian available */
 (function () {
   var sel = document.getElementById('lang-select');
   if (!sel) return;
   sel.addEventListener('change', function () {
-    var lang = sel.value;
-    var page = window.location.pathname.split('/').pop() || 'index.php';
-    if (!page || page === '') page = 'index.php';
-    window.location.href = page + '?lang=' + lang;
+    /* Multi-language requires server-side rendering. Reset to Italian. */
+    sel.value = 'ita';
   });
 })();
 
