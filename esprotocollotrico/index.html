@@ -209,15 +209,11 @@
       from { stroke-dashoffset: 0; }
       to   { stroke-dashoffset: -1; }
     }
-    @keyframes bgPathOpacity {
-      0%, 100% { opacity: 0.3; }
-      50%       { opacity: 0.6; }
-    }
     #bg-paths-container {
       position: absolute;
       inset: 0;
       pointer-events: none;
-      overflow: hidden;
+      z-index: 0;
     }
     #bg-paths-container svg {
       position: absolute;
@@ -276,7 +272,7 @@
     <div class="absolute -bottom-20 -left-20 w-[600px] h-[600px] rounded-full pointer-events-none" aria-hidden="true"
          style="background: radial-gradient(circle, rgba(196,150,90,0.09) 0%, transparent 62%);"></div>
 
-    <div class="max-w-6xl mx-auto w-full">
+    <div class="max-w-6xl mx-auto w-full" style="position:relative;z-index:1;">
       <div class="max-w-4xl">
 
         <!-- Location tag — no all-caps eyebrow pattern, just a clean inline element -->
@@ -912,17 +908,14 @@
           path.setAttribute('d', d);
           path.setAttribute('stroke', 'currentColor');
           path.setAttribute('stroke-width', (0.5 + i * 0.03).toFixed(2));
-          path.setAttribute('stroke-opacity', Math.min(0.1 + i * 0.03, 1).toFixed(2));
+          path.setAttribute('stroke-opacity', Math.min(0.03 + i * 0.015, 0.45).toFixed(3));
           path.setAttribute('pathLength', '1');
           path.setAttribute('stroke-dasharray', '0.3 0.7');
 
           var dur   = (20 + Math.random() * 10).toFixed(2);
           var delay = (-Math.random() * parseFloat(dur)).toFixed(2);
-          var opDur = (parseFloat(dur) * 0.65).toFixed(2);
 
-          path.style.animation =
-            'bgPathFlow '    + dur   + 's linear '      + delay + 's infinite,' +
-            'bgPathOpacity ' + opDur + 's ease-in-out ' + delay + 's infinite';
+          path.style.animation = 'bgPathFlow ' + dur + 's linear ' + delay + 's infinite';
 
           svg.appendChild(path);
         }
