@@ -322,7 +322,7 @@
     <div id="hero-sentinel" style="position:absolute;bottom:0;left:0;width:1px;height:1px;pointer-events:none;" aria-hidden="true"></div>
 
     <div style="max-width:1280px;margin:0 auto;padding:0 20px;width:100%;position:relative;z-index:1;">
-      <div style="display:grid;grid-template-columns:1fr;gap:48px;align-items:center;padding:72px 0 80px;">
+      <div id="hero-inner" style="display:grid;grid-template-columns:1fr;gap:48px;align-items:center;padding:72px 0 80px;">
 
         <div style="max-width:620px;">
           <h1 class="reveal" style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:clamp(2.75rem,6vw,4.75rem);line-height:1;letter-spacing:-0.01em;color:#fff;margin:0 0 24px;">
@@ -349,7 +349,7 @@
   <!-- STATS BAR -->
   <section style="background:#fff;border-bottom:1px solid #e4e4e0;">
     <div style="max-width:1280px;margin:0 auto;padding:0 20px;">
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);">
+      <div id="stats-grid" style="display:grid;grid-template-columns:repeat(3,1fr);">
 
         <div class="reveal" style="display:flex;align-items:center;gap:16px;padding:28px 24px 28px 0;border-right:1px solid #e4e4e0;">
           <span style="font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:2.75rem;line-height:1;color:#6ee547;">30+</span>
@@ -382,7 +382,7 @@
         </h2>
       </div>
 
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:36px;">
+      <div id="services-grid" style="display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:36px;">
 
         <div class="svc-card reveal d1" style="grid-column:span 1;">
           <div class="svc-icon">
@@ -465,7 +465,7 @@
       </div>
 
       <!-- Asymmetric grid: 3 cols, varied heights -->
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:280px 280px;gap:8px;">
+      <div id="portfolio-grid-main" style="display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:280px 280px;gap:8px;">
 
         <!-- Tall item: rows 1+2, col 1 -->
         <div class="portfolio-item reveal d1" style="grid-row:span 2; height:568px; background-image:url('photo/pizzeria-san-giorgio.jpg');">
@@ -501,7 +501,7 @@
       </div>
 
       <!-- Second row of 3 -->
-      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px;">
+      <div id="portfolio-grid-bottom" style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:8px;">
         <div class="portfolio-item reveal d1" style="height:220px; background-image:url('photo/trefor-immobiliare.jpg');">
           <div class="portfolio-overlay">
             <p class="portfolio-cat">Segnaletica</p>
@@ -530,7 +530,7 @@
   <section id="chi-siamo" style="background:#fafaf8;padding:88px 0;">
     <div style="max-width:1280px;margin:0 auto;padding:0 20px;">
       <!-- 5-col asymmetric: stat+copy (2 cols) + image (3 cols) -->
-      <div style="display:grid;grid-template-columns:2fr 3fr;gap:64px;align-items:center;">
+      <div id="chisiamo-grid" style="display:grid;grid-template-columns:2fr 3fr;gap:64px;align-items:center;">
 
         <!-- Left: big number + copy -->
         <div>
@@ -561,7 +561,7 @@
 
         <!-- Right: image -->
         <div class="reveal d1">
-          <img src="https://picsum.photos/seed/sign-workshop-craftsman-laboratorio/800/580"
+          <img src="photo/Milano.png"
                alt="Laboratorio New Neon Splendor - produzione insegne artigianali a Mulazzano"
                style="width:100%;height:520px;object-fit:cover;display:block;border-left:4px solid #6ee547;" />
         </div>
@@ -580,7 +580,7 @@
       </h2>
 
       <!-- Featured quote full-width, then 2-col pair below: different layout family from the 3-col card grids above -->
-      <div class="reveal" style="background:#111110;padding:40px 44px;margin-bottom:12px;display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px;">
+      <div id="testi-featured" class="reveal" style="background:#111110;padding:40px 44px;margin-bottom:12px;display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px;">
         <p style="font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:clamp(1.25rem,2.5vw,1.625rem);color:#fff;line-height:1.55;max-width:640px;margin:0;">
           "Lavoriamo con New Neon Splendor da anni per le nostre vetrine. Professionali, puntuali e il risultato e sempre di qualita. Li consiglio senza esitazione."
         </p>
@@ -593,7 +593,7 @@
         </div>
       </div>
 
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+      <div id="testi-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
 
         <div class="reveal d1" style="background:#fafaf8;border:1px solid #e4e4e0;padding:28px;">
           <p style="font-size:0.9375rem;color:#2c2c2a;line-height:1.72;margin:0 0 24px;">
@@ -629,7 +629,7 @@
   <!-- CONTATTI -->
   <section id="contatti" style="background:#fafaf8;padding:88px 0;">
     <div style="max-width:1280px;margin:0 auto;padding:0 20px;">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;">
+      <div id="contatti-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;">
 
         <!-- Form -->
         <div class="reveal">
@@ -640,7 +640,7 @@
 
           <form action="https://www.newneonsplendor.it/contatti/" method="POST" style="display:flex;flex-direction:column;gap:18px;" novalidate>
 
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
+            <div id="form-name-row" style="display:grid;grid-template-columns:1fr 1fr;gap:14px;">
               <div>
                 <label class="form-label" for="nome">Nome e cognome</label>
                 <input class="form-input" type="text" id="nome" name="nome" placeholder="Mario Rossi" required autocomplete="name" />
@@ -690,7 +690,7 @@
         </div>
 
         <!-- Contact info -->
-        <div class="reveal d1" style="padding-top:80px;">
+        <div id="contatti-info" class="reveal d1" style="padding-top:80px;">
           <div style="display:flex;flex-direction:column;gap:32px;">
 
             <div>
@@ -737,7 +737,7 @@
   <footer style="background:#111110;padding:64px 0 32px;">
     <div style="max-width:1280px;margin:0 auto;padding:0 20px;">
 
-      <div style="display:grid;grid-template-columns:1.5fr 1fr 1.5fr 1fr;gap:48px;padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,0.08);">
+      <div id="footer-grid" style="display:grid;grid-template-columns:1.5fr 1fr 1.5fr 1fr;gap:48px;padding-bottom:48px;border-bottom:1px solid rgba(255,255,255,0.08);">
 
         <div>
           <a href="/" aria-label="New Neon Splendor Homepage">
@@ -817,45 +817,78 @@
   <!-- Mobile responsive overrides -->
   <style>
     @media (max-width: 767px) {
-      /* Stats: stack vertically */
+      /* Section padding */
+      section { padding-top: 52px !important; padding-bottom: 52px !important; }
+      footer  { padding-top: 44px !important; padding-bottom: 20px !important; }
+
+      /* Hero inner padding */
+      #hero-inner { padding: 36px 0 48px !important; }
+
+      /* Stats: vertical stack */
       #stats-grid { grid-template-columns: 1fr !important; }
-      #stats-grid > div { border-right: none !important; border-bottom: 1px solid #e4e4e0; padding: 20px 0 !important; }
-      #stats-grid > div:last-child { border-bottom: none; }
+      #stats-grid > div {
+        border-right: none !important;
+        border-bottom: 1px solid #e4e4e0 !important;
+        padding: 18px 0 !important;
+      }
+      #stats-grid > div:last-child { border-bottom: none !important; }
 
       /* Services: 1 col */
       #services-grid { grid-template-columns: 1fr !important; }
 
-      /* Portfolio: 1 col */
-      #portfolio-grid-main { grid-template-columns: 1fr !important; grid-template-rows: auto !important; }
-      #portfolio-grid-main .portfolio-item { grid-row: auto !important; grid-column: auto !important; height: 220px !important; }
-      #portfolio-grid-bottom { grid-template-columns: 1fr !important; }
+      /* Portfolio: 2-col, fixed heights */
+      #portfolio-grid-main {
+        grid-template-columns: 1fr 1fr !important;
+        grid-template-rows: auto !important;
+      }
+      #portfolio-grid-main .portfolio-item {
+        grid-row: auto !important;
+        grid-column: auto !important;
+        height: 170px !important;
+      }
+      #portfolio-grid-bottom { grid-template-columns: 1fr 1fr !important; }
+      #portfolio-grid-bottom .portfolio-item { height: 150px !important; }
 
-      /* Chi siamo: stack */
-      #chisiamo-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
-      #chisiamo-grid .big-num { font-size: 6rem !important; }
+      /* Chi siamo: stack, image below text */
+      #chisiamo-grid {
+        grid-template-columns: 1fr !important;
+        gap: 28px !important;
+      }
+      #chisiamo-grid img { height: 240px !important; }
 
-      /* Testimonianze: 1 col */
+      /* Featured testimonial: tighter padding */
+      #testi-featured { padding: 24px 20px !important; }
+
+      /* Testimonials: 1 col */
       #testi-grid { grid-template-columns: 1fr !important; }
 
-      /* Contatti: stack */
-      #contatti-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+      /* Form: stack nome + telefono */
+      #form-name-row { grid-template-columns: 1fr !important; }
+
+      /* Contatti: stack, form first */
+      #contatti-grid { grid-template-columns: 1fr !important; gap: 36px !important; }
       #contatti-info { padding-top: 0 !important; }
 
       /* Footer: 2 col */
-      #footer-grid { grid-template-columns: 1fr 1fr !important; gap: 32px !important; }
+      #footer-grid {
+        grid-template-columns: 1fr 1fr !important;
+        gap: 28px !important;
+        padding-bottom: 32px !important;
+      }
+
+      /* Hero CTAs: full width on narrow */
+      .btn-primary, .btn-outline { width: 100%; justify-content: center; }
     }
 
-    @media (max-width: 480px) {
+    @media (max-width: 430px) {
+      /* Very narrow: single col portfolio and footer */
+      #portfolio-grid-main { grid-template-columns: 1fr !important; }
+      #portfolio-grid-main .portfolio-item { height: 220px !important; }
+      #portfolio-grid-bottom { grid-template-columns: 1fr !important; }
+      #portfolio-grid-bottom .portfolio-item { height: 200px !important; }
       #footer-grid { grid-template-columns: 1fr !important; }
     }
   </style>
-
-  <!-- Apply IDs for responsive targeting -->
-  <script>
-    // Stats grid ID
-    document.querySelector('[style*="grid-template-columns:repeat(3,1fr)"]') &&
-      document.querySelectorAll('[style*="grid-template-columns:repeat(3,1fr)"]')[0]?.setAttribute('id','stats-grid');
-  </script>
 
   <script>
     // Nav shadow: IntersectionObserver watches the hero bottom sentinel
