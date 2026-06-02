@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ELLE Parrucchieri - Salone di Bellezza</title>
+  <meta name="description" content="Tagli d'autore e trattamenti su misura. ELLE Parrucchieri, il salone di bellezza professionale nel cuore dell'Italia." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'media',
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Outfit', 'sans-serif'] },
+        }
+      }
+    }
+  </script>
+
+  <style>
+    :root {
+      --bg:           #fafafa;
+      --fg:           #18181b;
+      --muted:        #71717a;
+      --border:       #e4e4e7;
+      --accent:       #8b6914;
+      --accent-hover: #7a5810;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg:           #0c0c0d;
+        --fg:           #f4f4f5;
+        --muted:        #a1a1aa;
+        --border:       #27272a;
+        --accent:       #8b6914;
+        --accent-hover: #7a5810;
+      }
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html  { scroll-behavior: smooth; }
+    body  {
+      background-color: var(--bg);
+      color: var(--fg);
+      font-family: 'Outfit', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    /* Nav scroll state */
+    .nav-scrolled {
+      background: rgba(250,250,250,0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+    @media (prefers-color-scheme: dark) {
+      .nav-scrolled { background: rgba(12,12,13,0.88); }
+    }
+
+    /* Marquee */
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    .marquee-track { animation: marquee 32s linear infinite; }
+
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity .7s cubic-bezier(.16,1,.3,1),
+                  transform .7s cubic-bezier(.16,1,.3,1);
+    }
+    .reveal.d1 { transition-delay: .07s; }
+    .reveal.d2 { transition-delay: .14s; }
+    .reveal.d3 { transition-delay: .21s; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* Image zoom on hover */
+    .img-wrap { overflow: hidden; }
+    .img-wrap img { transition: transform .7s cubic-bezier(.16,1,.3,1); }
+    .img-wrap:hover img { transform: scale(1.05); }
+
+    /* Hide scrollbar */
+    .no-scroll::-webkit-scrollbar { display: none; }
+    .no-scroll { scrollbar-width: none; }
+
+    /* Hero with WebGL background */
+    .hero-section {
+      position: relative;
+      min-height: 100dvh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #060610;
+    }
+    #hero-canvas {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.32);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 5rem 1.5rem 3rem;
+      width: 100%;
+    }
+    /* Hero entrance animations */
+    .ha { animation: ha 1s cubic-bezier(.16,1,.3,1) both; }
+    .ha.d1 { animation-delay: .14s; }
+    .ha.d2 { animation-delay: .26s; }
+    @keyframes ha {
+      from { opacity:0; transform:translateY(22px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity:1; transform:none; transition:none; }
+      .ha     { animation:none; opacity:1; transform:none; }
+      .marquee-track { animation: none; }
+      .img-wrap img { transition: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Sentinel: nav becomes opaque when this leaves the viewport -->
+  <div id="sentinel" style="position:absolute;top:0;height:1px;width:100%;pointer-events:none;"></div>
+
+  <!-- ── NAV ─────────────────────────────────────────────────────────────── -->
+  <header id="nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" style="height:64px">
+    <div class="max-w-[1400px] mx-auto px-6 lg:px-12 h-full flex items-center justify-between">
+
+      <a href="#" class="text-sm font-semibold uppercase tracking-[.12em]" style="color:var(--fg)">ELLE parruchieri</a>
+
+      <nav class="hidden md:flex items-center gap-8" aria-label="Navigazione principale">
+        <a href="#servizi"   class="text-sm transition-colors duration-200" style="color:var(--muted)" onmouseover="this.style.color='var(--fg)'" onmouseout="this.style.color='var(--muted)'">Servizi</a>
+        <a href="#chi-siamo" class="text-sm transition-colors duration-200" style="color:var(--muted)" onmouseover="this.style.color='var(--fg)'" onmouseout="this.style.color='var(--muted)'">Chi Siamo</a>
+        <a href="#galleria"  class="text-sm transition-colors duration-200" style="color:var(--muted)" onmouseover="this.style.color='var(--fg)'" onmouseout="this.style.color='var(--muted)'">Galleria</a>
+        <a href="#contatti"  class="text-sm transition-colors duration-200" style="color:var(--muted)" onmouseover="this.style.color='var(--fg)'" onmouseout="this.style.color='var(--muted)'">Contatti</a>
+      </nav>
+
+      <a href="#prenota"
+         class="hidden md:inline-flex items-center px-5 py-2 text-sm font-medium text-white rounded-full transition-all duration-200 active:scale-[.98]"
+         style="background:var(--accent)"
+         onmouseover="this.style.background='var(--accent-hover)'"
+         onmouseout="this.style.background='var(--accent)'">
+        Prenota ora
+      </a>
+
+      <button id="menu-btn" class="md:hidden p-2" aria-label="Apri menu" style="color:var(--fg)">
+        <!-- Hamburger -->
+        <svg id="ico-open" xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" viewBox="0 0 256 256">
+          <path d="M224,128a8,8,0,0,1-8,8H40a8,8,0,0,1,0-16H216A8,8,0,0,1,224,128ZM40,72H216a8,8,0,0,0,0-16H40a8,8,0,0,0,0,16ZM216,184H40a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Z"/>
+        </svg>
+        <!-- X -->
+        <svg id="ico-close" class="hidden" xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" viewBox="0 0 256 256">
+          <path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="hidden md:hidden px-6 py-4 flex flex-col gap-4"
+         style="background:var(--bg);border-bottom:1px solid var(--border)">
+      <a href="#servizi"   class="text-sm" style="color:var(--muted)">Servizi</a>
+      <a href="#chi-siamo" class="text-sm" style="color:var(--muted)">Chi Siamo</a>
+      <a href="#galleria"  class="text-sm" style="color:var(--muted)">Galleria</a>
+      <a href="#contatti"  class="text-sm" style="color:var(--muted)">Contatti</a>
+      <a href="#prenota"
+         class="inline-flex justify-center px-5 py-2 text-sm font-medium text-white rounded-full"
+         style="background:var(--accent)">Prenota ora</a>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ── HERO: Full-Width WebGL Background ───────────────────────────── -->
+    <section class="hero-section">
+      <canvas id="hero-canvas"></canvas>
+      <div class="hero-overlay"></div>
+
+      <div class="hero-content">
+        <h1 class="ha font-light text-white" style="line-height:1.02">
+          <span class="block text-7xl md:text-8xl lg:text-9xl tracking-tight">ELLE</span>
+          <span class="block text-xl md:text-2xl lg:text-3xl tracking-[0.3em] uppercase mt-3"
+                style="color:rgba(255,255,255,.65)">Parrucchieri</span>
+        </h1>
+        <p class="ha d1 mt-8 text-base leading-relaxed mx-auto max-w-[36ch]"
+           style="color:rgba(255,255,255,.55)">
+          Tagli d&apos;autore e trattamenti su misura.
+        </p>
+        <div class="ha d2 mt-10">
+          <a href="#prenota"
+             class="inline-flex items-center px-7 py-3 text-sm font-medium text-white rounded-full transition-all duration-200 active:scale-[.98]"
+             style="background:var(--accent)"
+             onmouseover="this.style.background='var(--accent-hover)'"
+             onmouseout="this.style.background='var(--accent)'">
+            Prenota ora
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── SERVICE MARQUEE ───────────────────────────────────────────────── -->
+    <div style="border-top:1px solid var(--border);border-bottom:1px solid var(--border)" class="overflow-hidden py-5">
+      <div class="marquee-track flex gap-0 w-max select-none">
+        <span class="text-[11px] font-medium tracking-[.2em] uppercase whitespace-nowrap mx-8" style="color:var(--muted)">TAGLIO</span>
+        <span class="opacity-30 mx-1 text-[11px]" style="color:var(--muted)">|</span>
+        <span class="text-[11px] font-medium tracking-[.2em] uppercase whitespace-nowrap mx-8" style="color:var(--muted)">COLORE</span>
+        <span class="opacity-30 mx-1 text-[11px]" style="color:var(--muted)">|</span>
+        <span class="text-[11px] font-medium tracking-[.2em] uppercase whitespace-nowrap mx-8" style="color:var(--muted)">PIEGA</span>
+        <span class="opacity-30 mx-1 text-[11px]" style="color:var(--muted)">|</span>
+        <span class="text-[11px] font-medium tracking-[.2em] uppercase whitespace-nowrap mx-8" style="color:var(--muted)">MECHE</span>
+        <span class="opacity-30 mx-1 text-[11px]" style="color:var(--muted)">|</span>
+        <span class="text-[11px] font-medium tracking-[.2em] uppercase whitespace-nowrap mx-8" style="color:var(--muted)">KERATINA</span>
+        <span class="opacity-30 mx-1 text-[11px]" style="color:var(--muted)">|</span>
+        <span class="text-[11px] font-medium tracking-[.2em] uppercase whitespace-nowrap mx-8" style="color:var(--muted)">TRATTAMENTI</span>
+        <span class="opacity-30 mx-1 text-[11px]" style="color:var(--muted)">|</span>
+        <span class="text-[11px] font-medium tracking-[.2em] uppercase whitespace-nowrap mx-8" style="color:var(--muted)">ACCONCIATURA</span>
+        <span class="opacity-30 mx-1 text-[11px]" style="color:var(--muted)">|</span>
+        <span class="text-[11px] font-medium tracking-[.2em] uppercase whitespace-nowrap mx-8" style="color:var(--muted)">EXTENSION</span>
+        <span class="opacity-30 mx-1 text-[11px]" style="color:var(--muted)">|</span>
+      </div>
+    </div>
+
+    <!-- ── SERVICES BENTO ────────────────────────────────────────────────── -->
+    <section id="servizi" class="max-w-[1400px] mx-auto px-6 lg:px-12 py-24 lg:py-32">
+      <p class="text-[11px] font-medium uppercase tracking-[.2em] mb-10" style="color:var(--muted)">Servizi</p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+
+        <!-- Taglio & Piega -->
+        <article class="reveal rounded-2xl p-7 border transition-all duration-300 cursor-default"
+                 style="border-color:var(--border);background:var(--bg)"
+                 onmouseover="this.style.borderColor='var(--accent)';this.style.boxShadow='0 8px 32px rgba(139,105,20,0.18)'"
+                 onmouseout="this.style.borderColor='var(--border)';this.style.boxShadow='none'">
+          <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-5"
+               style="background:rgba(139,105,20,0.1)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none"
+                 stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                 style="color:var(--accent)" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/>
+              <path d="M20 4 8.12 15.88M14.47 14.48 20 20M8.12 8.12 12 12"/>
+            </svg>
+          </div>
+          <h3 class="text-lg font-medium mb-2" style="color:var(--fg)">Taglio &amp; Piega</h3>
+          <p class="text-sm leading-relaxed" style="color:var(--muted)">
+            Un taglio pensato per te, modellato sulle tue fattezze e sul tuo stile unico.
+          </p>
+        </article>
+
+        <!-- Colore & Meche -->
+        <article class="reveal d1 rounded-2xl p-7 border transition-all duration-300 cursor-default"
+                 style="border-color:var(--border);background:var(--bg)"
+                 onmouseover="this.style.borderColor='var(--accent)';this.style.boxShadow='0 8px 32px rgba(139,105,20,0.18)'"
+                 onmouseout="this.style.borderColor='var(--border)';this.style.boxShadow='none'">
+          <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-5"
+               style="background:rgba(139,105,20,0.1)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none"
+                 stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                 style="color:var(--accent)" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20z"/>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+              <path d="M2 12h20"/>
+            </svg>
+          </div>
+          <h3 class="text-lg font-medium mb-2" style="color:var(--fg)">Colore &amp; Meche</h3>
+          <p class="text-sm leading-relaxed" style="color:var(--muted)">
+            Tinte, meche e balayage con prodotti selezionati che rispettano e valorizzano il capello.
+          </p>
+        </article>
+
+        <!-- Trattamenti -->
+        <article class="reveal d2 rounded-2xl p-7 border transition-all duration-300 cursor-default"
+                 style="border-color:var(--border);background:var(--bg)"
+                 onmouseover="this.style.borderColor='var(--accent)';this.style.boxShadow='0 8px 32px rgba(139,105,20,0.18)'"
+                 onmouseout="this.style.borderColor='var(--border)';this.style.boxShadow='none'">
+          <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-5"
+               style="background:rgba(139,105,20,0.1)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none"
+                 stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                 style="color:var(--accent)" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"/>
+            </svg>
+          </div>
+          <h3 class="text-lg font-medium mb-2" style="color:var(--fg)">Trattamenti</h3>
+          <p class="text-sm leading-relaxed" style="color:var(--muted)">
+            Keratina, nutrizione e ristrutturazione per capelli sani, forti e luminosi.
+          </p>
+        </article>
+
+        <!-- Acconciature -->
+        <article class="reveal d3 rounded-2xl p-7 border transition-all duration-300 cursor-default"
+                 style="border-color:var(--border);background:var(--bg)"
+                 onmouseover="this.style.borderColor='var(--accent)';this.style.boxShadow='0 8px 32px rgba(139,105,20,0.18)'"
+                 onmouseout="this.style.borderColor='var(--border)';this.style.boxShadow='none'">
+          <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-5"
+               style="background:rgba(139,105,20,0.1)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none"
+                 stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                 style="color:var(--accent)" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            </svg>
+          </div>
+          <h3 class="text-lg font-medium mb-2" style="color:var(--fg)">Acconciature da Sposa</h3>
+          <p class="text-sm leading-relaxed" style="color:var(--muted)">
+            Il tuo giorno piu bello merita il massimo della cura, dell'attenzione e della precisione.
+          </p>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ── ABOUT: Full-Width Editorial ──────────────────────────────────── -->
+    <section id="chi-siamo" class="py-24 lg:py-40">
+      <div class="max-w-[1400px] mx-auto px-6 lg:px-12">
+        <div class="reveal max-w-4xl">
+          <h2 class="text-4xl md:text-6xl font-light tracking-tight leading-[1.05]" style="color:var(--fg)">
+            Ogni capello, una storia da raccontare.
+          </h2>
+          <p class="mt-8 text-base leading-relaxed max-w-[55ch]" style="color:var(--muted)">
+            Da oltre venticinque anni il salone ELLE e il luogo dove la cura diventa arte.
+            Ogni cliente porta con se un desiderio, una visione.
+            Il nostro lavoro e trasformare quella visione in realta, con attenzione e competenza.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── GALLERY: Masonry 2-Col ────────────────────────────────────────── -->
+    <section id="galleria" class="max-w-[1400px] mx-auto px-6 lg:px-12 py-24 lg:py-32">
+      <div class="flex gap-3">
+
+        <!-- Column 1 -->
+        <div class="flex flex-col gap-3 flex-1">
+          <div class="reveal img-wrap rounded-2xl overflow-hidden" style="aspect-ratio:3/4">
+            <img src="https://picsum.photos/seed/elle-gallery-haircut-portrait/600/800"
+                 alt="Taglio di capelli - ELLE Parrucchieri"
+                 class="w-full h-full object-cover" loading="lazy" />
+          </div>
+          <div class="reveal d1 img-wrap rounded-2xl overflow-hidden" style="aspect-ratio:4/3">
+            <img src="https://picsum.photos/seed/elle-gallery-color-style/800/600"
+                 alt="Colorazione capelli - ELLE Parrucchieri"
+                 class="w-full h-full object-cover" loading="lazy" />
+          </div>
+        </div>
+
+        <!-- Column 2 -->
+        <div class="flex flex-col gap-3 flex-1">
+          <div class="reveal d2 img-wrap rounded-2xl overflow-hidden" style="aspect-ratio:4/3">
+            <img src="https://picsum.photos/seed/elle-gallery-treatment-hair/800/600"
+                 alt="Trattamento capelli - ELLE Parrucchieri"
+                 class="w-full h-full object-cover" loading="lazy" />
+          </div>
+          <div class="reveal d3 img-wrap rounded-2xl overflow-hidden" style="aspect-ratio:3/4">
+            <img src="https://picsum.photos/seed/elle-gallery-bridal-hairstyle/600/800"
+                 alt="Acconciatura da sposa - ELLE Parrucchieri"
+                 class="w-full h-full object-cover" loading="lazy" />
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── TESTIMONIALS: Horizontal Scroll-Snap ─────────────────────────── -->
+    <section class="py-24 lg:py-32 overflow-hidden">
+      <div class="max-w-[1400px] mx-auto px-6 lg:px-12 mb-12">
+        <p class="text-[11px] font-medium uppercase tracking-[.2em]" style="color:var(--muted)">Recensioni</p>
+      </div>
+      <div class="no-scroll flex gap-6 px-6 lg:px-12 overflow-x-auto snap-x snap-mandatory pb-4">
+
+        <div class="reveal flex-none snap-start rounded-2xl p-8 flex flex-col justify-between"
+             style="width:min(85vw,420px);border:1px solid var(--border);background:var(--bg)">
+          <p class="text-base leading-relaxed font-light" style="color:var(--fg)">
+            &ldquo;Ti senti coccolata con garbo ed educazione, ti senti davvero bene. Una coccola non solo per i capelli ma anche per la persona che sei. Difficile trovare un salone cosi, ma finalmente c&rsquo;e.&rdquo;
+          </p>
+          <div class="mt-8 pt-6" style="border-top:1px solid var(--border)">
+            <p class="text-sm font-medium" style="color:var(--fg)">Daniela Amelli</p>
+            <p class="text-xs mt-0.5" style="color:var(--muted)">Recensione Google</p>
+          </div>
+        </div>
+
+        <div class="reveal d1 flex-none snap-start rounded-2xl p-8 flex flex-col justify-between"
+             style="width:min(85vw,420px);border:1px solid var(--border);background:var(--bg)">
+          <p class="text-base leading-relaxed font-light" style="color:var(--fg)">
+            &ldquo;Ascoltano davvero cio che desideri e riescono sempre a trasformarlo in realta, con risultati che superano ogni aspettativa. Ogni volta esco non solo con i capelli meravigliosi, ma anche con il cuore piu leggero.&rdquo;
+          </p>
+          <div class="mt-8 pt-6" style="border-top:1px solid var(--border)">
+            <p class="text-sm font-medium" style="color:var(--fg)">Stefania Tarletti</p>
+            <p class="text-xs mt-0.5" style="color:var(--muted)">Recensione Google</p>
+          </div>
+        </div>
+
+        <div class="reveal d2 flex-none snap-start rounded-2xl p-8 flex flex-col justify-between"
+             style="width:min(85vw,420px);border:1px solid var(--border);background:var(--bg)">
+          <p class="text-base leading-relaxed font-light" style="color:var(--fg)">
+            &ldquo;L&rsquo;alta professionalita si mischia ad un ambiente simpatico, allegro ed accogliente. Il cliente e coccolato e guidato sui trattamenti. Apprezzatissima l&rsquo;apertura fino alle 20:00 per chi lavora.&rdquo;
+          </p>
+          <div class="mt-8 pt-6" style="border-top:1px solid var(--border)">
+            <p class="text-sm font-medium" style="color:var(--fg)">Luciana Giacalone</p>
+            <p class="text-xs mt-0.5" style="color:var(--muted)">Recensione Google</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── BOOKING CTA: Centered Manifesto ──────────────────────────────── -->
+    <section id="prenota" class="py-28 lg:py-40 px-6 text-center" style="background:var(--accent)">
+      <div class="reveal max-w-2xl mx-auto">
+        <h2 class="text-4xl md:text-5xl font-light tracking-tight leading-[1.08] text-white">
+          Prenota il tuo appuntamento
+        </h2>
+        <p class="mt-6 text-base leading-relaxed" style="color:rgba(255,255,255,.7)">
+          Siamo aperti dal martedi al sabato. Ti aspettiamo con piacere.
+        </p>
+        <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a href="tel:+39029896165"
+             class="inline-flex items-center gap-2.5 px-7 py-3.5 text-sm font-medium rounded-full w-full sm:w-auto justify-center transition-all duration-200 active:scale-[.98]"
+             style="background:#fff;color:var(--accent)"
+             onmouseover="this.style.background='rgba(255,255,255,.9)'"
+             onmouseout="this.style.background='#fff'">
+            <!-- Phone SVG -->
+            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="currentColor" viewBox="0 0 256 256">
+              <path d="M222.37,158.46l-47.11-21.11-.13-.06a16,16,0,0,0-15.17,1.4,8.12,8.12,0,0,0-.75.56L134.87,160c-15.42-7.49-31.34-23.29-38.83-38.51l20.78-24.71c.2-.25.39-.5.57-.77a16,16,0,0,0,1.32-15.06l0-.12L97.54,33.64a16,16,0,0,0-16.62-9.52A56.26,56.26,0,0,0,32,80c0,79.4,64.6,144,144,144a56.26,56.26,0,0,0,55.88-48.92A16,16,0,0,0,222.37,158.46Z"/>
+            </svg>
+            Chiama ora
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── FOOTER: 3-Col Info Grid ──────────────────────────────────────── -->
+  <footer id="contatti" style="border-top:1px solid var(--border);background:var(--bg)">
+    <div class="max-w-[1400px] mx-auto px-6 lg:px-12 py-16 grid grid-cols-1 md:grid-cols-3 gap-12">
+
+      <!-- Brand + contact -->
+      <div>
+        <p class="text-sm font-semibold uppercase tracking-[.12em]" style="color:var(--fg)">ELLE Parrucchieri</p>
+        <address class="mt-4 not-italic text-sm leading-relaxed" style="color:var(--muted)">
+          Via Pandina, 26<br>26837 Mulazzano LO
+        </address>
+        <a href="tel:+39029896165" class="mt-3 block text-sm transition-colors" style="color:var(--muted)"
+           onmouseover="this.style.color='var(--fg)'" onmouseout="this.style.color='var(--muted)'">
+          02 989 6165
+        </a>
+        <!-- Social icons -->
+        <div class="mt-6 flex items-center gap-4">
+          <a href="#" aria-label="Instagram ELLE Parrucchieri" class="transition-colors" style="color:var(--muted)"
+             onmouseover="this.style.color='var(--fg)'" onmouseout="this.style.color='var(--muted)'">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 256 256">
+              <path d="M128,80a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160ZM176,24H80A56.06,56.06,0,0,0,24,80v96a56.06,56.06,0,0,0,56,56h96a56.06,56.06,0,0,0,56-56V80A56.06,56.06,0,0,0,176,24Zm40,152a40,40,0,0,1-40,40H80a40,40,0,0,1-40-40V80A40,40,0,0,1,80,40h96a40,40,0,0,1,40,40ZM192,76a12,12,0,1,1-12-12A12,12,0,0,1,192,76Z"/>
+            </svg>
+          </a>
+          <a href="#" aria-label="Facebook ELLE Parrucchieri" class="transition-colors" style="color:var(--muted)"
+             onmouseover="this.style.color='var(--fg)'" onmouseout="this.style.color='var(--muted)'">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 256 256">
+              <path d="M128,24A104,104,0,1,0,232,128,104.11,104.11,0,0,0,128,24Zm8,191.63V152h24a8,8,0,0,0,0-16H136V112a16,16,0,0,1,16-16h16a8,8,0,0,0,0-16H152a32,32,0,0,0-32,32v24H96a8,8,0,0,0,0,16h24v63.63a88,88,0,1,1,16,0Z"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- Quick links -->
+      <div>
+        <p class="text-xs font-medium uppercase tracking-[.15em] mb-4" style="color:var(--muted)">Navigazione</p>
+        <ul class="flex flex-col gap-2.5">
+          <li><a href="#servizi"   class="text-sm transition-colors" style="color:var(--muted)" onmouseover="this.style.color='var(--fg)'" onmouseout="this.style.color='var(--muted)'">Servizi</a></li>
+          <li><a href="#chi-siamo" class="text-sm transition-colors" style="color:var(--muted)" onmouseover="this.style.color='var(--fg)'" onmouseout="this.style.color='var(--muted)'">Chi Siamo</a></li>
+          <li><a href="#galleria"  class="text-sm transition-colors" style="color:var(--muted)" onmouseover="this.style.color='var(--fg)'" onmouseout="this.style.color='var(--muted)'">Galleria</a></li>
+          <li><a href="#prenota"   class="text-sm transition-colors" style="color:var(--muted)" onmouseover="this.style.color='var(--fg)'" onmouseout="this.style.color='var(--muted)'">Prenota</a></li>
+        </ul>
+      </div>
+
+      <!-- Hours -->
+      <div>
+        <p class="text-xs font-medium uppercase tracking-[.15em] mb-4" style="color:var(--muted)">Orari di apertura</p>
+        <ul class="flex flex-col gap-2">
+          <li class="flex justify-between text-sm gap-4"><span style="color:var(--muted)">Lunedi</span><span style="color:var(--accent)">Chiuso</span></li>
+          <li class="flex justify-between text-sm gap-4" style="color:var(--muted)"><span>Martedi</span><span>08:00 - 17:00</span></li>
+          <li class="flex justify-between text-sm gap-4" style="color:var(--muted)"><span>Mercoledi</span><span>10:00 - 20:00</span></li>
+          <li class="flex justify-between text-sm gap-4" style="color:var(--muted)"><span>Giovedi</span><span>09:00 - 19:00</span></li>
+          <li class="flex justify-between text-sm gap-4" style="color:var(--muted)"><span>Venerdi</span><span>09:00 - 19:00</span></li>
+          <li class="flex justify-between text-sm gap-4" style="color:var(--muted)"><span>Sabato</span><span>08:00 - 17:00</span></li>
+          <li class="flex justify-between text-sm gap-4"><span style="color:var(--muted)">Domenica</span><span style="color:var(--accent)">Chiuso</span></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div style="border-top:1px solid var(--border)" class="max-w-[1400px] mx-auto px-6 lg:px-12 py-6">
+      <p class="text-xs" style="color:var(--muted)">&copy; 2026 ELLE Parrucchieri. Tutti i diritti riservati.</p>
+    </div>
+  </footer>
+
+  <script>
+    // ── Marquee: duplicate inner HTML for seamless loop
+    (function () {
+      const track = document.querySelector('.marquee-track');
+      track.innerHTML = track.innerHTML + track.innerHTML;
+    })();
+
+    // ── Nav: show backdrop when sentinel leaves viewport
+    (function () {
+      const nav = document.getElementById('nav');
+      const sentinel = document.getElementById('sentinel');
+      new IntersectionObserver(function (entries) {
+        nav.classList.toggle('nav-scrolled', !entries[0].isIntersecting);
+      }).observe(sentinel);
+    })();
+
+    // ── Mobile menu toggle
+    (function () {
+      const btn   = document.getElementById('menu-btn');
+      const menu  = document.getElementById('mobile-menu');
+      const open  = document.getElementById('ico-open');
+      const close = document.getElementById('ico-close');
+      btn.addEventListener('click', function () {
+        const isOpen = !menu.classList.contains('hidden');
+        menu.classList.toggle('hidden', isOpen);
+        open.classList.toggle('hidden', !isOpen);
+        close.classList.toggle('hidden', isOpen);
+      });
+      menu.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () {
+          menu.classList.add('hidden');
+          open.classList.remove('hidden');
+          close.classList.add('hidden');
+        });
+      });
+    })();
+
+    // ── Scroll reveal
+    (function () {
+      const els = document.querySelectorAll('.reveal');
+      const io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            e.target.classList.add('visible');
+            io.unobserve(e.target);
+          }
+        });
+      }, { threshold: 0.12 });
+      els.forEach(function (el) { io.observe(el); });
+    })();
+
+    // ── Hero WebGL Shader
+    (function () {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+      var FRAG = [
+        '#version 300 es',
+        'precision highp float;',
+        'out vec4 fragColor;',
+        'in vec2 v_uv;',
+        'uniform vec3  iResolution;',
+        'uniform float iTime;',
+        'uniform int   iFrame;',
+        'uniform vec4  iMouse;',
+        'void mainImage(out vec4 fc, in vec2 coord) {',
+        '  vec2 r = iResolution.xy;',
+        '  float t = iTime;',
+        '  vec4 o = vec4(0.0);',
+        '  vec2 p = coord - r * 0.5;',
+        '  for (float i, a; i++ < 7.0; ) {',
+        '    a = length(p) / r.y - (i * i) / 50.0;',
+        '    float denom = max(a, -a * 4.0) + 2.0 / r.y;',
+        '    a = atan(p.y, p.x) * 3.0 + t * sin(i * i) + i * i;',
+        '    float gate = smoothstep(0.0, 0.6, cos(a));',
+        '    o += 0.02 / denom * gate * (1.0 + sin(a - i + vec4(0.0, 0.2, 0.5, 0.0)));',
+        '  }',
+        '  o = tanh(o);',
+        '  fc = vec4(o.rgb, 1.0);',
+        '}',
+        'void main(){ mainImage(fragColor, gl_FragCoord.xy); }'
+      ].join('\n');
+
+      var VERT = [
+        '#version 300 es',
+        'precision highp float;',
+        'layout(location=0) in vec2 a_pos;',
+        'out vec2 v_uv;',
+        'void main(){ v_uv = a_pos*0.5+0.5; gl_Position = vec4(a_pos,0.0,1.0); }'
+      ].join('\n');
+
+      var canvas = document.getElementById('hero-canvas');
+      if (!canvas) return;
+      var gl = canvas.getContext('webgl2', { premultipliedAlpha: false });
+      if (!gl) return;
+
+      function compile(type, src) {
+        var sh = gl.createShader(type);
+        gl.shaderSource(sh, src);
+        gl.compileShader(sh);
+        if (!gl.getShaderParameter(sh, gl.COMPILE_STATUS)) {
+          console.error('Shader error:', gl.getShaderInfoLog(sh));
+          return null;
+        }
+        return sh;
+      }
+
+      var vs = compile(gl.VERTEX_SHADER, VERT);
+      var fs = compile(gl.FRAGMENT_SHADER, FRAG);
+      if (!vs || !fs) return;
+
+      var prog = gl.createProgram();
+      gl.attachShader(prog, vs);
+      gl.attachShader(prog, fs);
+      gl.linkProgram(prog);
+      gl.deleteShader(vs);
+      gl.deleteShader(fs);
+      if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) {
+        console.error('Link error:', gl.getProgramInfoLog(prog));
+        return;
+      }
+
+      var vao = gl.createVertexArray();
+      var vbo = gl.createBuffer();
+      gl.bindVertexArray(vao);
+      gl.bindBuffer(gl.ARRAY_BUFFER, vbo);
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 3,-1, -1,3]), gl.STATIC_DRAW);
+      gl.enableVertexAttribArray(0);
+      gl.vertexAttribPointer(0, 2, gl.FLOAT, false, 0, 0);
+
+      var uRes   = gl.getUniformLocation(prog, 'iResolution');
+      var uTime  = gl.getUniformLocation(prog, 'iTime');
+      var uFrame = gl.getUniformLocation(prog, 'iFrame');
+      var uMouse = gl.getUniformLocation(prog, 'iMouse');
+
+      var needsResize = true;
+      var frameCount  = 0;
+      var startTime   = performance.now();
+      var mouse       = { x: 0, y: 0 };
+
+      function applySize() {
+        var dpr = Math.min(window.devicePixelRatio || 1, 2);
+        var w   = Math.max(1, Math.floor(canvas.clientWidth  * dpr));
+        var h   = Math.max(1, Math.floor(canvas.clientHeight * dpr));
+        if (canvas.width !== w || canvas.height !== h) {
+          canvas.width  = w;
+          canvas.height = h;
+          gl.viewport(0, 0, w, h);
+        }
+        needsResize = false;
+      }
+
+      new ResizeObserver(function () { needsResize = true; }).observe(canvas);
+
+      canvas.addEventListener('mousemove', function (e) {
+        var r   = canvas.getBoundingClientRect();
+        mouse.x = e.clientX - r.left;
+        mouse.y = r.height - (e.clientY - r.top);
+      });
+
+      function tick(now) {
+        if (!gl.isContextLost()) {
+          if (needsResize) applySize();
+          var t   = (now - startTime) / 1000;
+          var dpr = Math.min(window.devicePixelRatio || 1, 2);
+          frameCount++;
+          gl.useProgram(prog);
+          gl.uniform3f(uRes,   canvas.width, canvas.height, dpr);
+          gl.uniform1f(uTime,  t);
+          gl.uniform1i(uFrame, frameCount);
+          gl.uniform4f(uMouse, mouse.x * dpr, mouse.y * dpr, 0, 0);
+          gl.bindVertexArray(vao);
+          gl.drawArrays(gl.TRIANGLES, 0, 3);
+        }
+        requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    })();
+  </script>
+
+</body>
+</html>
