@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ApollonIA — Assistente AI per Agenti Immobiliari</title>
+  <meta name="description" content="ApollonIA risponde alle chiamate al posto tuo, raccoglie i lead e te li invia via email in tempo reale. L'assistente AI per agenti immobiliari." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: { extend: { fontFamily: { sans: ['Outfit', 'sans-serif'] } } }
+    }
+  </script>
+
+  <style>
+    :root {
+      --bg:           #0c0c0d;
+      --fg:           #f4f4f5;
+      --muted:        #a1a1aa;
+      --border:       #27272a;
+      --accent:       #8b6914;
+      --accent-hover: #7a5810;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html  { scroll-behavior: smooth; }
+    body  {
+      background-color: var(--bg);
+      color: var(--fg);
+      font-family: 'Outfit', sans-serif;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    /* Nav */
+    .nav-scrolled {
+      background: rgba(12,12,13,0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* Marquee */
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    .marquee-track { animation: marquee 38s linear infinite; }
+
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity .7s cubic-bezier(.16,1,.3,1),
+                  transform .7s cubic-bezier(.16,1,.3,1);
+    }
+    .reveal.d1 { transition-delay: .07s; }
+    .reveal.d2 { transition-delay: .14s; }
+    .reveal.d3 { transition-delay: .21s; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* Hero */
+    .hero-section {
+      position: relative;
+      min-height: 100dvh;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #060610;
+    }
+    #pattern-bg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      color: var(--fg);
+    }
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.44);
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      padding: 5rem 1.5rem 3rem;
+      width: 100%;
+    }
+
+    /* Hero entrance */
+    .ha { animation: ha 1s cubic-bezier(.16,1,.3,1) both; }
+    .ha.d1 { animation-delay: .14s; }
+    .ha.d2 { animation-delay: .26s; }
+    .ha.d3 { animation-delay: .38s; }
+    @keyframes ha {
+      from { opacity:0; transform:translateY(22px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+
+    /* Letter-by-letter entrance */
+    @keyframes letterIn {
+      from { opacity:0; transform:translateY(36px) rotateX(-70deg); }
+      to   { opacity:1; transform:translateY(0)     rotateX(0deg);   }
+    }
+    .hero-letter {
+      display: inline-block;
+      cursor: default;
+      transition: color .4s ease, transform .2s ease;
+    }
+    .hero-letter:hover {
+      color: var(--accent);
+      transform: translateY(-4px) scale(1.05);
+    }
+
+    /* Star button */
+    .btn-star {
+      position: relative;
+      padding: 12px 28px;
+      font-size: 15px;
+      font-weight: 500;
+      color: #0c0c0d;
+      background: #d4a843;
+      border: 2px solid #d4a843;
+      border-radius: 8px;
+      box-shadow: 0 0 0 rgba(212,168,67,0);
+      transition: background 300ms ease-in-out, color 300ms ease-in-out, box-shadow 300ms ease-in-out;
+      cursor: pointer;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      overflow: visible;
+    }
+    .btn-star:hover { background: transparent; color: #d4a843; box-shadow: 0 0 25px rgba(212,168,67,0.55); }
+    .btn-star:active { transform: scale(0.95); }
+    .star-el { position: absolute; z-index: -5; pointer-events: none; }
+    .star-el svg { fill: #d4a843; width: 100%; height: auto; filter: drop-shadow(0 0 0px rgba(212,168,67,0)); transition: filter 300ms ease; }
+    .btn-star:hover .star-el { z-index: 2; }
+    .btn-star:hover .star-el svg { filter: drop-shadow(0 0 10px rgba(212,168,67,0.8)); }
+    .star-1 { width:25px; top:20%; left:20%; transition: top 1000ms cubic-bezier(.05,.83,.43,.96), left 1000ms cubic-bezier(.05,.83,.43,.96); }
+    .btn-star:hover .star-1 { top:-80%; left:-30%; }
+    .star-2 { width:15px; top:45%; left:45%; transition: top 1000ms cubic-bezier(0,.4,0,1.01), left 1000ms cubic-bezier(0,.4,0,1.01); }
+    .btn-star:hover .star-2 { top:-25%; left:10%; }
+    .star-3 { width:5px;  top:40%; left:40%; transition: top 1000ms cubic-bezier(0,.4,0,1.01), left 1000ms cubic-bezier(0,.4,0,1.01); }
+    .btn-star:hover .star-3 { top:55%; left:25%; }
+    .star-4 { width:8px;  top:20%; left:40%; transition: top  800ms cubic-bezier(0,.4,0,1.01), left  800ms cubic-bezier(0,.4,0,1.01); }
+    .btn-star:hover .star-4 { top:30%; left:80%; }
+    .star-5 { width:15px; top:25%; left:45%; transition: top  600ms cubic-bezier(0,.4,0,1.01), left  600ms cubic-bezier(0,.4,0,1.01); }
+    .btn-star:hover .star-5 { top:25%; left:115%; }
+    .star-6 { width:5px;  top:5%;  left:50%; transition: top  800ms ease-in-out, left 800ms ease-in-out; }
+    .btn-star:hover .star-6 { top:5%; left:60%; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity:1; transform:none; transition:none; }
+      .ha     { animation:none; opacity:1; transform:none; }
+      .marquee-track { animation:none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="sentinel" style="position:absolute;top:0;height:1px;width:100%;pointer-events:none;"></div>
+
+  <!-- ── NAV ──────────────────────────────────────────────────────────── -->
+  <header id="nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300" style="height:64px">
+    <div class="max-w-[1400px] mx-auto px-6 lg:px-12 h-full flex items-center justify-between">
+
+      <a href="#" class="text-sm font-semibold uppercase tracking-[.12em]" style="color:var(--fg)">
+        Apollon<span style="color:var(--accent)">IA</span>
+      </a>
+
+      <nav class="hidden md:flex items-center gap-8" aria-label="Navigazione principale">
+        <a href="#funzionalita"  class="text-sm transition-colors duration-200" style="color:var(--muted)" onmouseover="this.style.color='var(--fg)'" onmouseout="this.style.color='var(--muted)'">Funzionalità</a>
+        <a href="#come-funziona" class="text-sm transition-colors duration-200" style="color:var(--muted)" onmouseover="this.style.color='var(--fg)'" onmouseout="this.style.color='var(--muted)'">Come funziona</a>
+        <a href="#recensioni"    class="text-sm transition-colors duration-200" style="color:var(--muted)" onmouseover="this.style.color='var(--fg)'" onmouseout="this.style.color='var(--muted)'">Recensioni</a>
+        <a href="#contatti"      class="text-sm transition-colors duration-200" style="color:var(--muted)" onmouseover="this.style.color='var(--fg)'" onmouseout="this.style.color='var(--muted)'">Contatti</a>
+      </nav>
+
+      <a href="#contatti" class="btn-star hidden md:inline-flex" style="padding:10px 22px;font-size:13px;border-radius:6px;">
+        <span class="star-el star-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 784.11 815.53"><path d="M392.05 0c-20.9,210.08-184.06,378.41-392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93-210.06 184.09-378.37 392.05-407.74-207.98-29.38-371.16-197.69-392.06-407.78z"/></svg></span>
+        <span class="star-el star-2"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 784.11 815.53"><path d="M392.05 0c-20.9,210.08-184.06,378.41-392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93-210.06 184.09-378.37 392.05-407.74-207.98-29.38-371.16-197.69-392.06-407.78z"/></svg></span>
+        <span class="star-el star-3"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 784.11 815.53"><path d="M392.05 0c-20.9,210.08-184.06,378.41-392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93-210.06 184.09-378.37 392.05-407.74-207.98-29.38-371.16-197.69-392.06-407.78z"/></svg></span>
+        <span class="star-el star-4"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 784.11 815.53"><path d="M392.05 0c-20.9,210.08-184.06,378.41-392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93-210.06 184.09-378.37 392.05-407.74-207.98-29.38-371.16-197.69-392.06-407.78z"/></svg></span>
+        <span class="star-el star-5"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 784.11 815.53"><path d="M392.05 0c-20.9,210.08-184.06,378.41-392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93-210.06 184.09-378.37 392.05-407.74-207.98-29.38-371.16-197.69-392.06-407.78z"/></svg></span>
+        <span class="star-el star-6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 784.11 815.53"><path d="M392.05 0c-20.9,210.08-184.06,378.41-392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93-210.06 184.09-378.37 392.05-407.74-207.98-29.38-371.16-197.69-392.06-407.78z"/></svg></span>
+        Inizia gratis
+      </a>
+
+      <button id="menu-btn" class="md:hidden p-2" aria-label="Apri menu" style="color:var(--fg)">
+        <svg id="ico-open" xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" viewBox="0 0 256 256">
+          <path d="M224,128a8,8,0,0,1-8,8H40a8,8,0,0,1,0-16H216A8,8,0,0,1,224,128ZM40,72H216a8,8,0,0,0,0-16H40a8,8,0,0,0,0,16ZM216,184H40a8,8,0,0,0,0,16H216a8,8,0,0,0,0-16Z"/>
+        </svg>
+        <svg id="ico-close" class="hidden" xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" viewBox="0 0 256 256">
+          <path d="M205.66,194.34a8,8,0,0,1-11.32,11.32L128,139.31,61.66,205.66a8,8,0,0,1-11.32-11.32L116.69,128,50.34,61.66A8,8,0,0,1,61.66,50.34L128,116.69l66.34-66.35a8,8,0,0,1,11.32,11.32L139.31,128Z"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="hidden md:hidden px-6 py-4 flex flex-col gap-4"
+         style="background:var(--bg);border-bottom:1px solid var(--border)">
+      <a href="#funzionalita"  class="text-sm" style="color:var(--muted)">Funzionalità</a>
+      <a href="#come-funziona" class="text-sm" style="color:var(--muted)">Come funziona</a>
+      <a href="#recensioni"    class="text-sm" style="color:var(--muted)">Recensioni</a>
+      <a href="#contatti"      class="text-sm" style="color:var(--muted)">Contatti</a>
+      <a href="#contatti" class="btn-star" style="justify-content:center;font-size:13px;padding:10px 22px;border-radius:6px;">
+        <span class="star-el star-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 784.11 815.53"><path d="M392.05 0c-20.9,210.08-184.06,378.41-392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93-210.06 184.09-378.37 392.05-407.74-207.98-29.38-371.16-197.69-392.06-407.78z"/></svg></span>
+        <span class="star-el star-2"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 784.11 815.53"><path d="M392.05 0c-20.9,210.08-184.06,378.41-392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93-210.06 184.09-378.37 392.05-407.74-207.98-29.38-371.16-197.69-392.06-407.78z"/></svg></span>
+        <span class="star-el star-3"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 784.11 815.53"><path d="M392.05 0c-20.9,210.08-184.06,378.41-392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93-210.06 184.09-378.37 392.05-407.74-207.98-29.38-371.16-197.69-392.06-407.78z"/></svg></span>
+        <span class="star-el star-4"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 784.11 815.53"><path d="M392.05 0c-20.9,210.08-184.06,378.41-392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93-210.06 184.09-378.37 392.05-407.74-207.98-29.38-371.16-197.69-392.06-407.78z"/></svg></span>
+        <span class="star-el star-5"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 784.11 815.53"><path d="M392.05 0c-20.9,210.08-184.06,378.41-392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93-210.06 184.09-378.37 392.05-407.74-207.98-29.38-371.16-197.69-392.06-407.78z"/></svg></span>
+        <span class="star-el star-6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 784.11 815.53"><path d="M392.05 0c-20.9,210.08-184.06,378.41-392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93-210.06 184.09-378.37 392.05-407.74-207.98-29.38-371.16-197.69-392.06-407.78z"/></svg></span>
+        Inizia gratis
+      </a>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ── HERO ─────────────────────────────────────────────────────────── -->
+    <section class="hero-section">
+      <div id="pattern-bg"></div>
+      <div class="hero-overlay"></div>
+
+      <div class="hero-content">
+        <h1 class="font-light text-white" style="line-height:1.02;perspective:800px;">
+          <span id="hero-title" class="block text-7xl md:text-8xl lg:text-9xl tracking-tight"></span>
+        </h1>
+        <p class="ha d1 mt-8 text-lg md:text-xl leading-relaxed mx-auto max-w-[42ch]"
+           style="color:var(--accent)">
+          L&apos;assistente AI per agenti immobiliari. Risponde al telefono, qualifica il cliente e ti manda il risultato.
+        </p>
+        <div class="ha d2 mt-10 flex flex-col sm:flex-row items-center justify-center gap-3">
+          <a href="#contatti" class="btn-star">
+            <span class="star-el star-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 784.11 815.53"><path d="M392.05 0c-20.9,210.08-184.06,378.41-392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93-210.06 184.09-378.37 392.05-407.74-207.98-29.38-371.16-197.69-392.06-407.78z"/></svg></span>
+            <span class="star-el star-2"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 784.11 815.53"><path d="M392.05 0c-20.9,210.08-184.06,378.41-392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93-210.06 184.09-378.37 392.05-407.74-207.98-29.38-371.16-197.69-392.06-407.78z"/></svg></span>
+            <span class="star-el star-3"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 784.11 815.53"><path d="M392.05 0c-20.9,210.08-184.06,378.41-392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93-210.06 184.09-378.37 392.05-407.74-207.98-29.38-371.16-197.69-392.06-407.78z"/></svg></span>
+            <span class="star-el star-4"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 784.11 815.53"><path d="M392.05 0c-20.9,210.08-184.06,378.41-392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93-210.06 184.09-378.37 392.05-407.74-207.98-29.38-371.16-197.69-392.06-407.78z"/></svg></span>
+            <span class="star-el star-5"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 784.11 815.53"><path d="M392.05 0c-20.9,210.08-184.06,378.41-392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93-210.06 184.09-378.37 392.05-407.74-207.98-29.38-371.16-197.69-392.06-407.78z"/></svg></span>
+            <span class="star-el star-6"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 784.11 815.53"><path d="M392.05 0c-20.9,210.08-184.06,378.41-392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93-210.06 184.09-378.37 392.05-407.74-207.98-29.38-371.16-197.69-392.06-407.78z"/></svg></span>
+            Inizia gratis
+          </a>
+          <a href="#come-funziona"
+             class="inline-flex items-center gap-2 px-7 py-3 text-sm font-medium rounded-full transition-all duration-200"
+             style="border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.7)"
+             onmouseover="this.style.color='#fff';this.style.borderColor='rgba(255,255,255,.5)'"
+             onmouseout="this.style.color='rgba(255,255,255,.7)';this.style.borderColor='rgba(255,255,255,.2)'">
+            Come funziona
+          </a>
+        </div>
+        <p class="ha d3 mt-8 text-xs tracking-[.15em] uppercase" style="color:rgba(255,255,255,.3)">
+          Non perdere tempo con perditempi &mdash; parli solo con i lead qualificati.
+        </p>
+      </div>
+    </section>
+
+    <!-- ── MARQUEE ───────────────────────────────────────────────────────── -->
+    <div style="border-top:1px solid var(--border);border-bottom:1px solid var(--border)" class="overflow-hidden py-5">
+      <div class="marquee-track flex gap-0 w-max select-none">
+        <span class="text-[11px] font-medium tracking-[.2em] uppercase whitespace-nowrap mx-8" style="color:var(--muted)">RISPONDE AL TELEFONO</span>
+        <span class="opacity-30 mx-1 text-[11px]" style="color:var(--muted)">|</span>
+        <span class="text-[11px] font-medium tracking-[.2em] uppercase whitespace-nowrap mx-8" style="color:var(--muted)">RACCOGLIE I LEAD</span>
+        <span class="opacity-30 mx-1 text-[11px]" style="color:var(--muted)">|</span>
+        <span class="text-[11px] font-medium tracking-[.2em] uppercase whitespace-nowrap mx-8" style="color:var(--muted)">INVIA VIA EMAIL</span>
+        <span class="opacity-30 mx-1 text-[11px]" style="color:var(--muted)">|</span>
+        <span class="text-[11px] font-medium tracking-[.2em] uppercase whitespace-nowrap mx-8" style="color:var(--muted)">MULTILINGUA</span>
+        <span class="opacity-30 mx-1 text-[11px]" style="color:var(--muted)">|</span>
+        <span class="text-[11px] font-medium tracking-[.2em] uppercase whitespace-nowrap mx-8" style="color:var(--muted)">IMMOBILIARE.IT</span>
+        <span class="opacity-30 mx-1 text-[11px]" style="color:var(--muted)">|</span>
+        <span class="text-[11px] font-medium tracking-[.2em] uppercase whitespace-nowrap mx-8" style="color:var(--muted)">24 / 7</span>
+        <span class="opacity-30 mx-1 text-[11px]" style="color:var(--muted)">|</span>
+        <span class="text-[11px] font-medium tracking-[.2em] uppercase whitespace-nowrap mx-8" style="color:var(--muted)">ZERO CHIAMATE PERSE</span>
+        <span class="opacity-30 mx-1 text-[11px]" style="color:var(--muted)">|</span>
+      </div>
+    </div>
+
+    <!-- ── HOW IT WORKS ──────────────────────────────────────────────────── -->
+    <section id="come-funziona" class="py-24 lg:py-32">
+      <div class="max-w-[1400px] mx-auto px-6 lg:px-12">
+
+        <p class="reveal text-[11px] font-medium uppercase tracking-[.2em] mb-10" style="color:var(--muted)">Come funziona</p>
+        <div class="reveal max-w-3xl mb-16">
+          <h2 class="text-4xl md:text-5xl font-light tracking-tight leading-[1.08]" style="color:var(--fg)">
+            ApollonIA lavora per te <br /> Tu ti concentri su ciò che conta.
+          </h2>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+
+          <!-- Card 1 -->
+          <article class="reveal rounded-2xl p-7 border transition-all duration-300 cursor-default"
+                   style="border-color:var(--border);background:var(--bg)"
+                   onmouseover="this.style.borderColor='var(--accent)';this.style.boxShadow='0 8px 32px rgba(139,105,20,0.18)'"
+                   onmouseout="this.style.borderColor='var(--border)';this.style.boxShadow='none'">
+            <span class="text-[11px] font-semibold tracking-[.2em] uppercase" style="color:var(--accent)">01</span>
+            <p class="text-[11px] font-medium uppercase tracking-[.15em] mt-1 mb-5" style="color:var(--muted)">Sincronizzazione annunci</p>
+            <h3 class="text-2xl font-light mb-3" style="color:var(--fg)">Legge i tuoi annunci da immobiliare.it</h3>
+            <p class="text-sm leading-relaxed" style="color:var(--muted)">
+              Collega il tuo profilo immobiliare.it e ApollonIA importa automaticamente tutte le tue schede — metratura, prezzo, zona, caratteristiche. Ogni nuovo annuncio viene recepito in tempo reale, senza alcun inserimento manuale.
+            </p>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="reveal d1 rounded-2xl p-7 border transition-all duration-300 cursor-default"
+                   style="border-color:var(--border);background:var(--bg)"
+                   onmouseover="this.style.borderColor='var(--accent)';this.style.boxShadow='0 8px 32px rgba(139,105,20,0.18)'"
+                   onmouseout="this.style.borderColor='var(--border)';this.style.boxShadow='none'">
+            <span class="text-[11px] font-semibold tracking-[.2em] uppercase" style="color:var(--accent)">02</span>
+            <p class="text-[11px] font-medium uppercase tracking-[.15em] mt-1 mb-5" style="color:var(--muted)">Trasferimento chiamate</p>
+            <h3 class="text-2xl font-light mb-3" style="color:var(--fg)">Il tuo numero, gestito da ApollonIA</h3>
+            <p class="text-sm leading-relaxed mb-5" style="color:var(--muted)">
+              Collegamento in pochi minuti. Scegli la modalità:
+            </p>
+            <div class="flex flex-col gap-3">
+              <div class="rounded-xl p-4" style="border:1px solid var(--border)">
+                <div class="flex items-center gap-2 mb-1.5">
+                  <span class="text-[10px] font-semibold tracking-widest uppercase px-2 py-0.5 rounded"
+                        style="background:rgba(139,105,20,0.15);color:var(--accent)">Modalità A</span>
+                  <span class="text-xs" style="color:var(--muted)">Sempre attiva</span>
+                </div>
+                <p class="text-xs leading-relaxed" style="color:var(--muted)">Tutte le chiamate gestite da ApollonIA. Ideale quando sei in appuntamento.</p>
+              </div>
+              <div class="rounded-xl p-4" style="border:1px solid var(--border)">
+                <div class="flex items-center gap-2 mb-1.5">
+                  <span class="text-[10px] font-semibold tracking-widest uppercase px-2 py-0.5 rounded"
+                        style="background:rgba(139,105,20,0.15);color:var(--accent)">Modalità B</span>
+                  <span class="text-xs" style="color:var(--muted)">Su scelta</span>
+                </div>
+                <p class="text-xs leading-relaxed" style="color:var(--muted)">Ricevi la chiamata normalmente. Con un tasto la passi ad ApollonIA quando preferisci.</p>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card 3 -->
+          <article class="reveal d2 rounded-2xl p-7 border transition-all duration-300 cursor-default"
+                   style="border-color:var(--border);background:var(--bg)"
+                   onmouseover="this.style.borderColor='var(--accent)';this.style.boxShadow='0 8px 32px rgba(139,105,20,0.18)'"
+                   onmouseout="this.style.borderColor='var(--border)';this.style.boxShadow='none'">
+            <span class="text-[11px] font-semibold tracking-[.2em] uppercase" style="color:var(--accent)">03</span>
+            <p class="text-[11px] font-medium uppercase tracking-[.15em] mt-1 mb-5" style="color:var(--muted)">Multilingua automatico</p>
+            <h3 class="text-2xl font-light mb-3" style="color:var(--fg)">Parla con chiunque, in qualsiasi lingua</h3>
+            <p class="text-sm leading-relaxed mb-5" style="color:var(--muted)">
+              ApollonIA rileva la lingua del chiamante in tempo reale e risponde di conseguenza. Nessuna barriera, nessun cliente straniero perso.
+            </p>
+            <div class="flex flex-wrap gap-2">
+              <span class="text-xs px-2.5 py-1 rounded-full" style="border:1px solid var(--accent);color:var(--accent)">Italiano</span>
+              <span class="text-xs px-2.5 py-1 rounded-full" style="border:1px solid var(--border);color:var(--muted)">English</span>
+              <span class="text-xs px-2.5 py-1 rounded-full" style="border:1px solid var(--border);color:var(--muted)">Deutsch</span>
+              <span class="text-xs px-2.5 py-1 rounded-full" style="border:1px solid var(--border);color:var(--muted)">Français</span>
+              <span class="text-xs px-2.5 py-1 rounded-full" style="border:1px solid var(--border);color:var(--muted)">Español</span>
+              <span class="text-xs px-2.5 py-1 rounded-full" style="border:1px solid var(--border);color:var(--muted)">العربية</span>
+              <span class="text-xs px-2.5 py-1 rounded-full" style="border:1px solid var(--border);color:var(--muted)">中文</span>
+              <span class="text-xs px-2.5 py-1 rounded-full" style="border:1px solid var(--border);color:var(--muted)">+ altro</span>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ── FEATURES BENTO ────────────────────────────────────────────────── -->
+    <section id="funzionalita" class="max-w-[1400px] mx-auto px-6 lg:px-12 py-24 lg:py-32" style="border-top:1px solid var(--border)">
+      <p class="text-[11px] font-medium uppercase tracking-[.2em] mb-10" style="color:var(--muted)">Funzionalità</p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+
+        <article class="reveal rounded-2xl p-7 border transition-all duration-300 cursor-default"
+                 style="border-color:var(--border);background:var(--bg)"
+                 onmouseover="this.style.borderColor='var(--accent)';this.style.boxShadow='0 8px 32px rgba(139,105,20,0.18)'"
+                 onmouseout="this.style.borderColor='var(--border)';this.style.boxShadow='none'">
+          <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-5"
+               style="background:rgba(139,105,20,0.1)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none"
+                 stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                 style="color:var(--accent)" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 13a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 2.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.29 6.29l.91-.91a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+            </svg>
+          </div>
+          <h3 class="text-lg font-medium mb-2" style="color:var(--fg)">Risponde per te</h3>
+          <p class="text-sm leading-relaxed" style="color:var(--muted)">
+            Riceve le chiamate dei tuoi clienti, anche quando sei in appuntamento o fuori ufficio. Nessuna opportunità va persa.
+          </p>
+        </article>
+
+        <article class="reveal d1 rounded-2xl p-7 border transition-all duration-300 cursor-default"
+                 style="border-color:var(--border);background:var(--bg)"
+                 onmouseover="this.style.borderColor='var(--accent)';this.style.boxShadow='0 8px 32px rgba(139,105,20,0.18)'"
+                 onmouseout="this.style.borderColor='var(--border)';this.style.boxShadow='none'">
+          <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-5"
+               style="background:rgba(139,105,20,0.1)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none"
+                 stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                 style="color:var(--accent)" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/>
+            </svg>
+          </div>
+          <h3 class="text-lg font-medium mb-2" style="color:var(--fg)">Raccoglie i contatti</h3>
+          <p class="text-sm leading-relaxed" style="color:var(--muted)">
+            Identifica il lead, ne raccoglie nome, numero e interesse immobiliare. Tutto qualificato prima che tu richiami.
+          </p>
+        </article>
+
+        <article class="reveal d2 rounded-2xl p-7 border transition-all duration-300 cursor-default"
+                 style="border-color:var(--border);background:var(--bg)"
+                 onmouseover="this.style.borderColor='var(--accent)';this.style.boxShadow='0 8px 32px rgba(139,105,20,0.18)'"
+                 onmouseout="this.style.borderColor='var(--border)';this.style.boxShadow='none'">
+          <div class="w-10 h-10 rounded-xl flex items-center justify-center mb-5"
+               style="background:rgba(139,105,20,0.1)">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none"
+                 stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                 style="color:var(--accent)" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
+          </div>
+          <h3 class="text-lg font-medium mb-2" style="color:var(--fg)">Invia via email</h3>
+          <p class="text-sm leading-relaxed" style="color:var(--muted)">
+            Ogni lead arriva direttamente in casella in tempo reale. Agisci subito, quando il cliente è ancora caldo.
+          </p>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- ── TESTIMONIALS ──────────────────────────────────────────────────── -->
+    <section id="recensioni" class="py-24 lg:py-32 overflow-hidden" style="border-top:1px solid var(--border)">
+      <div class="max-w-[1400px] mx-auto px-6 lg:px-12 mb-12">
+        <p class="text-[11px] font-medium uppercase tracking-[.2em]" style="color:var(--muted)">Recensioni</p>
+      </div>
+      <div class="flex gap-6 px-6 lg:px-12 overflow-x-auto snap-x snap-mandatory pb-4"
+           style="scrollbar-width:none;" onscroll="">
+        <style>.no-bar::-webkit-scrollbar{display:none}</style>
+
+        <div class="reveal no-bar flex-none snap-start rounded-2xl p-8 flex flex-col justify-between"
+             style="width:min(85vw,420px);border:1px solid var(--border);background:var(--bg)">
+          <p class="text-base leading-relaxed font-light" style="color:var(--fg)">
+            &ldquo;Da quando uso ApollonIA non perdo più neanche una chiamata. I lead mi arrivano in email già con nome e interesse. Ha cambiato il mio modo di lavorare.&rdquo;
+          </p>
+          <div class="mt-8 pt-6" style="border-top:1px solid var(--border)">
+            <p class="text-sm font-medium" style="color:var(--fg)">Marco Riva</p>
+            <p class="text-xs mt-0.5" style="color:var(--muted)">Agente immobiliare — Milano</p>
+          </div>
+        </div>
+
+        <div class="reveal d1 flex-none snap-start rounded-2xl p-8 flex flex-col justify-between"
+             style="width:min(85vw,420px);border:1px solid var(--border);background:var(--bg)">
+          <p class="text-base leading-relaxed font-light" style="color:var(--fg)">
+            &ldquo;Incredibile. In un mese ho recuperato almeno una decina di contatti che prima perdevo. Il sistema è preciso, veloce e non richiede nessuna configurazione complicata.&rdquo;
+          </p>
+          <div class="mt-8 pt-6" style="border-top:1px solid var(--border)">
+            <p class="text-sm font-medium" style="color:var(--fg)">Sara Bianchi</p>
+            <p class="text-xs mt-0.5" style="color:var(--muted)">Agente immobiliare — Roma</p>
+          </div>
+        </div>
+
+        <div class="reveal d2 flex-none snap-start rounded-2xl p-8 flex flex-col justify-between"
+             style="width:min(85vw,420px);border:1px solid var(--border);background:var(--bg)">
+          <p class="text-base leading-relaxed font-light" style="color:var(--fg)">
+            &ldquo;Finalmente un prodotto AI che funziona davvero nel settore immobiliare. Setup in 10 minuti e già il primo giorno ho ricevuto tre lead via email che altrimenti avrei perso.&rdquo;
+          </p>
+          <div class="mt-8 pt-6" style="border-top:1px solid var(--border)">
+            <p class="text-sm font-medium" style="color:var(--fg)">Luca Ferrari</p>
+            <p class="text-xs mt-0.5" style="color:var(--muted)">Agente immobiliare — Torino</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── CTA FULL-WIDTH ─────────────────────────────────────────────────── -->
+    <section id="contatti" class="py-28 lg:py-40 px-6 text-center" style="background:var(--accent)">
+      <div class="reveal max-w-2xl mx-auto">
+        <h2 class="text-4xl md:text-5xl font-light tracking-tight leading-[1.08] text-white">
+          Nessuna chiamata persa,<br />mai più
+        </h2>
+        <p class="mt-6 text-base leading-relaxed" style="color:rgba(255,255,255,.7)">
+          Attiva ApollonIA oggi. Setup in pochi minuti, prima lead nella tua casella entro la prima ora.
+        </p>
+        <div class="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
+          <a href="mailto:info@apollon-ia.com"
+             class="inline-flex items-center gap-2.5 px-7 py-3.5 text-sm font-medium rounded-full transition-all duration-200 active:scale-[.98]"
+             style="background:#fff;color:var(--accent)"
+             onmouseover="this.style.background='rgba(255,255,255,.9)'"
+             onmouseout="this.style.background='#fff'">
+            <svg xmlns="http://www.w3.org/2000/svg" width="17" height="17" fill="none" viewBox="0 0 24 24"
+                 stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+              <polyline points="22,6 12,13 2,6"/>
+            </svg>
+            Scrivici ora
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ── FOOTER ────────────────────────────────────────────────────────── -->
+  <footer style="border-top:1px solid var(--border);background:var(--bg)">
+    <div class="max-w-[1400px] mx-auto px-6 lg:px-12 py-16 grid grid-cols-1 md:grid-cols-3 gap-12">
+
+      <div>
+        <p class="text-sm font-semibold uppercase tracking-[.12em]" style="color:var(--fg)">ApollonIA</p>
+        <p class="mt-4 text-sm leading-relaxed" style="color:var(--muted)">
+          L'assistente AI per agenti immobiliari.<br />
+          Disponibile 24 ore su 24, 7 giorni su 7.
+        </p>
+        <a href="mailto:info@apollon-ia.com"
+           class="mt-3 block text-sm transition-colors" style="color:var(--muted)"
+           onmouseover="this.style.color='var(--fg)'" onmouseout="this.style.color='var(--muted)'">
+          info@apollon-ia.com
+        </a>
+      </div>
+
+      <div>
+        <p class="text-xs font-medium uppercase tracking-[.15em] mb-4" style="color:var(--muted)">Navigazione</p>
+        <ul class="flex flex-col gap-2.5">
+          <li><a href="#funzionalita"  class="text-sm transition-colors" style="color:var(--muted)" onmouseover="this.style.color='var(--fg)'" onmouseout="this.style.color='var(--muted)'">Funzionalità</a></li>
+          <li><a href="#come-funziona" class="text-sm transition-colors" style="color:var(--muted)" onmouseover="this.style.color='var(--fg)'" onmouseout="this.style.color='var(--muted)'">Come funziona</a></li>
+          <li><a href="#recensioni"    class="text-sm transition-colors" style="color:var(--muted)" onmouseover="this.style.color='var(--fg)'" onmouseout="this.style.color='var(--muted)'">Recensioni</a></li>
+          <li><a href="#contatti"      class="text-sm transition-colors" style="color:var(--muted)" onmouseover="this.style.color='var(--fg)'" onmouseout="this.style.color='var(--muted)'">Contatti</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <p class="text-xs font-medium uppercase tracking-[.15em] mb-4" style="color:var(--muted)">Cosa ottieni</p>
+        <ul class="flex flex-col gap-2">
+          <li class="flex items-start gap-2 text-sm" style="color:var(--muted)">
+            <span style="color:var(--accent);margin-top:1px">✓</span> Risposta automatica alle chiamate
+          </li>
+          <li class="flex items-start gap-2 text-sm" style="color:var(--muted)">
+            <span style="color:var(--accent);margin-top:1px">✓</span> Raccolta dati del potenziale cliente
+          </li>
+          <li class="flex items-start gap-2 text-sm" style="color:var(--muted)">
+            <span style="color:var(--accent);margin-top:1px">✓</span> Lead inviato via email in tempo reale
+          </li>
+          <li class="flex items-start gap-2 text-sm" style="color:var(--muted)">
+            <span style="color:var(--accent);margin-top:1px">✓</span> Sincronizzazione con immobiliare.it
+          </li>
+          <li class="flex items-start gap-2 text-sm" style="color:var(--muted)">
+            <span style="color:var(--accent);margin-top:1px">✓</span> Supporto multilingua automatico
+          </li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div style="border-top:1px solid var(--border)" class="max-w-[1400px] mx-auto px-6 lg:px-12 py-6">
+      <p class="text-xs" style="color:var(--muted)">&copy; 2026 ApollonIA. Tutti i diritti riservati.</p>
+    </div>
+  </footer>
+
+  <script>
+    // ── Marquee: duplicate for seamless loop
+    (function () {
+      var t = document.querySelector('.marquee-track');
+      t.innerHTML = t.innerHTML + t.innerHTML;
+    })();
+
+    // ── Nav: opaque on scroll
+    (function () {
+      var nav = document.getElementById('nav');
+      var sentinel = document.getElementById('sentinel');
+      new IntersectionObserver(function (entries) {
+        nav.classList.toggle('nav-scrolled', !entries[0].isIntersecting);
+      }).observe(sentinel);
+    })();
+
+    // ── Mobile menu
+    (function () {
+      var btn   = document.getElementById('menu-btn');
+      var menu  = document.getElementById('mobile-menu');
+      var open  = document.getElementById('ico-open');
+      var close = document.getElementById('ico-close');
+      btn.addEventListener('click', function () {
+        var isOpen = !menu.classList.contains('hidden');
+        menu.classList.toggle('hidden', isOpen);
+        open.classList.toggle('hidden', !isOpen);
+        close.classList.toggle('hidden', isOpen);
+      });
+      menu.querySelectorAll('a').forEach(function (a) {
+        a.addEventListener('click', function () {
+          menu.classList.add('hidden');
+          open.classList.remove('hidden');
+          close.classList.add('hidden');
+        });
+      });
+    })();
+
+    // ── Scroll reveal
+    (function () {
+      var els = document.querySelectorAll('.reveal');
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.10 });
+      els.forEach(function (el) { io.observe(el); });
+    })();
+
+    // ── Hero: Letter animation + SVG Background Patterns
+    (function () {
+      var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      /* ── 1. Letter-by-letter title ── */
+      var titleEl = document.getElementById('hero-title');
+      var word    = 'ApollonIA';
+      word.split('').forEach(function (ch, i) {
+        var s = document.createElement('span');
+        s.textContent = ch === ' ' ? ' ' : ch;
+        s.className   = 'hero-letter';
+        s.style.cssText = reduced
+          ? 'display:inline-block'
+          : 'display:inline-block;opacity:0;animation:letterIn .8s cubic-bezier(.16,1,.3,1) ' + (0.05 + i * 0.065) + 's both';
+        titleEl.appendChild(s);
+      });
+
+      if (reduced) return;
+
+      /* ── 2. Pattern system ── */
+      var PATTERNS  = ['Neural', 'Flow', 'Geometric', 'Spiral'];
+      var current   = 0;
+      var bg        = document.getElementById('pattern-bg');
+      var activeSVG = null;
+
+      // SVG helpers
+      var NS = 'http://www.w3.org/2000/svg';
+      function el(tag, attrs) {
+        var e = document.createElementNS(NS, tag);
+        if (attrs) Object.keys(attrs).forEach(function (k) { e.setAttribute(k, attrs[k]); });
+        return e;
+      }
+      function makeSVG(vb, op) {
+        return el('svg', { viewBox: vb, style: 'position:absolute;inset:0;width:100%;height:100%;opacity:' + op });
+      }
+
+      // Animate a path with Web Animations API (draw → hold → erase)
+      function animPath(path, svg, dur, delay) {
+        svg.appendChild(path);
+        requestAnimationFrame(function () {
+          var len = (path.getTotalLength ? path.getTotalLength() : 300) || 300;
+          path.style.strokeDasharray  = len;
+          path.style.strokeDashoffset = len;
+          path.animate(
+            [
+              { strokeDashoffset: len,          opacity: 0   },
+              { strokeDashoffset: len * 0.4,    opacity: 0.9, offset: 0.15 },
+              { strokeDashoffset: 0,            opacity: 0.9, offset: 0.55 },
+              { strokeDashoffset: -(len * 0.6), opacity: 0,   offset: 0.88 },
+              { strokeDashoffset: -len,         opacity: 0   }
+            ],
+            { duration: dur * 1000, delay: delay * 1000, iterations: Infinity, easing: 'ease-in-out', fill: 'both' }
+          );
+        });
+      }
+
+      /* ── Neural ── */
+      function createNeural() {
+        var svg   = makeSVG('0 0 800 600', 0.18);
+        var nodes = Array.from({ length: 50 }, function () {
+          return { x: 20 + Math.random() * 760, y: 20 + Math.random() * 560 };
+        });
+        nodes.forEach(function (a, i) {
+          nodes.forEach(function (b, j) {
+            if (j <= i) return;
+            if (Math.hypot(a.x - b.x, a.y - b.y) < 130 && Math.random() > 0.55) {
+              var p = el('path', { d: 'M' + a.x + ',' + a.y + ' L' + b.x + ',' + b.y,
+                                   stroke: 'currentColor', 'stroke-width': '0.6', fill: 'none' });
+              animPath(p, svg, 5 + Math.random() * 5, Math.random() * 10);
+            }
+          });
+        });
+        nodes.forEach(function (n) {
+          var c = el('circle', { cx: n.x, cy: n.y, r: '1.8', fill: 'currentColor' });
+          svg.appendChild(c);
+          c.animate(
+            [{ opacity: 0.15 }, { opacity: 0.85 }, { opacity: 0.15 }],
+            { duration: (3 + Math.random() * 4) * 1000, delay: Math.random() * 5000,
+              iterations: Infinity, easing: 'ease-in-out' }
+          );
+        });
+        return svg;
+      }
+
+      /* ── Flow ── */
+      function createFlow() {
+        var svg = makeSVG('0 0 800 800', 0.25);
+        for (var i = 0; i < 13; i++) {
+          var amp = 45 + i * 9;
+          var cy  = 160 + i * 52;
+          var p   = el('path', {
+            d: 'M-100,' + cy + ' Q200,' + (cy - amp) + ' 500,' + cy + ' T900,' + cy,
+            stroke: 'currentColor', 'stroke-width': (0.7 + i * 0.22).toFixed(2),
+            'stroke-linecap': 'round', fill: 'none'
+          });
+          animPath(p, svg, 13 + i * 0.6, i * 0.9);
+        }
+        return svg;
+      }
+
+      /* ── Geometric ── */
+      function createGeometric() {
+        var svg = makeSVG('0 0 800 480', 0.2);
+        var gs  = 40;
+        for (var x = 0; x < 20; x++) {
+          for (var y = 0; y < 12; y++) {
+            if (Math.random() > 0.68) {
+              var p = el('path', {
+                d: 'M' + (x*gs) + ',' + (y*gs) + ' L' + ((x+1)*gs) + ',' + (y*gs) +
+                   ' L' + ((x+1)*gs) + ',' + ((y+1)*gs) + ' L' + (x*gs) + ',' + ((y+1)*gs) + ' Z',
+                fill: 'none', stroke: 'currentColor', 'stroke-width': '1'
+              });
+              animPath(p, svg, 7 + Math.random() * 3, Math.random() * 7);
+            }
+          }
+        }
+        return svg;
+      }
+
+      /* ── Spiral ── */
+      function createSpiral() {
+        var svg = makeSVG('0 0 800 600', 0.22);
+        for (var i = 0; i < 8; i++) {
+          var cx = 110 + (i % 4) * 185;
+          var cy = 150 + Math.floor(i / 4) * 300;
+          var R  = 65 + i * 11;
+          var turns = 3.5;
+          var d  = 'M' + (cx + R) + ',' + cy;
+          for (var a = 0; a <= turns * 360; a += 4) {
+            var rad = a * Math.PI / 180;
+            var r   = R * (1 - a / (turns * 360));
+            d += ' L' + (cx + r * Math.cos(rad)).toFixed(1) + ',' + (cy + r * Math.sin(rad)).toFixed(1);
+          }
+          var p = el('path', { d: d, fill: 'none', stroke: 'currentColor',
+                               'stroke-width': '1.3', 'stroke-linecap': 'round' });
+          animPath(p, svg, 10 + i * 0.9, i * 1.3);
+        }
+        return svg;
+      }
+
+      var generators = [createNeural, createFlow, createGeometric, createSpiral];
+
+      function showPattern(idx) {
+        var next = generators[idx]();
+        next.style.opacity    = '0';
+        next.style.transition = 'opacity 2s ease';
+        bg.appendChild(next);
+        // Double rAF ensures transition fires after paint
+        requestAnimationFrame(function () {
+          requestAnimationFrame(function () {
+            next.style.opacity = String(parseFloat(next.getAttribute('style').match(/opacity:([\d.]+)/)[1]) || 1);
+          });
+        });
+        if (activeSVG) {
+          var old = activeSVG;
+          old.style.transition = 'opacity 2s ease';
+          old.style.opacity    = '0';
+          setTimeout(function () { if (old.parentNode) old.parentNode.removeChild(old); }, 2200);
+        }
+        activeSVG = next;
+      }
+
+      showPattern(0);
+      // Restore correct opacity after transition (it was set inline above)
+      setTimeout(function () { if (activeSVG) activeSVG.style.opacity = ''; }, 2300);
+
+      setInterval(function () {
+        current = (current + 1) % PATTERNS.length;
+        showPattern(current);
+        setTimeout(function () { if (activeSVG) activeSVG.style.opacity = ''; }, 2300);
+      }, 12000);
+    })();
+  </script>
+
+</body>
+</html>
