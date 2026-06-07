@@ -81,6 +81,8 @@
       width: 100%;
       height: 100%;
       color: var(--fg);
+      -webkit-mask-image: radial-gradient(ellipse 55% 48% at center, transparent 35%, black 78%);
+      mask-image: radial-gradient(ellipse 55% 48% at center, transparent 35%, black 78%);
     }
     .hero-overlay {
       position: absolute;
@@ -158,6 +160,61 @@
     .star-6 { width:5px;  top:5%;  left:50%; transition: top  800ms ease-in-out, left 800ms ease-in-out; }
     .btn-star:hover .star-6 { top:5%; left:60%; }
 
+    /* Pricing */
+    .price-section { position: relative; overflow: hidden; }
+    .price-starfield { position: absolute; inset: 0; pointer-events: none; overflow: hidden; transition: transform .6s cubic-bezier(.16,1,.3,1); }
+    .price-star { position: absolute; border-radius: 9999px; background: var(--fg); opacity: 0; animation: priceTwinkle 4s ease-in-out infinite; }
+    @keyframes priceTwinkle { 0%, 100% { opacity: 0; } 50% { opacity: .75; } }
+
+    .price-toggle { position: relative; display: inline-flex; align-items: center; border-radius: 9999px; background: rgba(255,255,255,.04); border: 1px solid var(--border); padding: 4px; }
+    .price-toggle-pill { position: absolute; top: 4px; bottom: 4px; left: 0; border-radius: 9999px; background: var(--accent); transition: transform .45s cubic-bezier(.16,1,.3,1), width .45s cubic-bezier(.16,1,.3,1); }
+    .price-toggle-btn { position: relative; z-index: 1; padding: 9px 22px; font-size: 13px; font-weight: 500; font-family: inherit; border-radius: 9999px; color: var(--muted); background: transparent; border: none; cursor: pointer; transition: color .3s ease; }
+    .price-toggle-btn.is-active { color: #0c0c0d; }
+    .price-toggle-btn .save-tag { transition: color .3s ease; }
+    .price-toggle-btn.is-active .save-tag { color: rgba(12,12,13,.65) !important; }
+
+    .price-card { position: relative; display: flex; flex-direction: column; border-radius: 1.25rem; padding: 2.25rem 2rem; background: rgba(12,12,13,.45); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid var(--border); transition: transform .3s ease, border-color .3s ease, box-shadow .3s ease; }
+    .price-card.is-popular { border-color: var(--accent); box-shadow: 0 12px 48px rgba(139,105,20,.16); }
+    @media (min-width: 1024px) { .price-card.is-popular { transform: translateY(-20px); } }
+    .price-badge { position: absolute; top: 0; left: 50%; transform: translate(-50%, -50%); display: inline-flex; align-items: center; gap: 6px; background: var(--accent); color: #0c0c0d; font-size: 12px; font-weight: 600; padding: 6px 16px; border-radius: 9999px; white-space: nowrap; }
+    .price-amount { display: flex; align-items: baseline; justify-content: center; gap: 2px; }
+    .price-amount .cur { font-size: 1.5rem; font-weight: 500; color: var(--fg); }
+    .price-amount .num { font-size: 2.75rem; font-weight: 600; letter-spacing: -.02em; color: var(--fg); font-variant-numeric: tabular-nums; }
+    .price-amount .per { font-size: 13px; font-weight: 500; color: var(--muted); margin-left: 3px; }
+    .price-cta { display: inline-flex; align-items: center; justify-content: center; width: 100%; padding: 12px 24px; font-size: 14px; font-weight: 500; border-radius: 9999px; text-decoration: none; transition: all .25s ease; }
+    .price-cta.is-outline { border: 1px solid var(--border); color: var(--fg); }
+    .price-cta.is-outline:hover { border-color: var(--accent); color: var(--accent); }
+    .price-cta.is-solid { background: var(--accent); color: #0c0c0d; border: 1px solid var(--accent); }
+    .price-cta.is-solid:hover { background: var(--accent-hover); border-color: var(--accent-hover); }
+
+    /* FAQ accordion */
+    .faq-list { border-radius: .75rem; overflow: hidden; background: rgba(255,255,255,.02); border: 1px solid var(--border); }
+    .faq-item { position: relative; border-bottom: 1px solid var(--border); }
+    .faq-item:last-child { border-bottom: none; }
+    .faq-trigger { width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 18px 20px; background: transparent; border: none; text-align: left; font-family: inherit; font-size: 15px; line-height: 1.5; color: var(--fg); cursor: pointer; transition: color .25s ease; }
+    .faq-trigger:hover { color: var(--accent); }
+    .faq-icon { flex-shrink: 0; transition: transform .35s cubic-bezier(.16,1,.3,1); color: var(--muted); }
+    .faq-item.is-open .faq-icon { transform: rotate(45deg); color: var(--accent); }
+    .faq-panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .35s cubic-bezier(.16,1,.3,1); }
+    .faq-item.is-open .faq-panel { grid-template-rows: 1fr; }
+    .faq-panel-inner { overflow: hidden; }
+    .faq-panel p { padding: 0 20px 18px; font-size: 14px; line-height: 1.65; color: var(--muted); }
+
+    /* Demo call player */
+    .demo-card { display: flex; flex-direction: column; align-items: center; gap: 28px; padding: 2.5rem 2rem; border-radius: 1.25rem; background: rgba(255,255,255,.02); border: 1px solid var(--border); }
+    .waveform { position: relative; width: 100%; max-width: 520px; height: 64px; border-radius: .5rem; cursor: pointer; overflow: hidden; }
+    .waveform-bars { position: absolute; inset: 0; display: flex; align-items: center; justify-content: space-between; padding: 0 2px; }
+    .waveform-bar { width: 3px; border-radius: 2px; background: var(--border); flex-shrink: 0; }
+    .waveform-progress { position: absolute; inset: 0 auto 0 0; width: 0%; overflow: hidden; pointer-events: none; }
+    .waveform-progress .waveform-bars { position: absolute; inset: 0; }
+    .waveform-progress .waveform-bar { background: var(--accent); }
+    .waveform-progress { transition: width .08s linear; }
+    .demo-playbtn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; width: 64px; height: 64px; border-radius: 9999px; background: var(--accent); color: #0c0c0d; border: none; cursor: pointer; transition: background .25s ease, transform .2s ease, box-shadow .25s ease; }
+    .demo-playbtn:hover { background: var(--accent-hover); box-shadow: 0 0 24px rgba(139,105,20,.4); }
+    .demo-playbtn:active { transform: scale(.93); }
+    .demo-playbtn svg { display: block; }
+    .demo-meta { font-size: 13px; color: var(--muted); letter-spacing: .02em; }
+
     @media (prefers-reduced-motion: reduce) {
       .reveal { opacity:1; transform:none; transition:none; }
       .ha     { animation:none; opacity:1; transform:none; }
@@ -180,7 +237,7 @@
       <nav class="hidden md:flex items-center gap-8" aria-label="Navigazione principale">
         <a href="#funzionalita"  class="text-sm transition-colors duration-200" style="color:var(--muted)" onmouseover="this.style.color='var(--fg)'" onmouseout="this.style.color='var(--muted)'">Funzionalità</a>
         <a href="#come-funziona" class="text-sm transition-colors duration-200" style="color:var(--muted)" onmouseover="this.style.color='var(--fg)'" onmouseout="this.style.color='var(--muted)'">Come funziona</a>
-        <a href="#recensioni"    class="text-sm transition-colors duration-200" style="color:var(--muted)" onmouseover="this.style.color='var(--fg)'" onmouseout="this.style.color='var(--muted)'">Recensioni</a>
+        <a href="#prezzi"        class="text-sm transition-colors duration-200" style="color:var(--muted)" onmouseover="this.style.color='var(--fg)'" onmouseout="this.style.color='var(--muted)'">Prezzi</a>
         <a href="#contatti"      class="text-sm transition-colors duration-200" style="color:var(--muted)" onmouseover="this.style.color='var(--fg)'" onmouseout="this.style.color='var(--muted)'">Contatti</a>
       </nav>
 
@@ -209,7 +266,7 @@
          style="background:var(--bg);border-bottom:1px solid var(--border)">
       <a href="#funzionalita"  class="text-sm" style="color:var(--muted)">Funzionalità</a>
       <a href="#come-funziona" class="text-sm" style="color:var(--muted)">Come funziona</a>
-      <a href="#recensioni"    class="text-sm" style="color:var(--muted)">Recensioni</a>
+      <a href="#prezzi"        class="text-sm" style="color:var(--muted)">Prezzi</a>
       <a href="#contatti"      class="text-sm" style="color:var(--muted)">Contatti</a>
       <a href="#contatti" class="btn-star" style="justify-content:center;font-size:13px;padding:10px 22px;border-radius:6px;">
         <span class="star-el star-1"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 784.11 815.53"><path d="M392.05 0c-20.9,210.08-184.06,378.41-392.05,407.78 207.96,29.37 371.12,197.68 392.05,407.74 20.93-210.06 184.09-378.37 392.05-407.74-207.98-29.38-371.16-197.69-392.06-407.78z"/></svg></span>
@@ -304,7 +361,7 @@
             <p class="text-[11px] font-medium uppercase tracking-[.15em] mt-1 mb-5" style="color:var(--muted)">Sincronizzazione annunci</p>
             <h3 class="text-2xl font-light mb-3" style="color:var(--fg)">Legge i tuoi annunci da immobiliare.it</h3>
             <p class="text-sm leading-relaxed" style="color:var(--muted)">
-              Collega il tuo profilo immobiliare.it e ApollonIA importa automaticamente tutte le tue schede — metratura, prezzo, zona, caratteristiche. Ogni nuovo annuncio viene recepito in tempo reale, senza alcun inserimento manuale.
+              ApollonIA importa automaticamente tutte le tue schede — metratura, prezzo, zona, caratteristiche. Ogni nuovo annuncio viene recepito in tempo reale, senza alcun inserimento manuale.
             </p>
           </article>
 
@@ -363,6 +420,35 @@
           </article>
 
         </div>
+      </div>
+    </section>
+
+    <!-- ── DEMO CALL ─────────────────────────────────────────────────────── -->
+    <section id="demo" class="max-w-3xl mx-auto px-6 py-24 lg:py-32" style="border-top:1px solid var(--border)">
+      <div class="reveal text-center mb-12">
+        <p class="text-[11px] font-medium uppercase tracking-[.2em] mb-4" style="color:var(--muted)">Demo</p>
+        <h2 class="text-3xl md:text-4xl font-light tracking-tight" style="color:var(--fg)">
+          Ascolta ApollonIA gestire una chiamata
+        </h2>
+        <p class="mt-3 max-w-xl mx-auto text-base leading-relaxed" style="color:var(--muted)">
+          Una vera richiesta di un potenziale cliente, gestita dall'assistente AI dall'inizio alla fine — niente copioni, nessun operatore umano.
+        </p>
+      </div>
+
+      <div class="reveal d1 demo-card">
+        <button class="demo-playbtn" id="demo-playbtn" type="button" aria-label="Riproduci la registrazione">
+          <svg id="demo-icon-play" width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+          <svg id="demo-icon-pause" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true" style="display:none"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg>
+        </button>
+
+        <div class="waveform" id="demo-waveform">
+          <div class="waveform-bars" id="demo-bars-bg"></div>
+          <div class="waveform-progress" id="demo-progress">
+            <div class="waveform-bars" id="demo-bars-fg"></div>
+          </div>
+        </div>
+
+        <p class="demo-meta" id="demo-time">0:00 / 0:00</p>
       </div>
     </section>
 
@@ -432,48 +518,188 @@
       </div>
     </section>
 
-    <!-- ── TESTIMONIALS ──────────────────────────────────────────────────── -->
-    <section id="recensioni" class="py-24 lg:py-32 overflow-hidden" style="border-top:1px solid var(--border)">
-      <div class="max-w-[1400px] mx-auto px-6 lg:px-12 mb-12">
-        <p class="text-[11px] font-medium uppercase tracking-[.2em]" style="color:var(--muted)">Recensioni</p>
+    <!-- ── FAQ ───────────────────────────────────────────────────────────── -->
+    <section id="faq" class="max-w-3xl mx-auto px-6 py-24 lg:py-32" style="border-top:1px solid var(--border)">
+      <div class="reveal mb-10">
+        <h2 class="text-3xl md:text-4xl font-light tracking-tight" style="color:var(--fg)">Domande frequenti</h2>
+        <p class="mt-3 max-w-2xl text-base leading-relaxed" style="color:var(--muted)">
+          Le risposte alle domande più comuni su ApollonIA. Se non trovi quello che cerchi, scrivici pure.
+        </p>
       </div>
-      <div class="flex gap-6 px-6 lg:px-12 overflow-x-auto snap-x snap-mandatory pb-4"
-           style="scrollbar-width:none;" onscroll="">
-        <style>.no-bar::-webkit-scrollbar{display:none}</style>
 
-        <div class="reveal no-bar flex-none snap-start rounded-2xl p-8 flex flex-col justify-between"
-             style="width:min(85vw,420px);border:1px solid var(--border);background:var(--bg)">
-          <p class="text-base leading-relaxed font-light" style="color:var(--fg)">
-            &ldquo;Da quando uso ApollonIA non perdo più neanche una chiamata. I lead mi arrivano in email già con nome e interesse. Ha cambiato il mio modo di lavorare.&rdquo;
+      <div class="reveal d1 faq-list" id="faq-list">
+        <div class="faq-item is-open" data-faq>
+          <button class="faq-trigger" type="button" aria-expanded="true">
+            <span>Cos'è ApollonIA?</span>
+            <svg class="faq-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+          <div class="faq-panel"><div class="faq-panel-inner"><p>
+            ApollonIA è un assistente telefonico basato su intelligenza artificiale pensato per agenti e agenzie immobiliari: risponde alle chiamate al posto tuo, raccoglie le informazioni dei potenziali clienti e ti invia i lead via email in tempo reale.
+          </p></div></div>
+        </div>
+        <div class="faq-item" data-faq>
+          <button class="faq-trigger" type="button" aria-expanded="false">
+            <span>A chi è utile ApollonIA?</span>
+            <svg class="faq-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+          <div class="faq-panel"><div class="faq-panel-inner"><p>
+            È pensato per agenti immobiliari indipendenti e agenzie con più collaboratori che vogliono smettere di perdere chiamate, rispondere più velocemente ai potenziali clienti e dedicare più tempo alle visite e alle trattative.
+          </p></div></div>
+        </div>
+        <div class="faq-item" data-faq>
+          <button class="faq-trigger" type="button" aria-expanded="false">
+            <span>Quali funzionalità include?</span>
+            <svg class="faq-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+          <div class="faq-panel"><div class="faq-panel-inner"><p>
+            ApollonIA risponde alle chiamate 24 ore su 24, qualifica i potenziali clienti, gestisce più lingue automaticamente, sincronizza gli annunci con immobiliare.it e ti invia ogni lead via email non appena viene raccolto — tutto da un'unica dashboard.
+          </p></div></div>
+        </div>
+        <div class="faq-item" data-faq>
+          <button class="faq-trigger" type="button" aria-expanded="false">
+            <span>Posso personalizzare ApollonIA per la mia agenzia?</span>
+            <svg class="faq-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+          <div class="faq-panel"><div class="faq-panel-inner"><p>
+            Sì. Puoi personalizzare il modo in cui l'assistente si presenta, le domande che fa ai potenziali clienti e le modalità di trasferimento delle chiamate, in modo che rispecchi il tono e i processi della tua agenzia.
+          </p></div></div>
+        </div>
+        <div class="faq-item" data-faq>
+          <button class="faq-trigger" type="button" aria-expanded="false">
+            <span>Si integra con gli strumenti che uso già?</span>
+            <svg class="faq-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+          <div class="faq-panel"><div class="faq-panel-inner"><p>
+            ApollonIA si collega al tuo numero di telefono esistente, sincronizza gli annunci con immobiliare.it e invia i lead direttamente alla tua casella email, così si inserisce nel tuo flusso di lavoro senza bisogno di cambiare strumenti.
+          </p></div></div>
+        </div>
+        <div class="faq-item" data-faq>
+          <button class="faq-trigger" type="button" aria-expanded="false">
+            <span>Come ricevo assistenza durante l'utilizzo?</span>
+            <svg class="faq-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+          <div class="faq-panel"><div class="faq-panel-inner"><p>
+            Il nostro team ti segue durante l'attivazione e resta a disposizione via email per qualsiasi domanda. I piani Pro e Agenzia includono assistenza prioritaria e, per le agenzie più grandi, un account manager dedicato.
+          </p></div></div>
+        </div>
+        <div class="faq-item" data-faq>
+          <button class="faq-trigger" type="button" aria-expanded="false">
+            <span>Come posso iniziare?</span>
+            <svg class="faq-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </button>
+          <div class="faq-panel"><div class="faq-panel-inner"><p>
+            Basta cliccare su "Inizia gratis", attivare l'assistente sul tuo numero in pochi minuti e iniziare a ricevere i lead via email — senza vincoli e con la possibilità di disdire quando vuoi.
+          </p></div></div>
+        </div>
+      </div>
+
+      <p class="reveal d2 mt-6 text-sm" style="color:var(--muted)">
+        Non trovi quello che cerchi? Scrivi al nostro
+        <a href="#contatti" class="transition-colors" style="color:var(--accent)" onmouseover="this.style.color='var(--accent-hover)'" onmouseout="this.style.color='var(--accent)'">team di assistenza</a>.
+      </p>
+    </section>
+
+    <!-- ── PRICING ───────────────────────────────────────────────────────── -->
+    <section id="prezzi" class="price-section py-24 lg:py-32" style="border-top:1px solid var(--border)">
+      <div class="price-starfield" id="price-starfield"></div>
+      <div class="relative max-w-[1400px] mx-auto px-6 lg:px-12" style="z-index:1">
+
+        <div class="reveal max-w-2xl mx-auto text-center mb-12">
+          <p class="text-[11px] font-medium uppercase tracking-[.2em] mb-4" style="color:var(--muted)">Prezzi</p>
+          <h2 class="text-4xl md:text-5xl font-light tracking-tight leading-[1.08]" style="color:var(--fg)">
+            Un piano per ogni agenzia
+          </h2>
+          <p class="mt-4 text-base leading-relaxed" style="color:var(--muted)">
+            Scegli il piano più adatto al tuo modo di lavorare. Nessun vincolo — disdici quando vuoi.
           </p>
-          <div class="mt-8 pt-6" style="border-top:1px solid var(--border)">
-            <p class="text-sm font-medium" style="color:var(--fg)">Marco Riva</p>
-            <p class="text-xs mt-0.5" style="color:var(--muted)">Agente immobiliare — Milano</p>
+        </div>
+
+        <!-- Toggle -->
+        <div class="reveal flex justify-center mb-14">
+          <div class="price-toggle" id="price-toggle">
+            <div class="price-toggle-pill" id="price-pill"></div>
+            <button class="price-toggle-btn is-active" id="btn-monthly" type="button">Mensile</button>
+            <button class="price-toggle-btn" id="btn-annual" type="button">
+              Annuale<span class="save-tag" style="color:var(--accent)"> &nbsp;(Risparmia 15%)</span>
+            </button>
           </div>
         </div>
 
-        <div class="reveal d1 flex-none snap-start rounded-2xl p-8 flex flex-col justify-between"
-             style="width:min(85vw,420px);border:1px solid var(--border);background:var(--bg)">
-          <p class="text-base leading-relaxed font-light" style="color:var(--fg)">
-            &ldquo;Incredibile. In un mese ho recuperato almeno una decina di contatti che prima perdevo. Il sistema è preciso, veloce e non richiede nessuna configurazione complicata.&rdquo;
-          </p>
-          <div class="mt-8 pt-6" style="border-top:1px solid var(--border)">
-            <p class="text-sm font-medium" style="color:var(--fg)">Sara Bianchi</p>
-            <p class="text-xs mt-0.5" style="color:var(--muted)">Agente immobiliare — Roma</p>
-          </div>
-        </div>
+        <!-- Cards -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 items-start">
 
-        <div class="reveal d2 flex-none snap-start rounded-2xl p-8 flex flex-col justify-between"
-             style="width:min(85vw,420px);border:1px solid var(--border);background:var(--bg)">
-          <p class="text-base leading-relaxed font-light" style="color:var(--fg)">
-            &ldquo;Finalmente un prodotto AI che funziona davvero nel settore immobiliare. Setup in 10 minuti e già il primo giorno ho ricevuto tre lead via email che altrimenti avrei perso.&rdquo;
-          </p>
-          <div class="mt-8 pt-6" style="border-top:1px solid var(--border)">
-            <p class="text-sm font-medium" style="color:var(--fg)">Luca Ferrari</p>
-            <p class="text-xs mt-0.5" style="color:var(--muted)">Agente immobiliare — Torino</p>
-          </div>
-        </div>
+          <!-- Base -->
+          <article class="reveal price-card">
+            <div class="text-center">
+              <h3 class="text-xl font-medium" style="color:var(--fg)">Base</h3>
+              <p class="mt-2 text-sm leading-relaxed" style="color:var(--muted)">Per chi vuole iniziare a non perdere chiamate.</p>
+              <div class="mt-7 price-amount">
+                <span class="cur">&euro;</span><span class="num" data-monthly="95" data-annual="80">95</span><span class="per">/ mese</span>
+              </div>
+              <p class="mt-1.5 text-xs price-billed" style="color:var(--muted)">Fatturato mensilmente</p>
+            </div>
+            <ul class="mt-8 space-y-3 text-sm leading-relaxed text-left" style="color:var(--muted)">
+              <li class="flex gap-x-3"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent);flex-shrink:0;margin-top:2px" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Risponde alle chiamate 24/7</li>
+              <li class="flex gap-x-3"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent);flex-shrink:0;margin-top:2px" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Raccoglie e qualifica i lead</li>
+              <li class="flex gap-x-3"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent);flex-shrink:0;margin-top:2px" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Fino a 200 minuti di chiamate al mese</li>
+              <li class="flex gap-x-3"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent);flex-shrink:0;margin-top:2px" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Lead via email in tempo reale</li>
+              <li class="flex gap-x-3"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent);flex-shrink:0;margin-top:2px" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Supporto via email</li>
+            </ul>
+            <div class="mt-auto pt-8">
+              <a href="#contatti" class="price-cta is-outline">Inizia gratis</a>
+            </div>
+          </article>
 
+          <!-- Pro (most popular) -->
+          <article class="reveal d1 price-card is-popular">
+            <div class="price-badge">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="1" aria-hidden="true"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              Più scelto
+            </div>
+            <div class="text-center">
+              <h3 class="text-xl font-medium" style="color:var(--fg)">Pro</h3>
+              <p class="mt-2 text-sm leading-relaxed" style="color:var(--muted)">Per chi non vuole più pensare al telefono.</p>
+              <div class="mt-7 price-amount">
+                <span class="cur">&euro;</span><span class="num" data-monthly="195" data-annual="160">195</span><span class="per">/ mese</span>
+              </div>
+              <p class="mt-1.5 text-xs price-billed" style="color:var(--muted)">Fatturato mensilmente</p>
+            </div>
+            <ul class="mt-8 space-y-3 text-sm leading-relaxed text-left" style="color:var(--muted)">
+              <li class="flex gap-x-3"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent);flex-shrink:0;margin-top:2px" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Tutto del piano Base</li>
+              <li class="flex gap-x-3"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent);flex-shrink:0;margin-top:2px" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Chiamate illimitate</li>
+              <li class="flex gap-x-3"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent);flex-shrink:0;margin-top:2px" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Modalità A/B di trasferimento</li>
+              <li class="flex gap-x-3"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent);flex-shrink:0;margin-top:2px" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Multilingua automatico</li>
+              <li class="flex gap-x-3"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent);flex-shrink:0;margin-top:2px" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Sincronizzazione con immobiliare.it</li>
+              <li class="flex gap-x-3"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent);flex-shrink:0;margin-top:2px" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Supporto prioritario</li>
+            </ul>
+            <div class="mt-auto pt-8">
+              <a href="#contatti" class="price-cta is-solid">Inizia ora</a>
+            </div>
+          </article>
+
+          <!-- Agenzia -->
+          <article class="reveal d2 price-card">
+            <div class="text-center">
+              <h3 class="text-xl font-medium" style="color:var(--fg)">Agenzia</h3>
+              <p class="mt-2 text-sm leading-relaxed" style="color:var(--muted)">Per team e agenzie con più agenti.</p>
+              <div class="mt-7 price-amount">
+                <span class="cur">&euro;</span><span class="num" data-monthly="395" data-annual="360">395</span><span class="per">/ mese</span>
+              </div>
+              <p class="mt-1.5 text-xs price-billed" style="color:var(--muted)">Fatturato mensilmente</p>
+            </div>
+            <ul class="mt-8 space-y-3 text-sm leading-relaxed text-left" style="color:var(--muted)">
+              <li class="flex gap-x-3"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent);flex-shrink:0;margin-top:2px" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Tutto del piano Pro</li>
+              <li class="flex gap-x-3"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent);flex-shrink:0;margin-top:2px" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Fino a 5 numeri / agenti</li>
+              <li class="flex gap-x-3"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent);flex-shrink:0;margin-top:2px" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Statistiche e dashboard avanzate</li>
+              <li class="flex gap-x-3"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent);flex-shrink:0;margin-top:2px" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Account manager dedicato</li>
+              <li class="flex gap-x-3"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent);flex-shrink:0;margin-top:2px" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg> Onboarding personalizzato</li>
+            </ul>
+            <div class="mt-auto pt-8">
+              <a href="#contatti" class="price-cta is-outline">Parliamone</a>
+            </div>
+          </article>
+
+        </div>
       </div>
     </section>
 
@@ -527,7 +753,7 @@
         <ul class="flex flex-col gap-2.5">
           <li><a href="#funzionalita"  class="text-sm transition-colors" style="color:var(--muted)" onmouseover="this.style.color='var(--fg)'" onmouseout="this.style.color='var(--muted)'">Funzionalità</a></li>
           <li><a href="#come-funziona" class="text-sm transition-colors" style="color:var(--muted)" onmouseover="this.style.color='var(--fg)'" onmouseout="this.style.color='var(--muted)'">Come funziona</a></li>
-          <li><a href="#recensioni"    class="text-sm transition-colors" style="color:var(--muted)" onmouseover="this.style.color='var(--fg)'" onmouseout="this.style.color='var(--muted)'">Recensioni</a></li>
+          <li><a href="#prezzi"        class="text-sm transition-colors" style="color:var(--muted)" onmouseover="this.style.color='var(--fg)'" onmouseout="this.style.color='var(--muted)'">Prezzi</a></li>
           <li><a href="#contatti"      class="text-sm transition-colors" style="color:var(--muted)" onmouseover="this.style.color='var(--fg)'" onmouseout="this.style.color='var(--muted)'">Contatti</a></li>
         </ul>
       </div>
@@ -629,7 +855,7 @@
 
       /* ── 2. Pattern system ── */
       var PATTERNS  = ['Neural', 'Flow', 'Geometric', 'Spiral'];
-      var current   = 0;
+      var current   = 2; // start with Geometric
       var bg        = document.getElementById('pattern-bg');
       var activeSVG = null;
 
@@ -770,7 +996,7 @@
         activeSVG = next;
       }
 
-      showPattern(0);
+      showPattern(current);
       // Restore correct opacity after transition (it was set inline above)
       setTimeout(function () { if (activeSVG) activeSVG.style.opacity = ''; }, 2300);
 
@@ -779,6 +1005,175 @@
         showPattern(current);
         setTimeout(function () { if (activeSVG) activeSVG.style.opacity = ''; }, 2300);
       }, 12000);
+    })();
+
+    // ── Demo call waveform player
+    (function () {
+      var section = document.getElementById('demo');
+      if (!section) return;
+
+      var playBtn   = document.getElementById('demo-playbtn');
+      var iconPlay  = document.getElementById('demo-icon-play');
+      var iconPause = document.getElementById('demo-icon-pause');
+      var waveform  = document.getElementById('demo-waveform');
+      var barsBg    = document.getElementById('demo-bars-bg');
+      var barsFg    = document.getElementById('demo-bars-fg');
+      var progress  = document.getElementById('demo-progress');
+      var timeEl    = document.getElementById('demo-time');
+
+      var BAR_COUNT = 48;
+      var heights = [];
+      for (var i = 0; i < BAR_COUNT; i++) heights.push(8 + Math.random() * 40);
+
+      function buildBars(container) {
+        heights.forEach(function (h) {
+          var bar = document.createElement('div');
+          bar.className = 'waveform-bar';
+          bar.style.height = h + 'px';
+          container.appendChild(bar);
+        });
+      }
+      buildBars(barsBg);
+      buildBars(barsFg);
+
+      var audio = new Audio('audio/demo-chiamata.mp3');
+      audio.preload = 'metadata';
+      var isPlaying = false;
+
+      function fmt(t) {
+        if (!isFinite(t) || t < 0) t = 0;
+        var m = Math.floor(t / 60);
+        var s = Math.floor(t % 60);
+        return m + ':' + (s < 10 ? '0' : '') + s;
+      }
+
+      function updateTime() {
+        timeEl.textContent = fmt(audio.currentTime) + ' / ' + fmt(audio.duration);
+      }
+
+      audio.addEventListener('loadedmetadata', updateTime);
+      audio.addEventListener('timeupdate', function () {
+        if (audio.duration) progress.style.width = (audio.currentTime / audio.duration * 100) + '%';
+        updateTime();
+      });
+      audio.addEventListener('ended', function () {
+        isPlaying = false;
+        iconPlay.style.display  = '';
+        iconPause.style.display = 'none';
+      });
+
+      playBtn.addEventListener('click', function () {
+        if (isPlaying) {
+          audio.pause();
+        } else {
+          audio.play()['catch'](function () {});
+        }
+        isPlaying = !isPlaying;
+        iconPlay.style.display  = isPlaying ? 'none' : '';
+        iconPause.style.display = isPlaying ? '' : 'none';
+      });
+
+      waveform.addEventListener('click', function (e) {
+        if (!audio.duration) return;
+        var rect = waveform.getBoundingClientRect();
+        var ratio = (e.clientX - rect.left) / rect.width;
+        audio.currentTime = ratio * audio.duration;
+      });
+    })();
+
+    // ── FAQ accordion (single open)
+    (function () {
+      var list = document.getElementById('faq-list');
+      if (!list) return;
+      var items = list.querySelectorAll('[data-faq]');
+
+      items.forEach(function (item) {
+        var trigger = item.querySelector('.faq-trigger');
+        trigger.addEventListener('click', function () {
+          var willOpen = !item.classList.contains('is-open');
+          items.forEach(function (other) {
+            other.classList.remove('is-open');
+            other.querySelector('.faq-trigger').setAttribute('aria-expanded', 'false');
+          });
+          if (willOpen) {
+            item.classList.add('is-open');
+            trigger.setAttribute('aria-expanded', 'true');
+          }
+        });
+      });
+    })();
+
+    // ── Pricing: toggle, animated prices, starfield
+    (function () {
+      var section = document.getElementById('prezzi');
+      if (!section) return;
+
+      var toggle   = document.getElementById('price-toggle');
+      var pill     = document.getElementById('price-pill');
+      var btnMonth = document.getElementById('btn-monthly');
+      var btnYear  = document.getElementById('btn-annual');
+      var nums     = section.querySelectorAll('.price-amount .num');
+      var pers     = section.querySelectorAll('.price-amount .per');
+      var billeds  = section.querySelectorAll('.price-billed');
+      var annual   = false;
+
+      function movePill(target) {
+        pill.style.width     = target.offsetWidth + 'px';
+        pill.style.transform = 'translateX(' + target.offsetLeft + 'px)';
+      }
+
+      function animateNumber(el, from, to) {
+        var start = performance.now();
+        var dur   = 600;
+        function step(now) {
+          var t = Math.min(1, (now - start) / dur);
+          var eased = 1 - Math.pow(1 - t, 3);
+          el.textContent = Math.round(from + (to - from) * eased);
+          if (t < 1) requestAnimationFrame(step);
+          else el.textContent = to;
+        }
+        requestAnimationFrame(step);
+      }
+
+      function setMode(toAnnual) {
+        if (annual === toAnnual) return;
+        annual = toAnnual;
+
+        movePill(annual ? btnYear : btnMonth);
+        btnMonth.classList.toggle('is-active', !annual);
+        btnYear.classList.toggle('is-active', annual);
+
+        nums.forEach(function (el) {
+          var from = parseInt(el.textContent, 10);
+          var to   = parseInt(el.getAttribute(annual ? 'data-annual' : 'data-monthly'), 10);
+          animateNumber(el, from, to);
+        });
+        pers.forEach(function (el)    { el.textContent = '/ mese'; });
+        billeds.forEach(function (el) { el.textContent = annual ? 'Fatturato annualmente' : 'Fatturato mensilmente'; });
+      }
+
+      btnMonth.addEventListener('click', function () { setMode(false); });
+      btnYear.addEventListener('click',  function () { setMode(true); });
+      window.addEventListener('resize', function () { movePill(annual ? btnYear : btnMonth); });
+      movePill(btnMonth);
+
+      // Starfield background
+      var field = document.getElementById('price-starfield');
+      if (field) {
+        var n = 60;
+        for (var i = 0; i < n; i++) {
+          var star = document.createElement('span');
+          star.className = 'price-star';
+          var size = 1 + Math.random() * 2;
+          star.style.width  = size + 'px';
+          star.style.height = size + 'px';
+          star.style.left   = Math.random() * 100 + '%';
+          star.style.top    = Math.random() * 100 + '%';
+          star.style.animationDuration = (3 + Math.random() * 4) + 's';
+          star.style.animationDelay    = (-Math.random() * 7) + 's';
+          field.appendChild(star);
+        }
+      }
     })();
   </script>
 
